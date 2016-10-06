@@ -1,0 +1,17 @@
+{
+  "name": "WhereIsIt",
+  "homepage": "https://github.com/firstziiz/WhereIsIt",
+  "authors": [
+    "KANISORN <firstziiz.k@gmail.com>"
+  ],
+  "description": "A project of INT303",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
