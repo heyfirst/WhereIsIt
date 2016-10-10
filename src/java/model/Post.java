@@ -14,7 +14,6 @@ import java.text.DecimalFormat;
  */
 public class Post {
     private int postId;
-    private User user;
     private Image image;
     private Tag tag;
     private String postName;
@@ -27,9 +26,14 @@ public class Post {
         
     }
 
-    public Post(int postId, User user, Image image, Tag tag, String postName, String postDescription, double lat, double lon, int status) {
+
+    public Post(Image image) {
+        this.image = image;
+    }
+
+    
+    public Post(int postId, Image image, Tag tag, String postName, String postDescription, double lat, double lon, int status) {
         this.postId = postId;
-        this.user = user;
         this.image = image;
         this.tag = tag;
         this.postName = postName;
@@ -57,14 +61,6 @@ public class Post {
         this.postId = postId;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
     public String getPostName() {
         return postName;
     }
@@ -75,7 +71,7 @@ public class Post {
 
     @Override
     public String toString() {
-        return "Post{" + "postId=" + postId + ", user=" + user + ", image=" + image + ", tag=" + tag + ", postName=" + postName + ", postDescription=" + postDescription + ", lat=" + lat + ", lon=" + lon + ", status=" + status + '}';
+        return "Post{" + "postId=" + postId + ", image=" + image + ", tag=" + tag + ", postName=" + postName + ", postDescription=" + postDescription + ", lat=" + lat + ", lon=" + lon + ", status=" + status + '}';
     }
 
    
