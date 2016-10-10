@@ -5,18 +5,21 @@
  */
 package servlet;
 
+import Repo.Repo;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import model.Post;
 import model.User;
 import util.ConnectionBuilder;
@@ -39,35 +42,15 @@ public class DashBoardServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-//        try (PrintWriter out = response.getWriter()) {
-//      
-//            out.println("<!DOCTYPE html>");
-//            out.println("<html>");
-//            out.println("<head>");
-//            out.println("<title>Servlet DashBoardServlet</title>");            
-//            out.println("</head>");
-//            out.println("<body>");
-//            out.println("<h1>Servlet DashBoardServlet at " + request.getContextPath() + "</h1>");
-//            out.println("</body>");
-//            out.println("</html>");
-//        }
-        try {
-            Connection con = ConnectionBuilder.getMySqlCond();
-            PreparedStatement pstmt = con.prepareStatement("SELECT * FROM wil_post p JOIN wil_user u On p.user_id = u.user_id");
-            ResultSet rs = pstmt.executeQuery();
-            if(rs.next()){
+        
+        HttpSession session = request.getSession(true);
+        
+        List<Post> listPost = Repo.allPost();
+        request.setAttribute("listPost",listPost);
+            
                 
-                 Post p = new Post();
-                p.setPostId(rs.getInt(1));
-                p.setPostName(rs.getString(3));
-                p.setPostDescription(rs.getString(4));
-                request.setAttribute("post",p);
-            }
-                
-        } catch (Exception ex) {
-            Exception message = ex;
-            request.setAttribute("message",message);
-        }
+      
+        
         
 
             getServletContext().getRequestDispatcher("/pages/dashboard.jsp").forward(request,response);

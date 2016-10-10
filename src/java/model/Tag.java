@@ -43,7 +43,7 @@ public class Tag {
 
     @Override
     public String toString() {
-        return "Tag{" + "tagId=" + tagId + ", tagName=" + tagName + '}';
+        return  "tagId=" + tagId + ", tagName=" + tagName;
     }
        
 }

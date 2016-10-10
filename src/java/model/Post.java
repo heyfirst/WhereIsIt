@@ -7,6 +7,8 @@ package model;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -15,7 +17,7 @@ import java.text.DecimalFormat;
 public class Post {
     private int postId;
     private Image image;
-    private Tag tag;
+    private ArrayList<Tag> tag;
     private String postName;
     private String postDescription;
     private double lat;
@@ -31,8 +33,7 @@ public class Post {
         this.image = image;
     }
 
-    
-    public Post(int postId, Image image, Tag tag, String postName, String postDescription, double lat, double lon, int status) {
+    public Post(int postId, Image image, ArrayList<Tag> tag, String postName, String postDescription, double lat, double lon, int status) {
         this.postId = postId;
         this.image = image;
         this.tag = tag;
@@ -43,7 +44,45 @@ public class Post {
         this.status = status;
     }
 
-    
+    public Image getImage() {
+        return image;
+    }
+
+    public void setImage(Image image) {
+        this.image = image;
+    }
+
+    public ArrayList<Tag> getTag() {
+        return tag;
+    }
+
+    public void setTag(ArrayList<Tag> tag) {
+        this.tag = tag;
+    }
+
+    public double getLat() {
+        return lat;
+    }
+
+    public void setLat(double lat) {
+        this.lat = lat;
+    }
+
+    public double getLon() {
+        return lon;
+    }
+
+    public void setLon(double lon) {
+        this.lon = lon;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
 
     public String getPostDescription() {
         return postDescription;
