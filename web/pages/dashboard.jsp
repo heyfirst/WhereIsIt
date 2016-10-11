@@ -8,16 +8,21 @@
 <%@page import="model.Post"%>
 <%@page import="model.Post"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page   contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--        <meta http-equiv="Content-Type" content="text/html; charset="UTF-8">-->
         <title>dash board</title>
+        <meta charset="UTF-8">
     </head>
     <body>
-        <% List<Post> lp = (List<Post>)request.getSession().getAttribute("post"); %>
-        
+        <FORM action="DashBoardServlet" method="post">
+            <input type="text" name="searchParam">
+            <input type="submit" value="Search">
+        </FORM>
+        <h1>POST</h1>
+        <%= request.getParameter("searchParam")%>
         <c:forEach items="${listPost}" var="post"  varStatus="theCountPost" >
             
             <div style="border: 3px solid black">

@@ -17,6 +17,7 @@ import java.util.List;
 public class Post {
     private int postId;
     private Image image;
+    private User user;
     private ArrayList<Tag> tag;
     private String postName;
     private String postDescription;
@@ -44,6 +45,15 @@ public class Post {
         this.status = status;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    
     public Image getImage() {
         return image;
     }
@@ -110,7 +120,7 @@ public class Post {
 
     @Override
     public String toString() {
-        return "Post{" + "postId=" + postId + ", image=" + image + ", tag=" + tag + ", postName=" + postName + ", postDescription=" + postDescription + ", lat=" + lat + ", lon=" + lon + ", status=" + status + '}';
+        return "Post{" + "postId=" + postId + ", image=" + image + ", tag=" + tag + ", postName=" + postName + ", postDescription=" + postDescription + ", lat=" + lat + ", lon=" + lon + ", status=" + status + "'\n'" +" user= "+user;
     }
 
    

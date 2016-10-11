@@ -42,10 +42,21 @@ public class DashBoardServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        if(request.getCharacterEncoding() == null) {
+            request.setCharacterEncoding("UTF-8");
+        }
+       HttpSession session = request.getSession(true); 
+       List<Post> listPost = null;
+        String searchParam = request.getParameter("searchParam");
         
-        HttpSession session = request.getSession(true);
-        
-        List<Post> listPost = Repo.allPost();
+        if(searchParam == null) {
+            searchParam = "";
+            listPost = Repo.allPost();
+        }else{
+            listPost = Repo.findPostByName(searchParam);
+        }
+       
+       
         request.setAttribute("listPost",listPost);
             
                 
