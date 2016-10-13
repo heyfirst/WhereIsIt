@@ -22,6 +22,19 @@ public class Tag {
         this.tagName = tagName;
     }
 
+
+
+    @Override
+    public boolean equals(Object obj) {
+       if(obj != null && obj instanceof Tag){
+           Tag tag = (Tag)obj;
+           if(tagId == tag.getTagId()){
+               return   true;
+           }
+       }
+       return false;
+    }
+
        
        
        

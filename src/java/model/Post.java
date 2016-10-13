@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class Post {
     private int postId;
-    private Image image;
+    private ArrayList<Image> image;
     private User user;
     private ArrayList<Tag> tag;
     private String postName;
@@ -29,21 +29,29 @@ public class Post {
         
     }
 
+    public Post(User user) {
+        this.user = user;
+    }
 
-    public Post(Image image) {
+    
+    public Post(ArrayList<Image> image) {
         this.image = image;
     }
 
-    public Post(int postId, Image image, ArrayList<Tag> tag, String postName, String postDescription, double lat, double lon, int status) {
-        this.postId = postId;
+    public Post(ArrayList<Image> image, ArrayList<Tag> tag) {
         this.image = image;
         this.tag = tag;
-        this.postName = postName;
-        this.postDescription = postDescription;
-        this.lat = lat;
-        this.lon = lon;
-        this.status = status;
     }
+
+    public Post(ArrayList<Image> image,  ArrayList<Tag> tag, User user) {
+        this.image = image;
+        this.user = user;
+        this.tag = tag;
+    }
+
+
+   
+   
 
     public User getUser() {
         return user;
@@ -53,14 +61,14 @@ public class Post {
         this.user = user;
     }
 
-    
-    public Image getImage() {
+    public ArrayList<Image> getImage() {
         return image;
     }
 
-    public void setImage(Image image) {
+    public void setImage(ArrayList<Image> image) {
         this.image = image;
     }
+
 
     public ArrayList<Tag> getTag() {
         return tag;
@@ -120,7 +128,7 @@ public class Post {
 
     @Override
     public String toString() {
-        return "Post{" + "postId=" + postId + ", image=" + image + ", tag=" + tag + ", postName=" + postName + ", postDescription=" + postDescription + ", lat=" + lat + ", lon=" + lon + ", status=" + status + "'\n'" +" user= "+user;
+        return "Post{" + "postId=" + postId + ",\n image=" + image + ",\n tag=" + tag + ",\n postName=" + postName + ", postDescription=" + postDescription + ", lat=" + lat + ", lon=" + lon + ", status=" + status + "'\n'" +" user= "+user+"\n";
     }
 
    

@@ -51,7 +51,7 @@ public class DashBoardServlet extends HttpServlet {
         
         if(searchParam == null) {
             searchParam = "";
-            listPost = Repo.allPost();
+            listPost = Repo.queryPost("Select * from wil_post","");
         }else{
             listPost = Repo.findPostByName(searchParam);
         }

@@ -33,6 +33,10 @@
                     </c:forEach>
                 <br>
                 postDescript : ${post.postDescription} <br>
+                Image : 
+                <c:forEach items="${listPost[theCountPost.index].image}" var="image" varStatus="theCountimage">
+                        ${listPost[theCountPost.index].image[theCountimage.index].src}
+                    </c:forEach>
         </div>
             </c:forEach>
         

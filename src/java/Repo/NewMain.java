@@ -6,6 +6,7 @@
 package Repo;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import model.Post;
 
@@ -20,8 +21,14 @@ public class NewMain {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        List<Post> lp = Repo.findPostByName("");
+        List<Post> lp = Repo.queryPost("Select * from wil_post","");
+//        System.out.println(lp.get(0).getUser().getImage().getImageId());
         System.out.println(lp);
+         
+            
+        
+       
+        
     }
     
 }
