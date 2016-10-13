@@ -7,6 +7,8 @@ tmp/
 node_modules/
 bower_components/
 jaxws/jaxws-client/src/main/
+*.log
+nbproject/private/*  
  
 # OS Files #
 .DS_Store
