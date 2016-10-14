@@ -39,6 +39,12 @@
                     </c:forEach>
         </div>
             </c:forEach>
-        
+        <br><br>
+    <script>
+            document.write("JAVASCRIPT");
+     
+             
+             
+    </script>
     </body>
 </html>

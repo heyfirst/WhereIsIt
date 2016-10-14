@@ -41,7 +41,18 @@ public class Repo {
         Post post = null;
         try {
             con = ConnectionBuilder.getMySqlCond();
-            PreparedStatement pstmt = con.prepareStatement("Select * from wil_post");
+            PreparedStatement pstmt = con.prepareStatement(sql);
+            try{
+                if (Integer.parseInt(param) != 0){
+                    pstmt.setInt(1,Integer.parseInt(param));
+                }
+             
+            }catch(Exception ex){
+                //Integer
+                    pstmt.setString(1,param);
+                
+            }
+            
             ResultSet rs = pstmt.executeQuery();
             while(rs.next()){
                 if(listPost == null){
@@ -59,7 +70,9 @@ public class Repo {
                 listTag     = queryTagByPost(con,listPost,listTag);
                 List<User> listUser  = queryUserByPost(con,listPost); 
                 for(int i=0;i < listPost.size();i++ ){
+      
                     for (int j = 0; j <listUser.size(); j++) {
+                      
                         if(listPost.get(i).getUser().getUserId() == listUser.get(j).getUserId()){
                             listPost.get(i).setUser(listUser.get(j));
                             break;
@@ -67,7 +80,6 @@ public class Repo {
                     }
                    
                 }
-                
             }
             con.close();
             }catch (ClassNotFoundException ex) {
@@ -93,6 +105,7 @@ public class Repo {
                   sqlWhere += String.valueOf(listPost.get(i).getPostId())+comma;   
               }
               sqlWhere += ")";
+
             PreparedStatement pstmt = con.prepareStatement("Select post_id, img.image_id, img.src "
                     + "from wil_post_image poimg "
                     + "JOIN wil_image img "
@@ -184,10 +197,9 @@ public class Repo {
         return  listTag;
     }
 
-    public static List<User> queryUserByPost(Connection con,List<Post> listPost){
+    public static List<User> queryUserByPost(Connection con,List<Post> listPost) throws ClassNotFoundException, SQLException{
         List<User> listUser = null;
         int index = 0;
-          try { 
              String  sqlWhere = "(";
               for (int i = 0; i < listPost.size(); i++) {
                   String    comma = "";    
@@ -198,24 +210,62 @@ public class Repo {
               sqlWhere += ")";
             con = ConnectionBuilder.getMySqlCond();
             PreparedStatement pstmt = con.prepareStatement("Select user_id, u.image_id \"user_image_id\", password,fname,lname,gender,citizen_id,tel,faculty,address,email  "
-                    + "from wil_user u "      
+                    + "from wil_user  u "   
                     + "Where  user_id IN  "+ sqlWhere );
+              
             ResultSet rs = pstmt.executeQuery();
             while(rs.next()){
                 if(listUser == null)
                     listUser = new ArrayList<User>(); 
-                Image img = new Image();      
+                Image img = new Image();     
                 ormImage(rs,img);
                  User user = new User(img);
                 ormUser(rs,user);
-
+          
                 listUser.add(user);
             }
-          }catch(Exception ex){
-              System.out.println("\nListUser\n");
-              ex.printStackTrace();
-          }
+            if(listUser != null){
+                setImageByUser(con,listUser);
+            }
+   
           return listUser;
+    }
+    
+    private static void setImageByUser(Connection con,List<User> listUser) {
+
+        try {
+            String  sqlWhere = "(";
+            for (int i = 0; i < listUser.size(); i++) {
+                String    comma = "";
+                if(i < listUser.size()-1)
+                    comma = ",";
+                if(listUser.get(i).getImage().getImageId() !=0)
+                    sqlWhere += String.valueOf(listUser.get(i).getImage().getImageId())+comma;
+            }
+            sqlWhere += ")";
+            con = ConnectionBuilder.getMySqlCond();
+
+            PreparedStatement pstmt = con.prepareStatement("Select image_id,src  "
+                    + "from wil_image "
+                    + "Where  image_id IN  "+ sqlWhere 
+                    +" Order By image_id ASC");
+            ResultSet rs = pstmt.executeQuery();
+            while(rs.next()){
+                Image img = new Image();
+                ormImage(rs,img);
+                for(int i =0;i< listUser.size(); i++){
+                    if(listUser.get(i).getImage().getImageId() !=0 && listUser.get(i).getImage().equals(img)){
+                        listUser.get(i).setImage(img);
+                    }
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Repo.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            
+        }
+           
+   
     }
     
     public static Post ormPost(ResultSet rs,Post post) throws SQLException{
@@ -230,7 +280,7 @@ public class Repo {
             post.setLon(rs.getBigDecimal("lost_lon").doubleValue());        
         }
         catch(Exception ex){
-               System.out.println(ex);
+              System.out.println(ex);
         }
       
         return post;
@@ -245,32 +295,44 @@ public class Repo {
     public static Image ormImage(ResultSet rs,Image img) {
 
            try{
-                img.setImageId(rs.getInt("image_id"));     
-                img.setSrc(rs.getString("src"));
+                int imgId = rs.getInt("image_id");
+                img.setImageId(imgId);     
+                if(imgId != 0)
+                    img.setSrc(rs.getString("src"));
            }catch(Exception ex){
                img.setImageId(0);
                img.setSrc(null);
+          
            }
         return img;
     }
     
-    public static User ormUser(ResultSet rs,User user)  {
+    public static User ormUser(ResultSet rs,User user) throws SQLException  {
         try{
-            
-            user.setUserId(rs.getInt("user_id"));
+            user.setUserId(rs.getInt("user_id"));  
             user.setCitizenId(rs.getString("citizen_id"));
             user.setFname(rs.getString("fname"));
             user.setLname(rs.getString("lname"));
             user.setGender(rs.getInt("gender"));
             user.setFaculty(rs.getString("faculty"));
             user.setPassword(rs.getString("password"));
-            user.setTel(rs.getString("tel"));          
-            user.setAddress(rs.getString("address"));
+            user.setTel(rs.getString("tel"));    
             user.setEmail(rs.getString("email"));
-
+            user.setAddress(rs.getString("address"));
+            user.getImage().setImageId(rs.getInt("user_image_id"));
         }
         catch(SQLException ex){
-            ex.printStackTrace();
+            user.setUserId(rs.getInt("user_id"));  
+            user.setCitizenId(rs.getString("citizen_id"));
+            user.setFname(rs.getString("fname"));
+            user.setLname(rs.getString("lname"));
+            user.setGender(rs.getInt("gender"));
+            user.setFaculty(rs.getString("faculty"));
+            user.setPassword(rs.getString("password"));
+            user.setTel(rs.getString("tel"));    
+            user.setEmail(rs.getString("email"));
+            user.setAddress(rs.getString("address"));
+            
         }
         return user;
     }
@@ -280,35 +342,38 @@ public class Repo {
     public static List<Post>findPostByName(String param){
         List<Post> listPost = null;
         Connection con = null;
-        
-        try {
-            con = ConnectionBuilder.getMySqlCond();
-//            PreparedStatement pstmt = con.prepareStatement(FIND_POST_BY_NAME);
-//            pstmt.setString(1, param.toLowerCase()+"%");
-//            ResultSet rs = pstmt.executeQuery();
-//      ---- //
-         con.close();
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        param = param.toLowerCase()+"%";
+        String sql = "select * from wil_post where lower(name) like ?";
+        try{
+            listPost = queryPost(sql,param);
+        }catch(Exception ex){
+            System.out.println("Find Post By Name : "+ex);
         }
+        
         return  listPost;
     }
     
-    public static List<Post> findPostByUserId(int id){
-        List<Post> listPost = null;
+    public static Post findPostByUserId(int id){
+         List<Post> listPost = null;
+        Post   post = null;
         Connection con = null;
-        
-        try {
-//            con = ConnectionBuilder.getMySqlCond();
-//            PreparedStatement pstmt = con.prepareStatement(FIND_POST_BY_ID);
-//            pstmt.setInt(1, id);
-//            ResultSet rs = pstmt.executeQuery();
-//            -----  //
-            con.close();
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        String sql = "select * from wil_post where post_id=?";
+        try{
+            listPost = queryPost(sql,String.valueOf(id));
+            if(listPost.size() == 1){
+                post = new Post(listPost.get(0).getImage(), listPost.get(0).getTag(), listPost.get(0).getUser());
+                post.setLat((listPost.get(0).getLat()));
+                post.setLon((listPost.get(0).getLon()));
+                post.setPostDescription((listPost.get(0).getPostDescription()));
+                post.setPostId((listPost.get(0).getPostId()));
+                post.setStatus((listPost.get(0).getStatus()));
+                post.setPostName(listPost.get(0).getPostName());
+            }
+        }catch(Exception ex){
+            System.out.println("Find Post By Name : "+ex);
         }
-        return  listPost;
+
+        return  post;
     }
 }
   
