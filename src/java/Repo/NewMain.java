@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import model.Image;
 import model.Post;
+import model.Tag;
 
 /**
  *
@@ -22,13 +23,15 @@ public class NewMain {
      */
     public static void main(String[] args) {
         // TODO code application logic here^
-        List<Post> lp = Repo.findPostByName("โทร");
+//        List<Post> lp = Repo.findPostByName("โทร");
 //        List<Post> lp = Repo.queryPost("select * from wil_post","");
-
+//        List<Tag> tag = Repo.queryTag("select * from wil_tag where tag_name IN(select tag_name like 'ของใช้ทั่วไป%')");
+//        System.out.println(tag);
 //        System.out.println(lp.get(0).getUser().getImage().getImageId());
-        Post p = Repo.findPostByUserId(3);
-         System.out.println(p);
-            
+//        Post p = Repo.findPostByUserId(3);
+//         System.out.println(lp);
+            ArrayList<String> ls = new ArrayList<String>();
+            System.out.println(ls.isEmpty());
 
     }
     

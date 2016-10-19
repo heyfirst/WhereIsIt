@@ -17,6 +17,11 @@ public class Tag {
         
     }
 
+    public Tag(String tagName) {
+        this.tagName = tagName;
+    }
+
+    
     public Tag(int tagId, String tagName) {
         this.tagId = tagId;
         this.tagName = tagName;

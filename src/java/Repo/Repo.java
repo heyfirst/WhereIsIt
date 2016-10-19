@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -48,7 +49,8 @@ public class Repo {
                 }
              
             }catch(Exception ex){
-                //Integer
+                //String
+                if(!param.isEmpty())
                     pstmt.setString(1,param);
                 
             }
@@ -91,7 +93,7 @@ public class Repo {
     }
     
     
-    public static List<Image> queryImageByPost(Connection con,List<Post> listPost, List<Image> listImage){
+    public  static List<Image> queryImageByPost(Connection con,List<Post> listPost, List<Image> listImage){
           try {
             int check = 0;
             int index = 0;
@@ -337,8 +339,6 @@ public class Repo {
         return user;
     }
         
-    
-    
     public static List<Post>findPostByName(String param){
         List<Post> listPost = null;
         Connection con = null;
@@ -374,6 +374,145 @@ public class Repo {
         }
 
         return  post;
+    }
+    
+     public static List<Tag> queryTag(String sql){
+        List<Tag> listTag = null;
+        Connection con = null;
+        try {            
+            con = ConnectionBuilder.getMySqlCond();
+            PreparedStatement pstmt = con.prepareStatement(sql);
+            ResultSet rs = pstmt.executeQuery();
+            while(rs.next()){
+                if(listTag == null)
+                    listTag = new ArrayList<Tag>();
+                Tag tag = new Tag();
+                ormTag(rs,tag);
+                listTag.add(tag);
+            }
+            con.close();
+            
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Repo.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Repo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listTag;
+    }
+     
+    public synchronized static boolean insertPost(Post post){
+        boolean success = false;
+        boolean insertTag = false;
+        boolean insertImage = false;
+        Connection con =null;
+        String insertPost = "insert into wil_post (user_id, name, description, lost_lat, lost_lon, status, created_at, updated_at) "
+                                  + "values (?,?,?,?,?,?,now(),now())";
+        
+        ArrayList<Integer> listImageId = null;
+        int postId = 0;
+        try {
+            
+            // 8 
+            con =  ConnectionBuilder.getMySqlCond();
+             con.setAutoCommit(false);
+             PreparedStatement setUpFK = con.prepareStatement("set foreign_key_checks=0");
+             setUpFK.executeUpdate();
+            PreparedStatement pstmt = con.prepareStatement(insertPost);
+            
+            pstmt.setInt(1,post.getUser().getUserId());
+            pstmt.setString(2,post.getPostName());
+            pstmt.setString(3,post.getPostDescription());
+            try{
+                 if(post.getLat() == -100 && post.getLon() == -100){
+                     pstmt.setString(4,null);
+                     pstmt.setString(5,null);
+                }
+                 else{
+                      pstmt.setBigDecimal(4,BigDecimal.valueOf(post.getLat()));
+                     pstmt.setBigDecimal(5,BigDecimal.valueOf(post.getLon()));
+                 }
+            }catch(Exception ex){
+                pstmt.setString(4, null);
+                pstmt.setString(5, null);
+            }
+            pstmt.setInt(6,post.getStatus());
+            pstmt.executeUpdate();
+            pstmt.close();
+            
+            if(!post.getImage().isEmpty()){
+                boolean check  = false;
+                if(post.getImage() != null)
+                    check   =   true;
+                if(check){
+                    listImageId = new ArrayList<Integer>();
+                    PreparedStatement pstmt_image = con.prepareStatement("select * from wil_image where created_at = now()");
+                    ResultSet rs = pstmt_image.executeQuery();
+                    while(rs.next()){
+                        listImageId.add(rs.getInt("image_id"));
+                    }
+                    // GET LASTEST POSTID
+                    if(insertTagByPost(con,post.getTag()) && insertImageByPost(con,postId,listImageId))
+                        success = true;
+                }
+    
+            }
+            else{ 
+                if(insertTagByPost(con,post.getTag()))
+                        success = true;
+            }
+            setUpFK = con.prepareStatement("set foreign_key_checks=1");
+            setUpFK.executeUpdate();
+             con.commit();
+            con.close();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Repo.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Repo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+      
+        return  success;
+    }
+    
+    public static boolean insertImage(Connection con,ArrayList<Image> img) throws SQLException{
+        boolean success = false;
+            String sql = "insert into wil_image(src,created_at,updated_at) values(?,now(),now())";
+           
+            for (int i = 0; i < img.size(); i++) {
+                 PreparedStatement pstmt = con.prepareStatement(sql);
+                pstmt.setString(1, img.get(i).getSrc());
+                int exeUpdate = pstmt.executeUpdate();
+                if(exeUpdate > 0)
+                    success = true;   
+             }
+            return success;
+    }
+    
+    private static boolean insertTagByPost(Connection con,ArrayList<Tag> tag) throws SQLException{
+            boolean success = false;
+            String sql = "insert into wil_post_tag (post_id,tag_id) values ((select max(post_id) from wil_post) ,?)";
+           PreparedStatement pstmt = con.prepareStatement(sql);
+            for (int i = 0; i < tag.size(); i++) {       
+                pstmt.setInt(1, tag.get(i).getTagId());
+                int exeUpdate = pstmt.executeUpdate();
+                if(exeUpdate > 0)
+                    success = true;   
+             }
+            return success;
+    }
+    
+    
+    private static boolean insertImageByPost(Connection con,int postId,ArrayList<Integer> imgId) throws SQLException{
+        
+        boolean success = false;
+        String sql = "insert into wil_post_image (image_id,post_id) values(?,(select max(post_id) from wil_post))";
+            PreparedStatement pstmt = con.prepareStatement(sql);
+            for (int i = 0; i < imgId.size(); i++) {
+                pstmt.setInt(1, imgId.get(i));
+                if(pstmt.executeUpdate() > 0)
+                    success = true;   
+             }
+        
+        return  success;
     }
 }
   

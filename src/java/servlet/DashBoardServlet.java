@@ -48,6 +48,8 @@ public class DashBoardServlet extends HttpServlet {
        HttpSession session = request.getSession(true); 
        List<Post> listPost = null;
         String searchParam = request.getParameter("searchParam");
+        listPost = Repo.queryPost("Select * from wil_post","");
+        System.out.println(listPost);
         
         if(searchParam == null) {
             searchParam = "";
