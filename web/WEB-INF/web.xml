@@ -10,7 +10,7 @@
     </servlet>
     <servlet>
         <servlet-name>RegisterServlet</servlet-name>
-        <servlet-class>servlet.RegisterServlet</servlet-class>
+        <servlet-class>servlet.AddPostServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>SampleServlet</servlet-name>

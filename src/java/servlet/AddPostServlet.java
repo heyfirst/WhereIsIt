@@ -22,7 +22,7 @@ import model.User;
  *
  * @author Huag
  */
-public class RegisterServlet extends HttpServlet {
+public class AddPostServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -108,7 +108,7 @@ public class RegisterServlet extends HttpServlet {
             request.setAttribute("postImage",listImage);
         request.setAttribute("success", success);
          request.setAttribute("listTag",allTag);
-        getServletContext().getRequestDispatcher("/pages/Register.jsp").forward(request, response);
+        getServletContext().getRequestDispatcher("/pages/addpost.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

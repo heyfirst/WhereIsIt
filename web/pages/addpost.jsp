@@ -15,7 +15,7 @@
     <body>
         <h1>Register</h1>
      
-        <form action="RegisterServlet" method="post"> 
+        <form action="AddPostServlet" method="post"> 
             POST NAME : <input type="text" name="postName"> <br>
             <c:forEach items="${listTag}" var="listTag"  varStatus="count" >
                   <input type="checkbox" name="tag" value="${listTag.tagId}">${listTag.tagName} <br>
