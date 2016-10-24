@@ -30,6 +30,6 @@
             <input type="submit" value="Submit"/>
         </form>
         
-        <h1>${message}</h1>
+        <h3 style="color: red">${message}</h3>
     </body>
 </html>
