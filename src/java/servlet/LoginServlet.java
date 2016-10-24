@@ -7,7 +7,6 @@ package servlet;
 
 import Repo.UserRepo;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -34,7 +33,7 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -51,10 +50,10 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
         
-        HttpSession session = request.getSession(false);
+        HttpSession session = request.getSession();
+        User loggedInUser = (User) session.getAttribute("loggedInUser");
         String message = "";
-        
-        if(session != null){
+        if(loggedInUser != null){
             getServletContext().getRequestDispatcher("/pages/homepage.jsp").forward(request, response);
         }else{
             getServletContext().getRequestDispatcher("/pages/login.jsp").forward(request, response);

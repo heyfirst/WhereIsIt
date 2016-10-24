@@ -18,7 +18,7 @@
         <h1>${message}</h1>
         
     <c:if test="${loggedInUser != null}">
-        <form action="/WhereIsIt/Logout" method="POST">
+        <form action="/WhereIsIt/Logout" method="GET">
             <input type="submit" value="Logout">
         </form>
     </c:if>
