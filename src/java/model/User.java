@@ -120,7 +120,7 @@ public class User {
         return image;
     }
 
-    public void setImage(Image image) {
+    public void setImage(Image imageId) {
         this.image = image;
     }
 
