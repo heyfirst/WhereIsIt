@@ -45,7 +45,7 @@ public class DashBoardServlet extends HttpServlet {
         if(request.getCharacterEncoding() == null) {
             request.setCharacterEncoding("UTF-8");
         }
-       HttpSession session = request.getSession(true); 
+   
        List<Post> listPost = null;
         String searchParam = request.getParameter("searchParam");
         listPost = Repo.queryPost("Select * from wil_post","");
