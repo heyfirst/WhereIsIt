@@ -24,7 +24,7 @@ public class Post {
     private double lat;
     private double lon;
     private int status;
-    
+   
     public Post() {
         
     }

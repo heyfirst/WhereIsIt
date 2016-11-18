@@ -342,7 +342,7 @@ public class Repo {
     public static List<Post>findPostByName(String param){
         List<Post> listPost = null;
         Connection con = null;
-        param = param.toLowerCase()+"%";
+        param = "%"+param.toLowerCase()+"%";
         String sql = "select * from wil_post where lower(name) like ?";
         try{
             listPost = queryPost(sql,param);
@@ -353,7 +353,7 @@ public class Repo {
         return  listPost;
     }
     
-    public static Post findPostByUserId(int id){
+     public static Post findPostById(int id){
          List<Post> listPost = null;
         Post   post = null;
         Connection con = null;
@@ -375,6 +375,7 @@ public class Repo {
 
         return  post;
     }
+   
     
      public static List<Tag> queryTag(String sql){
         List<Tag> listTag = null;

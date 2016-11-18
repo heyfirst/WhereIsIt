@@ -1,9 +1,10 @@
 <%-- 
-    Document   : Register
-    Created on : Oct 18, 2016, 11:00:26 PM
+    Document   : post
+    Created on : Nov 17, 2016, 2:01:21 AM
     Author     : Huag
 --%>
-
+ <link rel="stylesheet" href="../template/assets/css/bulma/css/bulma.css">
+  <link rel="stylesheet" href="../template/assets/css/font-awesome.min.css">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -82,57 +83,55 @@
   <section class="section">
     <div class="container">
       <div class="columns">
-        <div class="column is-half is-offset-one-quarter">
-          <label class="label">Name</label>
-          <p class="control">
-            <input class="input" type="text" placeholder="Text input">
-          </p>
-          <label class="label">Username</label>
-          <p class="control has-icon has-icon-right">
-            <input class="input is-success" type="text" placeholder="Text input" value="bulma">
-            <i class="fa fa-check"></i>
-            <span class="help is-success">This username is available</span>
-          </p>
-          <label class="label">Email</label>
-          <p class="control has-icon has-icon-right">
-            <input class="input is-danger" type="text" placeholder="Email input" value="hello@">
-            <i class="fa fa-warning"></i>
-            <span class="help is-danger">This email is invalid</span>
-          </p>
-          <label class="label">Subject</label>
-          <p class="control">
-            <span class="select">
-              <select>
-                <option>Select dropdown</option>
-                <option>With options</option>
-              </select>
-            </span>
-          </p>
-          <label class="label">Message</label>
-          <p class="control">
-            <textarea class="textarea" placeholder="Textarea"></textarea>
-          </p>
-          <p class="control">
-            <label class="checkbox">
-              <input type="checkbox">
-              Remember me
-            </label>
-          </p>
-          <p class="control">
-            <label class="radio">
-              <input type="radio" name="question">
-              Yes
-            </label>
-            <label class="radio">
-              <input type="radio" name="question">
-              No
-            </label>
-          </p>
-          <p class="control">
-            <button class="button is-primary is-fullwidth">Submit</button>
-            <button class="button is-link is-fullwidth">Cancel</button>
-          </p>
+        <!-- Post -->
+        <div class="column is-3">
+          <div class="card">
+            <div class="card-image">
+              <figure class="image is-3by2">
+                <img src="http://placehold.it/225x225" alt="">
+              </figure>
+            </div>
+            <div class="card-content">
+              <div class="content">
+                <h2>${post.postName}</h2>
+              </div>
+              <div class="content">
+                ${post.postDescription}
+              </div>
+              <div class="media">
+                <div class="media-left">
+                  <figure class="image is-32x32">
+                    <img src="http://placehold.it/64x64" alt="Image">
+                  </figure>
+                </div>
+                <div class="media-content">
+                  <p class="title is-5">${post.postName}</p>
+                  <p class="subtitle is-6">${post.user.fname} ${post.user.lname}</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+        <!-- ./End Post -->
+        <!-- Content -->
+        <div class="column">
+          <div class="panel">
+            <p class="panel-heading">
+                Details
+            </p>
+            <div class="panel-block">
+              <div class="content">
+                <p>${post.postDescription}</p>
+              </div>
+            </div>
+            <div class="panel-block">
+              <button class="button is-danger is-outlined is-fullwidth is-medium">
+                I Found It !
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- ./End Content -->
       </div>
     </div>
   </section>

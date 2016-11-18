@@ -1,17 +1,21 @@
 <%-- 
-    Document   : index
-    Created on : Nov 17, 2016, 12:56:35 AM
+    Document   : dashboard
+    Created on : Oct 8, 2016, 11:26:30 PM
     Author     : Huag
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
+<%@page import="model.Post"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>Where Is It | Lost and Found Website.</title>
-  <link rel="stylesheet" href="/template/assets/css/bulma/css/bulma.css">
-  <link rel="stylesheet" href="/template/assets/css/font-awesome.min.css">
+  <link rel="stylesheet" href="../template/assets/css/bulma/css/bulma.css">
+  <link rel="stylesheet" href="../template/assets/css/font-awesome.min.css">
 </head>
 <body>
   <section class="hero is-primary is-medium">
@@ -34,6 +38,9 @@
               หน้าแรก
             </a>
             <a class="nav-item">
+              ของที่หายของฉัน
+            </a>
+            <a class="nav-item">
               ข้อมูลส่วนตัวของฉัน
             </a>
             <span class="nav-item">
@@ -48,7 +55,7 @@
         </div>
       </header>
     </div>
-
+    
     <!-- Hero content: will be in the middle -->
     <div class="hero-body">
       <div class="container has-text-centered">
@@ -82,16 +89,20 @@
         <div class="level-left">
           <div class="level-item">
             <p class="subtitle is-5">
-              <strong>123</strong> posts
+                <% List listPost =  (ArrayList)request.getSession().getAttribute("posts");  
+                %>
+              <strong><%= listPost.size() %></strong> posts
             </p>
           </div>
           <div class="level-item">
-            <p class="control has-addons">
-              <input class="input" type="text" placeholder="Find a post">
-              <button class="button">
-                Search
-              </button>
-            </p>
+            <form action="DashBoard" Method="post">
+              <p class="control has-addons">
+                <input class="input" type="text" name="searchParam" placeholder="Find a post">
+                <button class="button" type="submit">
+                  Search
+                </button> 
+             </p>
+            </form>
           </div>
         </div>
 
@@ -107,272 +118,42 @@
 
       <div class="columns is-multiline">
         <!-- Post -->
-        <div class="column is-3">
-          <div class="card">
-            <div class="card-image">
-              <figure class="image is-3by2">
-                <img src="http://placehold.it/225x225" alt="">
-              </figure>
-            </div>
-            <div class="card-content">
-              <div class="media">
-                <div class="media-left">
-                  <figure class="image is-32x32">
-                    <img src="http://placehold.it/64x64" alt="Image">
+        <c:forEach items="${posts}" var="p" varStatus="vs">
+            <div class="column is-3">
+              <div class="card">
+                <div class="card-image">
+                  <figure class="image is-3by2">
+                    <img src="http://placehold.it/225x225" alt="">
                   </figure>
                 </div>
-                <div class="media-content">
-                  <p class="title is-5">John Smith</p>
-                  <p class="subtitle is-6">@johnsmith</p>
-                </div>
-              </div>
+                <div class="card-content">
+                  <div class="media">
+                    <div class="media-left">
+                      <figure class="image is-32x32">
+                        <img src="http://placehold.it/64x64" alt="Image">
+                      </figure>
+                    </div>
+                    <div class="media-content">
+                      <p class="title is-5">${p.postName}</p>
+                      <p class="subtitle is-6">${p.user.fname} ${p.user.lname} </p>
+                    </div>
+                  </div>
 
-              <div class="content">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Phasellus nec iaculis mauris.
+                  <div class="content">
+                    ${p.postDescription}
+                  </div>
+                </div>
+                <footer class="card-footer">
+                  <a class="card-footer-item" href="Seemore?post_id=${p.postId}">See more.</a>
+                  <a class="card-footer-item" >Found It!</a>
+                </footer>
               </div>
             </div>
-            <footer class="card-footer">
-              <a class="card-footer-item">See more.</a>
-              <a class="card-footer-item">Found It!</a>
-            </footer>
-          </div>
-        </div>
+          </c:forEach>
         <!-- ./End Post -->
-        <!-- Post -->
-        <div class="column is-3">
-          <div class="card">
-            <div class="card-image">
-              <figure class="image is-3by2">
-                <img src="http://placehold.it/225x225" alt="">
-              </figure>
-            </div>
-            <div class="card-content">
-              <div class="media">
-                <div class="media-left">
-                  <figure class="image is-32x32">
-                    <img src="http://placehold.it/64x64" alt="Image">
-                  </figure>
-                </div>
-                <div class="media-content">
-                  <p class="title is-5">John Smith</p>
-                  <p class="subtitle is-6">@johnsmith</p>
-                </div>
-              </div>
 
-              <div class="content">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Phasellus nec iaculis mauris.
-              </div>
-            </div>
-            <footer class="card-footer">
-              <a class="card-footer-item">See more.</a>
-              <a class="card-footer-item">Found It!</a>
-            </footer>
-          </div>
-        </div>
-        <!-- ./End Post -->
-        <!-- Post -->
-        <div class="column is-3">
-          <div class="card">
-            <div class="card-image">
-              <figure class="image is-3by2">
-                <img src="http://placehold.it/225x225" alt="">
-              </figure>
-            </div>
-            <div class="card-content">
-              <div class="media">
-                <div class="media-left">
-                  <figure class="image is-32x32">
-                    <img src="http://placehold.it/64x64" alt="Image">
-                  </figure>
-                </div>
-                <div class="media-content">
-                  <p class="title is-5">John Smith</p>
-                  <p class="subtitle is-6">@johnsmith</p>
-                </div>
-              </div>
-
-              <div class="content">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Phasellus nec iaculis mauris.
-              </div>
-            </div>
-            <footer class="card-footer">
-              <a class="card-footer-item">See more.</a>
-              <a class="card-footer-item">Found It!</a>
-            </footer>
-          </div>
-        </div>
-        <!-- ./End Post -->
-        <!-- Post -->
-        <div class="column is-3">
-          <div class="card">
-            <div class="card-image">
-              <figure class="image is-3by2">
-                <img src="http://placehold.it/225x225" alt="">
-              </figure>
-            </div>
-            <div class="card-content">
-              <div class="media">
-                <div class="media-left">
-                  <figure class="image is-32x32">
-                    <img src="http://placehold.it/64x64" alt="Image">
-                  </figure>
-                </div>
-                <div class="media-content">
-                  <p class="title is-5">John Smith</p>
-                  <p class="subtitle is-6">@johnsmith</p>
-                </div>
-              </div>
-
-              <div class="content">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Phasellus nec iaculis mauris.
-              </div>
-            </div>
-            <footer class="card-footer">
-              <a class="card-footer-item">See more.</a>
-              <a class="card-footer-item">Found It!</a>
-            </footer>
-          </div>
-        </div>
-        <!-- ./End Post -->
-        <!-- Post -->
-        <div class="column is-3">
-          <div class="card">
-            <div class="card-image">
-              <figure class="image is-3by2">
-                <img src="http://placehold.it/225x225" alt="">
-              </figure>
-            </div>
-            <div class="card-content">
-              <div class="media">
-                <div class="media-left">
-                  <figure class="image is-32x32">
-                    <img src="http://placehold.it/64x64" alt="Image">
-                  </figure>
-                </div>
-                <div class="media-content">
-                  <p class="title is-5">John Smith</p>
-                  <p class="subtitle is-6">@johnsmith</p>
-                </div>
-              </div>
-
-              <div class="content">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Phasellus nec iaculis mauris.
-              </div>
-            </div>
-            <footer class="card-footer">
-              <a class="card-footer-item">See more.</a>
-              <a class="card-footer-item">Found It!</a>
-            </footer>
-          </div>
-        </div>
-        <!-- ./End Post -->
-        <!-- Post -->
-        <div class="column is-3">
-          <div class="card">
-            <div class="card-image">
-              <figure class="image is-3by2">
-                <img src="http://placehold.it/225x225" alt="">
-              </figure>
-            </div>
-            <div class="card-content">
-              <div class="media">
-                <div class="media-left">
-                  <figure class="image is-32x32">
-                    <img src="http://placehold.it/64x64" alt="Image">
-                  </figure>
-                </div>
-                <div class="media-content">
-                  <p class="title is-5">John Smith</p>
-                  <p class="subtitle is-6">@johnsmith</p>
-                </div>
-              </div>
-
-              <div class="content">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Phasellus nec iaculis mauris.
-              </div>
-            </div>
-            <footer class="card-footer">
-              <a class="card-footer-item">See more.</a>
-              <a class="card-footer-item">Found It!</a>
-            </footer>
-          </div>
-        </div>
-        <!-- ./End Post -->
-        <!-- Post -->
-        <div class="column is-3">
-          <div class="card">
-            <div class="card-image">
-              <figure class="image is-3by2">
-                <img src="http://placehold.it/225x225" alt="">
-              </figure>
-            </div>
-            <div class="card-content">
-              <div class="media">
-                <div class="media-left">
-                  <figure class="image is-32x32">
-                    <img src="http://placehold.it/64x64" alt="Image">
-                  </figure>
-                </div>
-                <div class="media-content">
-                  <p class="title is-5">John Smith</p>
-                  <p class="subtitle is-6">@johnsmith</p>
-                </div>
-              </div>
-
-              <div class="content">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Phasellus nec iaculis mauris.
-              </div>
-            </div>
-            <footer class="card-footer">
-              <a class="card-footer-item">See more.</a>
-              <a class="card-footer-item">Found It!</a>
-            </footer>
-          </div>
-        </div>
-        <!-- ./End Post -->
-        <!-- Post -->
-        <div class="column is-3">
-          <div class="card">
-            <div class="card-image">
-              <figure class="image is-3by2">
-                <img src="http://placehold.it/225x225" alt="">
-              </figure>
-            </div>
-            <div class="card-content">
-              <div class="media">
-                <div class="media-left">
-                  <figure class="image is-32x32">
-                    <img src="http://placehold.it/64x64" alt="Image">
-                  </figure>
-                </div>
-                <div class="media-content">
-                  <p class="title is-5">John Smith</p>
-                  <p class="subtitle is-6">@johnsmith</p>
-                </div>
-              </div>
-
-              <div class="content">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Phasellus nec iaculis mauris.
-              </div>
-            </div>
-            <footer class="card-footer">
-              <a class="card-footer-item">See more.</a>
-              <a class="card-footer-item">Found It!</a>
-            </footer>
-          </div>
-        </div>
-        <!-- ./End Post -->
       </div>
     </div>
   </section>
 </body>
 </html>
-

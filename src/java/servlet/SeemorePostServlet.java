@@ -5,30 +5,20 @@
  */
 package servlet;
 
-import Repo.Repo;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.Post;
-import model.User;
-import util.ConnectionBuilder;
-
+import Repo.Repo;
 /**
  *
  * @author Huag
  */
-public class DashBoardServlet extends HttpServlet {
+public class SeemorePostServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,34 +32,10 @@ public class DashBoardServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        if(request.getCharacterEncoding() == null) {
-            request.setCharacterEncoding("UTF-8");
-        }
-   
-       List<Post> listPost = null;
-        String searchParam = request.getParameter("searchParam");
-        listPost = Repo.queryPost("Select * from wil_post","");
-        System.out.println(listPost);
-        
-        if(searchParam == null) {
-            searchParam = "";
-            listPost = Repo.queryPost("Select * from wil_post","");
-        }else{
-            listPost = Repo.findPostByName(searchParam);
-        }
-       
-       
-        request.setAttribute("listPost",listPost);
+            // click Found it in DashBoard  do in Method doGet        
+        if(request.getSession().getAttribute("posts") != null){
             
-                
-      
-        
-        
-
-            getServletContext().getRequestDispatcher("/pages/dashboard.jsp").forward(request,response);
-
-
-
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -84,7 +50,17 @@ public class DashBoardServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+          String query = request.getQueryString();
+          int index = query.indexOf("=");
+          String id = query.substring(index+1);
+          if(request.getSession().getAttribute("posts") != null){
+            HttpSession session = request.getSession();
+            Post post = Repo.findPostById(Integer.parseInt(id));
+            request.setAttribute("post", post);
+            getServletContext().getRequestDispatcher("/pages/seemorePost.jsp").forward(request,response);
+         }
+         
+       
     }
 
     /**
