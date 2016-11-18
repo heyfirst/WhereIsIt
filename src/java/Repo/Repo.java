@@ -375,6 +375,20 @@ public class Repo {
 
         return  post;
     }
+     
+       public static List<Post> findPostByUserId(int id){
+         List<Post> listPost = null;
+        Post   post = null;
+        Connection con = null;
+        String sql = "select * from wil_post where user_id=?";
+        try{
+            listPost = queryPost(sql,String.valueOf(id));
+        }catch(Exception ex){
+            System.out.println("Method In findPostByUserID : Find Post By Name : "+ex);
+        }
+
+        return  listPost;
+    }
    
     
      public static List<Tag> queryTag(String sql){
