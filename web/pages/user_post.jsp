@@ -24,26 +24,24 @@
           <!-- Left side -->
           <div class="level-left">
             <div class="level-item">
-            <% int sizeOfPost = 0; %>
-                <c:if test="${posts != null}">
+          <c:if test="${userPost != null}">
               <p class="subtitle is-5">
-                  <% List<Post> posts = (List<Post>)request.getSession().getAttribute("posts");
-                         sizeOfPost = posts.size();
+                  <% List<Post> posts = (List<Post>)request.getAttribute("userPost");
+                        int sizeOfPost = posts.size();
                       %>
-                </c:if>
                 <strong><%= sizeOfPost %></strong> posts
+          </c:if>
               </p>
-                
             </div>
             <div class="level-item">
-             <form action="/WhereIsIt/pages/" method="GET">
+                <form action="/WhereIsIt/pages/User" method="get">
               <p class="control has-addons">
                 <input class="input" type="text" placeholder="Find a post" name="searchParam">
-                <button class="button">
+                <button class="button" >
                   Search
                 </button>
               </p>
-             </form>
+                </form>
             </div>
           </div>
 
@@ -59,9 +57,9 @@
 
         <div class="columns is-multiline">
           <!-- Post -->
- <c:if test="${posts != null}">
-    <c:forEach items="${posts}" var="p" varStatus="vs">
-        <c:if test="${p.status == 0}">
+ <c:if test="${userPost != null}">
+    <c:forEach items="${userPost}" var="up" varStatus="vs">
+        <c:if test="${up.status == 0}">
           <div class="column is-3">
             <div class="card">
               <div class="card-image">
@@ -77,68 +75,30 @@
                     </figure>
                   </div>
                   <div class="media-content">
-                    <p class="title is-5">${p.postName}</p>
-                    <p class="subtitle is-6">${p.user.fname} ${p.user.lname}</p>
+                    <p class="title is-5">${up.postName}</p>
+                    <p class="subtitle is-6">${up.user.fname} ${up.user.lname}</p>
                   </div>
                 </div>
 
                 <div class="content">
-                  ${p.postDescription}
+                  ${up.postDescription}
                 </div>
               </div>
               <footer class="card-footer">
-                <a class="card-footer-item" href="Post?post_id=${p.postId}">See more.</a>
-                <a class="card-footer-item modal-button" data-target="#found-item">Found It!</a>
+                <a class="card-footer-item" href="Post?post_id=${up.postId}">See more.</a>
+                <a class="card-footer-item">Found It!</a>
               </footer>
             </div>
           </div>
           <!-- ./End Post -->
           </c:if>
        </c:forEach>
-   </c:if>
+</c:if>
         </div>
       </div>
     </section>
     
     <jsp:include page="../layouts/script_included.jsp"/>
     
-    <!-- Modal -->
-    <div id="found-item" class="modal">
-      <div class="modal-background"></div>
-      <div class="modal-card">
-        <header class="modal-card-head">
-          <p class="modal-card-title">I Found it !</p>
-          <button class="delete"></button>
-        </header>
-        <section class="modal-card-body">
-          <form action="PostPending?post_id=${post.postId}" method="post">
-            <div class="content">
-              <label class="label">ข้อมูลของที่พบ</label>
-              <p class="control">
-                <textarea class="input" name="found_data"></textarea>
-              </p>
-              <label class="label">วันที่เจอ</label>
-              <p class="control">
-                <input class="input" type="date" name="found_date">
-              </p>
-              <label class="label">เวลาที่เจอ</label>
-              <p class="control">
-                <input class="input" type="time" name="found_time">
-              </p>
-              <hr>
-              <label class="label">สถานที่</label>
-              <p class="control">
-                <input class="input" type="text" name="found_place">
-              </p>
-              <label class="label">ที่อยู่</label>
-              <p class="control">
-                <input class="input" type="text" name="found_address">
-              </p>
-              <button class="button is-success is-medium is-fullwidth">ฉันเจอมันแล้ว</button>
-            </div>
-            </form>
-        </section>
-      </div>
-    </div>
   </body>
 </html>

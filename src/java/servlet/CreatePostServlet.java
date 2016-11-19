@@ -14,7 +14,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Image;
+import model.Post;
 import model.Tag;
+import model.User;
 
 /**
  *
@@ -34,7 +37,59 @@ public class CreatePostServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+         if(request.getCharacterEncoding() == null) {
+            request.setCharacterEncoding("UTF-8");
+        }
         // Post Only        
+        String postName = request.getParameter("postName");
+        String tagfromInput    = request.getParameter("tag");
+        String postDesciption = request.getParameter("postDescription");
+        String yes = request.getParameter("question");
+       
+        User user = (User) request.getSession().getAttribute("loggedInUser");
+        if(user != null){
+            if(yes.equalsIgnoreCase("yes") && postName != null && postDesciption != null){
+                int userId = user.getUserId();
+                 int status = 0;
+                 int tagId = Integer.parseInt(tagfromInput);
+                 Tag tag = Repo.queryTagByTagId(tagId);
+                 ArrayList<Tag> listTag =  new ArrayList<Tag>();
+                 listTag.add(tag);
+                  ArrayList<Image> listImage =  new ArrayList<Image>();
+                 
+
+                    
+                
+                 
+                 
+                 Post post = new Post(listImage,listTag);
+                 post.setUser(user);
+                 post.setPostName(postName);
+                 post.setPostDescription(postDesciption);
+                 post.setStatus(0);
+                 
+          
+                 
+                 boolean success = Repo.insertPost(post);
+                 if(success){
+                     Post p = Repo.findLastPostByUserId(userId);
+                     request.setAttribute("post", p);
+                     getServletContext().getRequestDispatcher("/pages/create_post_success.jsp").forward(request, response);
+                 }
+                 else{
+                     ArrayList<Tag> allTag = (ArrayList<Tag>) Repo.queryTag();
+                     request.setAttribute("message","Create Post Fail Please try again");
+                     request.setAttribute("tag", allTag);
+                     getServletContext().getRequestDispatcher("/pages/create_post.jsp").forward(request, response);
+                 }
+                     
+            }
+        }
+        
+
+        
+        
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -67,6 +122,7 @@ public class CreatePostServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         processRequest(request, response);
     }
 

@@ -1,3 +1,4 @@
+<%@page import="model.User"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <section class="hero is-primary is-medium">
@@ -16,15 +17,24 @@
           <span></span>
         </span>
         <div class="nav-right nav-menu">
-          <a class="nav-item is-active">
+          <a class="nav-item is-active" href="/WhereIsIt/pages/">
             หน้าแรก
           </a>
-          <a class="nav-item">
-            ข้อมูลส่วนตัวของฉัน
-          </a>
+          <c:choose>
+              <c:when test="${sessionScope.loggedInUser != null}">
+                <a class="nav-item" href="/WhereIsIt/pages/User">
+                  ข้อมูลส่วนตัวของฉัน
+                </a>
+               </c:when>
+              <c:otherwise>
+                  <a class="nav-item" >
+                  ข้อมูลส่วนตัวของฉัน
+                </a>
+              </c:otherwise>
+            </c:choose>
           <span class="nav-item">
               <c:choose>
-                <c:when test="${loggedInUser == null}">
+                  <c:when test="${sessionScope.loggedInUser == null}">
                     <button class="button is-primary is-inverted modal-button" data-target="#login">
                       <span class="icon">
                         <i class="fa fa-user"></i>
@@ -36,7 +46,7 @@
                       <span class="icon">
                         <i class="fa fa-user"></i>
                       </span>
-                      <span>${sessionScope.loggedInUser.fname} ${sessionScope.loggedInUser.fname.lname}</span>
+                      <span>${sessionScope.loggedInUser.fname} ${sessionScope.loggedInUser.lname}</span>
                   </c:otherwise>
               </c:choose>
           </span>
@@ -49,7 +59,7 @@
   <div class="hero-body">
     <div class="container has-text-centered">
       <h1 class="title">
-        Where Is It
+          Where Is It 
       </h1>
       <h2 class="subtitle">
         Lost & Found Application

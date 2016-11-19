@@ -77,21 +77,23 @@ public class LoginServlet extends HttpServlet {
         HttpSession session = request.getSession(false);
         String message = "";
         User loggedInUser = (User) session.getAttribute("loggedInUser");
-        
+
         if(loggedInUser != null){
             response.sendRedirect(getServletContext().getContextPath());
+//                getServletContext().getRequestDispatcher("/pages/index.jsp").forward(request, response);
         }else{
-            session = request.getSession();
+            
             String em = request.getParameter("email");
             String pw = request.getParameter("password");
             loggedInUser = UserRepo.getUser(em, pw);
             
             if(loggedInUser != null){
                 message = "Logged in! Welcome!";
+                
             }else{
                 message = "Your Email or Password is not collect!";
                 request.setAttribute("message", message);
-                getServletContext().getRequestDispatcher("/pages/index.jsp").forward(request, response);
+                
             }
             session.setAttribute("loggedInUser", loggedInUser);
         }

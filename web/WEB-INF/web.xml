@@ -16,6 +16,12 @@
         <dispatcher>REQUEST</dispatcher>
         <dispatcher>FORWARD</dispatcher>
     </filter-mapping>
+    <filter-mapping>
+        <filter-name>Authencation</filter-name>
+        <servlet-name>UserPostServlet</servlet-name>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+    </filter-mapping>
     <servlet>
         <servlet-name>SampleServlet</servlet-name>
         <servlet-class>servlet.SampleServlet</servlet-class>
@@ -56,6 +62,10 @@
         <servlet-name>CreatePostServlet</servlet-name>
         <servlet-class>servlet.CreatePostServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UserPostServlet</servlet-name>
+        <servlet-class>servlet.UserPostServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SampleServlet</servlet-name>
         <url-pattern>/SampleServlet</url-pattern>
@@ -95,6 +105,10 @@
     <servlet-mapping>
         <servlet-name>CreatePostServlet</servlet-name>
         <url-pattern>/pages/CreatePost</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserPostServlet</servlet-name>
+        <url-pattern>/pages/User</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>

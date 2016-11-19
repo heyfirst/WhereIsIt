@@ -69,7 +69,13 @@ public class UserRepo {
             ResultSet rs = pstmt.executeQuery();
             if(rs.next()){
                 int userId = rs.getInt("user_id");
-                int imageId = rs.getInt("image_id");
+                int imageId;
+                try{
+                     imageId = rs.getInt("image_id");
+                }
+                catch(Exception x){
+                    imageId = 0;
+                }
                 String email = rs.getString("email");
                 String password = rs.getString("password");
                 String fname = rs.getString("fname");
@@ -78,7 +84,15 @@ public class UserRepo {
                 String citizenId = rs.getString("citizen_id");
                 String tel = rs.getString("tel");
                 String faculty = rs.getString("faculty");
-                String address = rs.getString("address");
+                String address;
+                  try{
+                     address = rs.getString("address");
+                }
+                catch(Exception x){
+                    address = null;
+                }
+                
+                
                 
                 Image image = new Image(); // need ImageRepo to query by Id
                 userInfor = new User(userId, image, email, password, fname, lname, gender, citizenId, tel, faculty, address);

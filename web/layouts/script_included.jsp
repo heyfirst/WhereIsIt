@@ -38,14 +38,14 @@
             </header>
             <section class="modal-card-body">
               <div class="content">
-                  <form action="/Login" method="post">
+                  <form action="Login" method="post">
                 <label class="label">Username</label>
                 <p class="control">
-                  <input class="input" type="text" placeholder="Username..." >
+                  <input class="input" type="text" placeholder="Username..." name="email" >
                 </p>
                 <label class="label">Password</label>
                 <p class="control">
-                  <input class="input" type="password" placeholder="Password...">
+                  <input class="input" type="password" placeholder="Password..." name="password">
                 </p>
                 <button type="submit" class="button is-success">Login</button>
                 <a class="button is-danger is-outlined" href="/WhereIsIt/pages/Register">Register</a>

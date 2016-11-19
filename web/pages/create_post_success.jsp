@@ -20,14 +20,14 @@
         <div class="column is-half is-offset-one-quarter">
           <div class="content has-text-centered">
             <h1>Post Successful !</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla accumsan, metus ultrices eleifend gravida, nulla nunc varius lectus, nec rutrum justo nibh eu lectus. Ut vulputate semper dui. Fusce erat odio, sollicitudin vel erat vel, interdum mattis neque.</p>
-            <a class="button is-danger">
+            <p>ตอนนี้ โพสของหายของคุณได้ถูกประกาศบนเว็บไซต์เรียบร้อยแล้ว</p>
+            <a class="button is-danger" href="/WhereIsIt/pages/">
               <span class="icon">
                 <i class="fa fa-arrow-left"></i>
               </span>
               <span>Back to Home</span>
             </a>
-            <a class="button is-success">
+            <a class="button is-success" href="/WhereIsIt/pages/Post?post_id=${post.postId}">
               <span>Go to Post</span>
               <span class="icon">
                 <i class="fa fa-arrow-right"></i>

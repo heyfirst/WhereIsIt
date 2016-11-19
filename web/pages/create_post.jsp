@@ -25,9 +25,10 @@
         <div class="columns">
           <div class="column is-half is-offset-one-quarter">
              <form action="CreatePost" method="Post">     
+                 <p style="color: red; font-size: 16px;">${message}</p>
                 <label class="label">Name</label>
                 <p class="control">
-                  <input class="input" type="text" placeholder="Text input" name="postName">
+                  <input class="input" type="text" placeholder="Text input" name="postName" required>
                 </p>
                 <label class="label">Username</label>
                 <p class="control has-icon has-icon-right">
@@ -47,7 +48,7 @@
                 </p>
                 <label class="label">Message</label>
                 <p class="control">
-                  <textarea class="textarea" placeholder="Textarea" name="postDescription"></textarea>
+                  <textarea class="textarea" placeholder="Textarea" name="postDescription" required></textarea>
                 </p>
                 <p class="control">
                   <label class="checkbox">
@@ -57,11 +58,11 @@
                 </p>
                 <p class="control">
                   <label class="radio">
-                    <input type="radio" name="question">
+                    <input type="radio" name="question" value="yes">
                     Yes
                   </label>
                   <label class="radio">
-                    <input type="radio" name="question">
+                      <input type="radio" name="question" value="no">
                     No
                   </label>
                 </p>

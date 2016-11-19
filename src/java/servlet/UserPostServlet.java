@@ -7,16 +7,20 @@ package servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import javax.servlet.http.HttpSession;
+import model.Post;
+import Repo.Repo;
+import model.User;
 /**
  *
  * @author Huag
  */
-public class PostPendingServlet extends HttpServlet {
+public class UserPostServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,6 +34,26 @@ public class PostPendingServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        if(request.getCharacterEncoding() == null) {
+            request.setCharacterEncoding("UTF-8");
+        }
+        HttpSession session = request.getSession(false);
+        User user = (User)session.getAttribute("loggedInUser");
+        String search = request.getParameter("searchParam");
+        List<Post> listPost = null;
+        if(session != null && user != null){
+            int userId = user.getUserId();
+            if(search == null){
+                listPost = Repo.findPostByUserId(userId);
+                
+            }
+            else{
+               listPost = Repo.findPostByNameAndUserId(search,userId);
+            }
+            request.setAttribute("userPost", listPost);
+                getServletContext().getRequestDispatcher("/pages/user_post.jsp").forward(request, response);
+
+        }
         
     }
 

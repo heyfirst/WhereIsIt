@@ -282,7 +282,8 @@ public class Repo {
             post.setLon(rs.getBigDecimal("lost_lon").doubleValue());        
         }
         catch(Exception ex){
-              System.out.println(ex);
+             post.setLat(0);
+            post.setLon(0);
         }
       
         return post;
@@ -376,7 +377,7 @@ public class Repo {
         return  post;
     }
      
-       public static List<Post> findPostByUserId(int id){
+       public synchronized static List<Post> findPostByUserId(int id){
          List<Post> listPost = null;
         Post   post = null;
         Connection con = null;
@@ -415,6 +416,30 @@ public class Repo {
         }
         return listTag;
     }
+     
+     public static Tag queryTagByTagId(int id){
+         Tag tag = null;
+        Connection con = null;
+        String sql = "select * from wil_tag where tag_id = ?";
+        try {            
+            con = ConnectionBuilder.getMySqlCond();
+            PreparedStatement pstmt = con.prepareStatement(sql);
+            pstmt.setInt(1, id);
+            ResultSet rs = pstmt.executeQuery();
+            while(rs.next()){
+                 tag = new Tag();
+                ormTag(rs,tag);
+            }
+            con.close();
+            
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Repo.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Repo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return tag;
+    }
+     
      
     public synchronized static boolean insertPost(Post post){
         boolean success = false;
@@ -480,10 +505,8 @@ public class Repo {
             setUpFK.executeUpdate();
              con.commit();
             con.close();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Repo.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(Repo.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
       
         return  success;
@@ -503,7 +526,7 @@ public class Repo {
             return success;
     }
     
-    private static boolean insertTagByPost(Connection con,ArrayList<Tag> tag) throws SQLException{
+    private synchronized static boolean insertTagByPost(Connection con,ArrayList<Tag> tag) throws SQLException{
             boolean success = false;
             String sql = "insert into wil_post_tag (post_id,tag_id) values ((select max(post_id) from wil_post) ,?)";
            PreparedStatement pstmt = con.prepareStatement(sql);
@@ -517,7 +540,7 @@ public class Repo {
     }
     
     
-    private static boolean insertImageByPost(Connection con,int postId,ArrayList<Integer> imgId) throws SQLException{
+    private synchronized static boolean insertImageByPost(Connection con,int postId,ArrayList<Integer> imgId) throws SQLException{
         
         boolean success = false;
         String sql = "insert into wil_post_image (image_id,post_id) values(?,(select max(post_id) from wil_post))";
@@ -530,6 +553,49 @@ public class Repo {
         
         return  success;
     }
+    
+    
+   public synchronized static Post findLastPostByUserId(int id){
+       Connection con = null;
+       PreparedStatement pstmt = null;
+       List<Post> listPost = null;
+       Post post = null;
+       String sql = "select * from wil_post where user_id = ?";
+       try{
+           con = ConnectionBuilder.getMySqlCond();
+           listPost = queryPost(sql,String.valueOf(id));
+           int last = listPost.size()-1;
+            if(listPost.size() >0){
+                post = new Post(listPost.get(last).getImage(), listPost.get(last).getTag(), listPost.get(last).getUser());
+                post.setLat((listPost.get(last).getLat()));
+                post.setLon((listPost.get(last).getLon()));
+                post.setPostDescription((listPost.get(last).getPostDescription()));
+                post.setPostId((listPost.get(last).getPostId()));
+                post.setStatus((listPost.get(last).getStatus()));
+                post.setPostName(listPost.get(last).getPostName());
+            }
+       }
+       catch(Exception x){
+           x.printStackTrace();
+       }
+          return post;     
+   } 
+   
+    public static List<Post>findPostByNameAndUserId(String param,int id){
+        List<Post> listPost = null;
+        Connection con = null;
+        param = "%"+param.toLowerCase()+"%";
+        String sql = "select * from wil_post where lower(name) like ? and user_id="+id;
+        System.out.println(sql);
+        try{
+            listPost = queryPost(sql,param);
+        }catch(Exception ex){
+            System.out.println("Find Post By Name : "+ex);
+        }
+        
+        return  listPost;
+    }
+    
 }
   
 

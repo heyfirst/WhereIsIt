@@ -16,6 +16,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -34,7 +35,8 @@ public class Authencation implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
      HttpSession session = ((HttpServletRequest)request).getSession(false);
      if(session.getAttribute("loggedInUser") == null){
-        session.getServletContext().getRequestDispatcher("/pages/login.jsp").forward(request,response);
+       
+        ((HttpServletResponse)response).sendRedirect( ((HttpServletRequest)request).getServletContext().getContextPath()+"/pages/");
      }
      else{
          chain.doFilter(request, response);
