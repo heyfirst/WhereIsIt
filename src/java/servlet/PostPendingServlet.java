@@ -11,14 +11,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import model.Post;
-import Repo.Repo;
+
 /**
  *
  * @author Huag
  */
-public class SeemorePostServlet extends HttpServlet {
+public class PostPendingServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,9 +30,17 @@ public class SeemorePostServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-            // click Found it in DashBoard  do in Method doGet        
-        if(request.getSession().getAttribute("posts") != null){
-            
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet PostPendingServlet</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet PostPendingServlet at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 
@@ -50,17 +56,7 @@ public class SeemorePostServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-          String query = request.getQueryString();
-          int index = query.indexOf("=");
-          String id = query.substring(index+1);
-          if(request.getSession().getAttribute("posts") != null){
-            HttpSession session = request.getSession();
-            Post post = Repo.findPostById(Integer.parseInt(id));
-            request.setAttribute("post", post);
-            getServletContext().getRequestDispatcher("/pages/seemorePost.jsp").forward(request,response);
-         }
-         
-       
+        processRequest(request, response);
     }
 
     /**

@@ -391,9 +391,10 @@ public class Repo {
     }
    
     
-     public static List<Tag> queryTag(String sql){
+     public static List<Tag> queryTag(){
         List<Tag> listTag = null;
         Connection con = null;
+        String sql = "select * from wil_tag";
         try {            
             con = ConnectionBuilder.getMySqlCond();
             PreparedStatement pstmt = con.prepareStatement(sql);

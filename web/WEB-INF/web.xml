@@ -1,12 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <filter>
+        <filter-name>Authencation</filter-name>
+        <filter-class>filter.Authencation</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>Authencation</filter-name>
+        <servlet-name>CreatePostServlet</servlet-name>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>Authencation</filter-name>
+        <servlet-name>PostPendingServlet</servlet-name>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+    </filter-mapping>
     <servlet>
         <servlet-name>SampleServlet</servlet-name>
         <servlet-class>servlet.SampleServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>IndexServlet</servlet-name>
-        <servlet-class>servlet.IndexServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AddPostServlet</servlet-name>
@@ -29,16 +41,24 @@
         <servlet-class>servlet.HomepageServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>SeemoreServlet</servlet-name>
-        <servlet-class>servlet.SeemorePostServlet</servlet-class>
+        <servlet-name>PostServlet</servlet-name>
+        <servlet-class>servlet.PostServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PostPendingServlet</servlet-name>
+        <servlet-class>servlet.PostPendingServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>IndexServlet</servlet-name>
+        <servlet-class>servlet.IndexServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CreatePostServlet</servlet-name>
+        <servlet-class>servlet.CreatePostServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>SampleServlet</servlet-name>
         <url-pattern>/SampleServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>IndexServlet</servlet-name>
-        <url-pattern>/pages/</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AddPostServlet</servlet-name>
@@ -50,7 +70,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
-        <url-pattern>/Login</url-pattern>
+        <url-pattern>/pages/Login</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>LogoutServlet</servlet-name>
@@ -58,11 +78,23 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>HomepageServlet</servlet-name>
-        <url-pattern>/homepage</url-pattern>
+        <url-pattern>/Homepage</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>SeemoreServlet</servlet-name>
-        <url-pattern>/pages/Seemore</url-pattern>
+        <servlet-name>PostServlet</servlet-name>
+        <url-pattern>/pages/Post</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PostPendingServlet</servlet-name>
+        <url-pattern>/PostPending</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>IndexServlet</servlet-name>
+        <url-pattern>/pages/</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreatePostServlet</servlet-name>
+        <url-pattern>/pages/CreatePost</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>

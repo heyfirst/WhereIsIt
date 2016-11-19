@@ -43,7 +43,7 @@ public class AddPostServlet extends HttpServlet {
          String[] tagName = request.getParameterValues("tag");
          String postDescription = request.getParameter("postDescription");
          String[] src = request.getParameterValues("postImage");
-         ArrayList<Tag> allTag = (ArrayList<Tag>) Repo.queryTag("select * from wil_tag");
+         ArrayList<Tag> allTag = (ArrayList<Tag>) Repo.queryTag();
          ArrayList<Image> listImage = null;
          double lat;
          double lon;

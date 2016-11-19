@@ -5,20 +5,20 @@
  */
 package servlet;
 
-import Repo.UserRepo;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import model.User;
-
+import model.Post;
+import Repo.Repo;
 /**
  *
- * @author pingpongsz
+ * @author Huag
  */
-public class LoginServlet extends HttpServlet {
+public class PostServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,7 +32,10 @@ public class LoginServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-       
+            // click Found it in DashBoard  do in Method doGet        
+        if(request.getSession().getAttribute("posts") != null){
+            
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -47,18 +50,17 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
-        
-        HttpSession session = request.getSession();
-        User loggedInUser = (User) session.getAttribute("loggedInUser");
-        String message = "";
-        if(loggedInUser != null){
-            response.sendRedirect(getServletContext().getContextPath());
-        }else{
-            getServletContext().getRequestDispatcher("/pages/login.jsp").forward(request, response);
-        }
-        
-                
+          String query = request.getQueryString();
+          int index = query.indexOf("=");
+          String id = query.substring(index+1);
+          if(request.getSession().getAttribute("posts") != null){
+            HttpSession session = request.getSession();
+            Post post = Repo.findPostById(Integer.parseInt(id));
+            request.setAttribute("post", post);
+            getServletContext().getRequestDispatcher("/pages/post.jsp").forward(request,response);
+         }
+         
+       
     }
 
     /**
@@ -73,30 +75,6 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        
-        HttpSession session = request.getSession(false);
-        String message = "";
-        User loggedInUser = (User) session.getAttribute("loggedInUser");
-        
-        if(loggedInUser != null){
-            response.sendRedirect(getServletContext().getContextPath());
-        }else{
-            session = request.getSession();
-            String em = request.getParameter("email");
-            String pw = request.getParameter("password");
-            loggedInUser = UserRepo.getUser(em, pw);
-            
-            if(loggedInUser != null){
-                message = "Logged in! Welcome!";
-            }else{
-                message = "Your Email or Password is not collect!";
-                request.setAttribute("message", message);
-                getServletContext().getRequestDispatcher("/pages/index.jsp").forward(request, response);
-            }
-            session.setAttribute("loggedInUser", loggedInUser);
-        }
-        request.setAttribute("message", message);
-        response.sendRedirect(getServletContext().getContextPath()+"/pages/");
     }
 
     /**
