@@ -58,7 +58,11 @@
                   <p>${post.postDescription}</p>
                 </div>
               </div>
-              
+              <div class="panel-block">
+                <div class="content">
+                  <div id="map" data-lat="13.6525855" data-lng="100.4936103"></div>
+                </div>
+              </div>
               <div class="panel-block">
                 <button class="button is-danger is-outlined is-fullwidth is-medium modal-button" data-target="#found-item">
                   I Found It !
@@ -72,6 +76,9 @@
     </section>
 
     <jsp:include page="../layouts/script_included.jsp"/>
+    <script type="text/javascript" src="../assets/js/map.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDiS9UZeqzWSIFgKVE_ooOllVLPT02dcEU&callback=initMap"
+    async defer></script>
 
     <!-- Modal -->
     <div id="found-item" class="modal">

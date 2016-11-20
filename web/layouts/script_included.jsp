@@ -30,7 +30,6 @@
 <script src="../assets/js/superplaceholder.min.js"></script>
 <script src="../assets/js/script.js"></script>
 
-
 <!-- Modal -->
         <div id="login" class="modal">
           <div class="modal-background"></div>

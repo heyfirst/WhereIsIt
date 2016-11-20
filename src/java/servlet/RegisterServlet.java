@@ -49,7 +49,7 @@ public class RegisterServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        getServletContext().getRequestDispatcher("/pages/register.jsp").forward(request, response);
+        getServletContext().getRequestDispatcher("/pages/register_new.jsp").forward(request, response);
     }
 
     /**
