@@ -5,7 +5,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import model.Found;
+import model.Image;
 import model.User;
 import util.ConnectionBuilder;
 
@@ -33,7 +35,12 @@ public class FoundRepo {
              pstmt.setString(3, description);
              int insert = pstmt.executeUpdate();
              if(insert > 0){
-                 success = true;
+    
+                        
+                         success = true;
+                 
+                 
+                 
              }
              con.close();
          }catch(Exception x){
@@ -41,6 +48,7 @@ public class FoundRepo {
          }
          return success;
     }
+    
     
     public static synchronized  Found findFounderByPostId(int postId){
         Found founder = null;
