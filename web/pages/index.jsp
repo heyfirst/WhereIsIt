@@ -28,7 +28,10 @@
                 <c:if test="${posts != null}">
               <p class="subtitle is-5">
                   <% List<Post> posts = (List<Post>)request.getSession().getAttribute("posts");
-                         sizeOfPost = posts.size();
+                  for(Post p : posts){
+                      if(p.getStatus() == 0)
+                        sizeOfPost++;
+                  }
                       %>
                 </c:if>
                 <strong><%= sizeOfPost %></strong> posts

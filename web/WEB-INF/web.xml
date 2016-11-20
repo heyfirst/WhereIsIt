@@ -27,10 +27,6 @@
         <servlet-class>servlet.SampleServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>AddPostServlet</servlet-name>
-        <servlet-class>servlet.AddPostServlet</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>RegisterServlet</servlet-name>
         <servlet-class>servlet.RegisterServlet</servlet-class>
     </servlet>
@@ -77,10 +73,6 @@
     <servlet-mapping>
         <servlet-name>SampleServlet</servlet-name>
         <url-pattern>/SampleServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>AddPostServlet</servlet-name>
-        <url-pattern>/AddPostServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
