@@ -27,10 +27,6 @@
         <servlet-class>servlet.SampleServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>AddPostServlet</servlet-name>
-        <servlet-class>servlet.AddPostServlet</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>RegisterServlet</servlet-name>
         <servlet-class>servlet.RegisterServlet</servlet-class>
     </servlet>
@@ -41,10 +37,6 @@
     <servlet>
         <servlet-name>LogoutServlet</servlet-name>
         <servlet-class>servlet.LogoutServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>HomepageServlet</servlet-name>
-        <servlet-class>servlet.HomepageServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>PostServlet</servlet-name>
@@ -79,10 +71,6 @@
         <url-pattern>/SampleServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>AddPostServlet</servlet-name>
-        <url-pattern>/AddPostServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/Register</url-pattern>
     </servlet-mapping>
@@ -93,10 +81,6 @@
     <servlet-mapping>
         <servlet-name>LogoutServlet</servlet-name>
         <url-pattern>/Logout</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>HomepageServlet</servlet-name>
-        <url-pattern>/Homepage</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>PostServlet</servlet-name>
