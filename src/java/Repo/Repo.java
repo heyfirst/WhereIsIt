@@ -72,15 +72,29 @@ public class Repo {
                 listTag     = queryTagByPost(con,listPost,listTag);
                 List<User> listUser  = queryUserByPost(con,listPost); 
                 for(int i=0;i < listPost.size();i++ ){
-      
+                    
                     for (int j = 0; j <listUser.size(); j++) {
-                      
+                        
                         if(listPost.get(i).getUser().getUserId() == listUser.get(j).getUserId()){
                             listPost.get(i).setUser(listUser.get(j));
                             break;
                         }
+                        
                     }
-                   
+                    
+                   if(listPost.get(i).getImage() == null){
+                          ArrayList<Image> ai = new ArrayList<Image>();
+                          ai.add(new Image());
+                              listPost.get(i).setImage(ai);
+                              
+                             listPost.get(i).getImage().get(0).setSrc("/assets/img/post1.png");
+                   }
+                   if(listPost.get(i).getUser().getImage().getSrc() == null){
+                       if(listPost.get(i).getUser().getGender() == 1)
+                            listPost.get(i).getUser().getImage().setSrc("/assets/img/user1.png");
+                       else
+                           listPost.get(i).getUser().getImage().setSrc("/assets/img/user2.png");
+                   }
                 }
             }
             con.close();
