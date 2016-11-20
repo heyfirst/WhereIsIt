@@ -39,7 +39,7 @@
                 <label class="label">Tag</label>
                 <p class="control">
                   <span class="select">
-                      <select name="tag" >
+                      <select name="tag" multiple>
                          <c:forEach items="${tag}" var="t" varStatus="vs">
                               <option value="${t.tagId}">${t.tagName}</option>
                           </c:forEach>

@@ -28,7 +28,10 @@
                 <c:if test="${posts != null}">
               <p class="subtitle is-5">
                   <% List<Post> posts = (List<Post>)request.getSession().getAttribute("posts");
-                         sizeOfPost = posts.size();
+                  for(Post p : posts){
+                      if(p.getStatus() == 0)
+                        sizeOfPost++;
+                  }
                       %>
                 </c:if>
                 <strong><%= sizeOfPost %></strong> posts
@@ -59,43 +62,62 @@
 
         <div class="columns is-multiline">
           <!-- Post -->
-           <c:if test="${posts != null}">
-              <c:forEach items="${posts}" var="p" varStatus="vs">
-                <c:if test="${p.status == 0}">
-                  <div class="column is-3">
-                    <div class="card">
-                      <div class="card-image">
-                        <figure class="image is-3by2">
-                          <img src="http://placehold.it/225x225" alt="">
-                        </figure>
-                      </div>
-                      <div class="card-content">
-                        <div class="media">
-                          <div class="media-left">
-                            <figure class="image is-32x32">
-                              <img src="http://placehold.it/64x64" alt="Image">
-                            </figure>
-                          </div>
-                          <div class="media-content">
-                            <p class="title is-5">${p.postName}</p>
-                            <p class="subtitle is-6">${p.user.fname} ${p.user.lname}</p>
-                          </div>
-                        </div>
+ <c:if test="${posts != null}">
+    <c:forEach items="${posts}" var="p" varStatus="vs">
+        <c:if test="${p.status == 0}">
+          <div class="column is-3">
+            <div class="card">
+              <div class="card-image">
+                <figure class="image is-3by2">
+                    <c:choose>
+                        <c:when test="${p.image[0].imageId == 0}">
+                            <img src="..${p.image[0].src}" alt="">
+                        </c:when>
+                        <c:otherwise>
+                            <img src="..${p.image[0].src}" alt="">
+                         </c:otherwise>
+                  </c:choose>
+                </figure>
+              </div>
+              <div class="card-content">
+                <div class="media">
+                  <div class="media-left">
+                    <figure class="image is-32x32">
+                     <c:choose>
+                        <c:when test="${p.user.image.imageId == 0}">
+                             <img src="..${p.user.image.src}" alt="">
+                        </c:when>
+                        <c:otherwise>
+                            <img src="..${p.user.image.src}" alt="">
+                         </c:otherwise>
+                      </c:choose>
 
-                        <div class="content">
-                          ${p.postDescription}
-                        </div>
-                      </div>
-                      <footer class="card-footer">
-                        <a class="card-footer-item" href="Post?post_id=${p.postId}">See more.</a>
-                        <a class="card-footer-item modal-button" data-target="#found-item" onclick="chageFoundFormURL(${p.postId})">Found It!</a>
-                      </footer>
-                    </div>
+                    </figure>
                   </div>
-                  <!-- ./End Post -->
-                </c:if>
-              </c:forEach>
-            </c:if>
+                  <div class="media-content">
+                    <p class="title is-5">${p.postName}</p>
+                    <p class="subtitle is-6">${p.user.fname} ${p.user.lname}</p>
+                  </div>
+                </div>
+
+                <div class="content">
+                  ${p.postDescription}
+                </div>
+              </div>
+              <footer class="card-footer">
+                <a class="card-footer-item" href="Post?post_id=${p.postId}">See more.</a>
+                 <c:choose>
+                     <c:when test="${p.user.userId != sessionScope.loggedInUser.userId}">
+                        <a class="card-footer-item modal-button" data-target="#found-item" onclick="chageFoundFormURL(${p.postId})">Found It!</a>
+                     </c:when>
+                 </c:choose>
+              </footer>
+            </div>
+          </div>
+          <!-- ./End Post -->
+          </c:if>
+       </c:forEach>
+   </c:if>
         </div>
       </div>
     </section>
@@ -129,10 +151,6 @@
               <label class="label">สถานที่</label>
               <p class="control">
                 <input class="input" type="text" name="found_place" required>
-              </p>
-              <label class="label">ที่อยู่</label>
-              <p class="control">
-                  <input class="input" type="text" name="found_address" required>
               </p>
               <button class="button is-success is-medium is-fullwidth">ฉันเจอมันแล้ว</button>
             </div>

@@ -72,15 +72,29 @@ public class Repo {
                 listTag     = queryTagByPost(con,listPost,listTag);
                 List<User> listUser  = queryUserByPost(con,listPost); 
                 for(int i=0;i < listPost.size();i++ ){
-      
+                    
                     for (int j = 0; j <listUser.size(); j++) {
-                      
+                        
                         if(listPost.get(i).getUser().getUserId() == listUser.get(j).getUserId()){
                             listPost.get(i).setUser(listUser.get(j));
                             break;
                         }
+                        
                     }
-                   
+                    
+                   if(listPost.get(i).getImage() == null){
+                          ArrayList<Image> ai = new ArrayList<Image>();
+                          ai.add(new Image());
+                              listPost.get(i).setImage(ai);
+                              
+                             listPost.get(i).getImage().get(0).setSrc("/assets/img/post1.png");
+                   }
+                   if(listPost.get(i).getUser().getImage().getSrc() == null){
+                       if(listPost.get(i).getUser().getGender() == 1)
+                            listPost.get(i).getUser().getImage().setSrc("/assets/img/user1.png");
+                       else
+                           listPost.get(i).getUser().getImage().setSrc("/assets/img/user2.png");
+                   }
                 }
             }
             con.close();
@@ -631,7 +645,43 @@ public class Repo {
          return success;
      }
      
- 
+     public synchronized static List<Post> findPostByTagId(List<Tag> listTag){
+         List<Post> listPost = null;
+         String tag_id = "";
+         for (int i = 0; i < listTag.size(); i++) {
+             String comma = ",";
+             if( i != listTag.size()-1){
+                tag_id += listTag.get(i).getTagId()+comma;
+             }else{
+                 tag_id += listTag.get(i).getTagId();
+             }
+         }
+         String sql  = "select wp.* from wil_post wp "
+                            + "join wil_post_tag   wpt "
+                            + "on  wp.post_id = wpt.post_id "
+                            + "where wpt.tag_id IN (" + tag_id +")";
+         
+         try{
+             listPost = queryPost(sql, "");
+         }
+         catch(Exception x){
+             x.printStackTrace();
+         }
+         return listPost;
+     }
+     
+      public synchronized static List<Post> findPostByStatus(int status){
+         List<Post> listPost = null;
+         String sql  = "select wp.* from wil_post wp where status = ?" ;
+         
+         try{
+             listPost = queryPost(sql, String.valueOf(status));
+         }
+         catch(Exception x){
+             x.printStackTrace();
+         }
+         return listPost;
+     }
      
 }
   

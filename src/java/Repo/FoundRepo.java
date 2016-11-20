@@ -71,4 +71,25 @@ public class FoundRepo {
         return founder;
     }
     
+    public static synchronized  Found findFounderByUserId(int userId){
+        Found founder = null;
+        String sql = "select * from wil_found where user_id=?";
+        try{
+            Connection con = ConnectionBuilder.getMySqlCond();
+            PreparedStatement pstmt = con.prepareStatement(sql);
+            pstmt.setInt(1, userId);
+            ResultSet rs = pstmt.executeQuery();
+            while(rs.next()){
+                founder = new Found(new User());
+               ormFound(rs,founder);
+               founder.setUser(getUserByUserId(founder.getUser().getUserId()));
+            }
+            con.close();
+        }
+        catch(Exception x){
+            x.printStackTrace();
+        }
+        return founder;
+    }
+    
 }

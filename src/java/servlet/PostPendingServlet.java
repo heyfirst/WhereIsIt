@@ -43,58 +43,32 @@ public class PostPendingServlet extends HttpServlet {
           int index = query.indexOf("=");
          User user = (User)request.getSession().getAttribute("loggedInUser");
          Post owner = null;
-         Found founder = null;
+         Found founder = new Found();
          HttpSession session = request.getSession();
          String postId = query.substring(index+1);
          String found_item = request.getParameter("found_item");
          String found_date = request.getParameter("found_date");
          String found_time = request.getParameter("found_time");
          String found_place= request.getParameter("found_place");
-         String found_address = request.getParameter("found_address");
-         String foundDescription = "item=" +found_item + ","
-                                                 +"date="+found_date + ","
-                                                 +"time=" + found_time + ","
-                                                 + "place="+found_place + ","
-                                                 + "address="+found_address;
-         if(user != null && session.getAttribute("posts") != null){
-             // Founder send information about  lost item
-             // founder user from session             
-             if(found_item != null || found_date !=null || found_time != null || found_place != null || found_address != null){
-                boolean foundInsert = FoundRepo.insertFounder(user.getUserId(), Integer.parseInt(postId), foundDescription);
-                if(foundInsert){
-                    boolean pendingPost = Repo.updateToPostPending(1,Integer.parseInt(postId));
-                    if(pendingPost){
-                        owner = Repo.findPostById(Integer.parseInt(postId));
-                    //        User from session
-                        request.setAttribute("founder",user);
-                    }
-                    
-                }
-                
-             }
-             else{
-                 /// Owner Confirm status pending
-                //    owner data form session
-                 owner = Repo.findPostById(Integer.parseInt(postId));
-                 founder = FoundRepo.findFounderByPostId(Integer.parseInt(postId));
-                 // User from Session
-                 request.setAttribute("founder", founder);
-                 
-             }
-             
-                        
-                        request.setAttribute("owner",owner);
+
+        if(user != null && session.getAttribute("posts") != null){
+                        founder.setUser(user);
+                        owner = Repo.findPostById(Integer.valueOf(postId));
+                        request.setAttribute("postId",postId);
+                        request.setAttribute("ownerPost",owner);
+                        request.setAttribute("founderPost", founder);
                         request.setAttribute("found_item", found_item);
                         request.setAttribute("found_date", found_date);
                         request.setAttribute("found_time", found_time);
                         request.setAttribute("found_place", found_place);
-                        request.setAttribute("found_address", found_address);
-             
+
              getServletContext().getRequestDispatcher("/pages/post_pending.jsp").forward(request, response);
-         }
+             
+        }
+     }
          
           
-    }
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

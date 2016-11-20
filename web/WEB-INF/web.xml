@@ -27,10 +27,6 @@
         <servlet-class>servlet.SampleServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>AddPostServlet</servlet-name>
-        <servlet-class>servlet.AddPostServlet</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>RegisterServlet</servlet-name>
         <servlet-class>servlet.RegisterServlet</servlet-class>
     </servlet>
@@ -41,10 +37,6 @@
     <servlet>
         <servlet-name>LogoutServlet</servlet-name>
         <servlet-class>servlet.LogoutServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>HomepageServlet</servlet-name>
-        <servlet-class>servlet.HomepageServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>PostServlet</servlet-name>
@@ -67,16 +59,21 @@
         <servlet-class>servlet.UserPostServlet</servlet-class>
     </servlet>
     <servlet>
+<<<<<<< HEAD
         <servlet-name>ProfileServlet</servlet-name>
         <servlet-class>servlet.ProfileServlet</servlet-class>
+=======
+        <servlet-name>ConfirmPostPendingServlet</servlet-name>
+        <servlet-class>servlet.ConfirmPostPendingServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>OwnerConfirm</servlet-name>
+        <servlet-class>servlet.OwnerConfirm</servlet-class>
+>>>>>>> d3888b0f406602562c5fec9cd9dfaae7106975f3
     </servlet>
     <servlet-mapping>
         <servlet-name>SampleServlet</servlet-name>
         <url-pattern>/SampleServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>AddPostServlet</servlet-name>
-        <url-pattern>/AddPostServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
@@ -89,10 +86,6 @@
     <servlet-mapping>
         <servlet-name>LogoutServlet</servlet-name>
         <url-pattern>/Logout</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>HomepageServlet</servlet-name>
-        <url-pattern>/Homepage</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>PostServlet</servlet-name>
@@ -115,8 +108,17 @@
         <url-pattern>/pages/User</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+<<<<<<< HEAD
         <servlet-name>ProfileServlet</servlet-name>
         <url-pattern>/pages/profile</url-pattern>
+=======
+        <servlet-name>ConfirmPostPendingServlet</servlet-name>
+        <url-pattern>/pages/ConfirmPostPending</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OwnerConfirm</servlet-name>
+        <url-pattern>/OwnerConfirm</url-pattern>
+>>>>>>> d3888b0f406602562c5fec9cd9dfaae7106975f3
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>

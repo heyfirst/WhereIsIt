@@ -73,7 +73,14 @@
       <div class="container">
         <ul>
           <li class="is-active" id="tab1"><a  href="/WhereIsIt/pages/">รายการของหายในระบบ</a></li>
-          <li id="tab2"><a href="/WhereIsIt/pages/CreatePost">ประกาศหาของหาย</a></li>
+          <c:choose>
+              <c:when test="${sessionScope.loggedInUser != null}">
+                    <li id="tab2"><a href="/WhereIsIt/pages/CreatePost">ประกาศหาของหาย</a></li>
+               </c:when>
+              <c:otherwise>
+                  <li id="tab2"><a>ประกาศหาของหาย</a></li>
+              </c:otherwise>
+            </c:choose>
         </ul>
       </div>
     </nav>
