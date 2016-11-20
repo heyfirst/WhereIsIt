@@ -66,6 +66,10 @@
         <servlet-name>UserPostServlet</servlet-name>
         <servlet-class>servlet.UserPostServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ProfileServlet</servlet-name>
+        <servlet-class>servlet.ProfileServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SampleServlet</servlet-name>
         <url-pattern>/SampleServlet</url-pattern>
@@ -109,6 +113,10 @@
     <servlet-mapping>
         <servlet-name>UserPostServlet</servlet-name>
         <url-pattern>/pages/User</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProfileServlet</servlet-name>
+        <url-pattern>/pages/profile</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>

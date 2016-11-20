@@ -16,7 +16,7 @@
   <body>
     <!-- Navigator Bar -->
     <jsp:include page="../layouts/navbar_included.jsp"/>
-    
+
     <!-- Main Container -->
     <section class="section">
       <div class="container">
@@ -33,7 +33,7 @@
                 </c:if>
                 <strong><%= sizeOfPost %></strong> posts
               </p>
-                
+
             </div>
             <div class="level-item">
              <form action="/WhereIsIt/pages/" method="GET">
@@ -59,49 +59,49 @@
 
         <div class="columns is-multiline">
           <!-- Post -->
- <c:if test="${posts != null}">
-    <c:forEach items="${posts}" var="p" varStatus="vs">
-        <c:if test="${p.status == 0}">
-          <div class="column is-3">
-            <div class="card">
-              <div class="card-image">
-                <figure class="image is-3by2">
-                  <img src="http://placehold.it/225x225" alt="">
-                </figure>
-              </div>
-              <div class="card-content">
-                <div class="media">
-                  <div class="media-left">
-                    <figure class="image is-32x32">
-                      <img src="http://placehold.it/64x64" alt="Image">
-                    </figure>
-                  </div>
-                  <div class="media-content">
-                    <p class="title is-5">${p.postName}</p>
-                    <p class="subtitle is-6">${p.user.fname} ${p.user.lname}</p>
-                  </div>
-                </div>
+           <c:if test="${posts != null}">
+              <c:forEach items="${posts}" var="p" varStatus="vs">
+                <c:if test="${p.status == 0}">
+                  <div class="column is-3">
+                    <div class="card">
+                      <div class="card-image">
+                        <figure class="image is-3by2">
+                          <img src="http://placehold.it/225x225" alt="">
+                        </figure>
+                      </div>
+                      <div class="card-content">
+                        <div class="media">
+                          <div class="media-left">
+                            <figure class="image is-32x32">
+                              <img src="http://placehold.it/64x64" alt="Image">
+                            </figure>
+                          </div>
+                          <div class="media-content">
+                            <p class="title is-5">${p.postName}</p>
+                            <p class="subtitle is-6">${p.user.fname} ${p.user.lname}</p>
+                          </div>
+                        </div>
 
-                <div class="content">
-                  ${p.postDescription}
-                </div>
-              </div>
-              <footer class="card-footer">
-                <a class="card-footer-item" href="Post?post_id=${p.postId}">See more.</a>
-                <a class="card-footer-item modal-button" data-target="#found-item" onclick="chageFoundFormURL(${p.postId})">Found It!</a>
-              </footer>
-            </div>
-          </div>
-          <!-- ./End Post -->
-          </c:if>
-       </c:forEach>
-   </c:if>
+                        <div class="content">
+                          ${p.postDescription}
+                        </div>
+                      </div>
+                      <footer class="card-footer">
+                        <a class="card-footer-item" href="Post?post_id=${p.postId}">See more.</a>
+                        <a class="card-footer-item modal-button" data-target="#found-item" onclick="chageFoundFormURL(${p.postId})">Found It!</a>
+                      </footer>
+                    </div>
+                  </div>
+                  <!-- ./End Post -->
+                </c:if>
+              </c:forEach>
+            </c:if>
         </div>
       </div>
     </section>
-    
+
     <jsp:include page="../layouts/script_included.jsp"/>
-    
+
     <!-- Modal -->
     <div id="found-item" class="modal">
       <div class="modal-background"></div>
@@ -140,7 +140,7 @@
         </section>
       </div>
     </div>
-            
+
             <script>
                 function chageFoundFormURL(id){
                     var foundForm = document.getElementById("found");
