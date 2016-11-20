@@ -86,7 +86,11 @@
               </div>
               <footer class="card-footer">
                 <a class="card-footer-item" href="Post?post_id=${up.postId}">See more.</a>
-                <a class="card-footer-item">Found It!</a>
+                <c:choose>
+                     <c:when test="${up.user.userId != sessionScope.loggedInUser.userId}">
+                        <a class="card-footer-item modal-button" data-target="#found-item" onclick="chageFoundFormURL(${p.postId})">Found It!</a>
+                     </c:when>
+                 </c:choose>
               </footer>
             </div>
           </div>

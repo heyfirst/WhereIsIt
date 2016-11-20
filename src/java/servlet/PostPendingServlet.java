@@ -50,22 +50,22 @@ public class PostPendingServlet extends HttpServlet {
          String found_date = request.getParameter("found_date");
          String found_time = request.getParameter("found_time");
          String found_place= request.getParameter("found_place");
-         String found_address = request.getParameter("found_address");
 
         if(user != null && session.getAttribute("posts") != null){
-
-             }
-             
+                        founder.setUser(user);
+                        owner = Repo.findPostById(Integer.valueOf(postId));
+                        request.setAttribute("postId",postId);
                         request.setAttribute("ownerPost",owner);
                         request.setAttribute("founderPost", founder);
                         request.setAttribute("found_item", found_item);
                         request.setAttribute("found_date", found_date);
                         request.setAttribute("found_time", found_time);
                         request.setAttribute("found_place", found_place);
-                        request.setAttribute("found_address", found_address);
-             
+
              getServletContext().getRequestDispatcher("/pages/post_pending.jsp").forward(request, response);
-         }
+             
+        }
+     }
          
           
     

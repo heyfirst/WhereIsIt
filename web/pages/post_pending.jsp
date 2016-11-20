@@ -24,12 +24,13 @@
               <div class="content">
                 <h2>FOUNDER</h2>
               </div>
-           <form id="founder" action="ConfirmPostPending" method="post"
-                 <input type="hidden" value="${found_item}">
-               <input type="hidden" value="${found_place}">
-               <input type="hidden" value="${found_date}">
-               <input type="hidden" value="${found_time}">
-               <input type="hidden" value="${found_address}">
+              <form id="founder" action="ConfirmPostPending" method="post">
+                 <input type="hidden" name="postId" value="${postId}">
+                <input type="hidden" name="found_item" value="${found_item}">
+               <input type="hidden" name="found_place" value="${found_place}">
+               <input type="hidden" name="found_date" value="${found_date}">
+               <input type="hidden" name="found_time" value="${found_time}">
+               <input type="hidden" name="found_address" value="${found_address}">
            </form>
               <div class="media">
                 <div class="media-left">
@@ -38,7 +39,7 @@
                   </figure>
                 </div>
                 <div class="media-content">
-                  <p class="title is-5">${founder.user.fname} ${founder.user.lname}</p>
+                  <p class="title is-5">${founderPost.user.fname} ${founderPost.user.lname}</p>
                   <p class="subtitle is-6"></p>
                 </div>
               </div>
@@ -112,6 +113,11 @@
               <div class="content">
                   ${ownerPost.postDescription}
               </div>
+              <hr>
+              <div class="content">
+                 &nbsp;
+              </div>
+              <hr>
             </div>
             <footer class="card-footer">
               <a class="card-footer-item">Contact</a>
@@ -122,7 +128,7 @@
       </div>
       <div class="columns">
         <div class="column is-4 is-offset-2">
-          <button class="button is-danger is-fullwidth  is-medium">Discard</button>
+            <a href="Post?post_id=${postId}"><button class="button is-danger is-fullwidth  is-medium" >Discard</button></a>
         </div>
         <div class="column is-4">
           <button class="button is-success is-fullwidth  is-medium" type="submit" form="founder" value="submit">Comfirm Post</button>

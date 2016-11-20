@@ -39,35 +39,29 @@ public class ConfirmPostPendingServlet extends HttpServlet {
          if(request.getCharacterEncoding() == null){
             request.setCharacterEncoding("UTF-8");
         }
-         String query = request.getQueryString();
-          int index = query.indexOf("=");
          User user = (User)request.getSession().getAttribute("loggedInUser");
          Post owner = null;
          Found founder = new Found();
          HttpSession session = request.getSession();
-         String postId = query.substring(index+1);
+         String postId = request.getParameter("postId");
          String found_item = request.getParameter("found_item");
          String found_date = request.getParameter("found_date");
          String found_time = request.getParameter("found_time");
          String found_place= request.getParameter("found_place");
-         String found_address = request.getParameter("found_address");
          String foundDescription = "item=" +found_item + ","
                                                  +"date="+found_date + ","
                                                  +"time=" + found_time + ","
-                                                 + "place="+found_place + ","
-                                                 + "address="+found_address;
-         if(user != null && session.getAttribute("posts") != null){
+                                                 + "place="+found_place;
+         if(user != null ){
              // Founder send information about  lost item
              // founder user from session             
-             if(found_item != null || found_date !=null || found_time != null || found_place != null || found_address != null){
+             if(found_item != null || found_date !=null || found_time != null || found_place != null){
                 boolean foundInsert = FoundRepo.insertFounder(user.getUserId(), Integer.parseInt(postId), foundDescription);
                 if(foundInsert){
                     boolean pendingPost = Repo.updateToPostPending(1,Integer.parseInt(postId));
                     if(pendingPost){
-                        owner = Repo.findPostById(Integer.parseInt(postId));
-                    //        User from session
-                        founder.setUser(user);
-                         
+                            //          ส่งแจ้งเตือน               
+                         response.sendRedirect(getServletContext().getContextPath()+"/pages/");
                     }
                     
                 }
@@ -75,7 +69,7 @@ public class ConfirmPostPendingServlet extends HttpServlet {
              }
       
          }
-         
+        
          
          
     }
