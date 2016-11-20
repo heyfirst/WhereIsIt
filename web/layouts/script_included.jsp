@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : script_included
     Created on : Oct 6, 2016, 3:28:13 PM
     Author     : KS
@@ -25,6 +25,9 @@
   </footer>
 
 <script src="../assets/js/jquery.min.js"></script>
+<script src="../assets/js/cleave.min.js"></script>
+<script src="../assets/js/select2.full.min.js"></script>
+<script src="../assets/js/superplaceholder.min.js"></script>
 <script src="../assets/js/script.js"></script>
 
 
@@ -54,6 +57,3 @@
             </section>
           </div>
         </div>
-
-
-
