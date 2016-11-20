@@ -5,18 +5,24 @@
  */
 package servlet;
 
+import Repo.FoundRepo;
+import Repo.Repo;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import model.Found;
+import model.Post;
+import model.User;
 
 /**
  *
- * @author pingpongsz
+ * @author Huag
  */
-public class HomepageServlet extends HttpServlet {
+public class ConfirmPostPendingServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,9 +36,42 @@ public class HomepageServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+         if(request.getCharacterEncoding() == null){
+            request.setCharacterEncoding("UTF-8");
+        }
+         User user = (User)request.getSession().getAttribute("loggedInUser");
+         Post owner = null;
+         Found founder = new Found();
+         HttpSession session = request.getSession();
+         String postId = request.getParameter("postId");
+         String found_item = request.getParameter("found_item");
+         String found_date = request.getParameter("found_date");
+         String found_time = request.getParameter("found_time");
+         String found_place= request.getParameter("found_place");
+         String foundDescription = "item=" +found_item + ","
+                                                 +"date="+found_date + ","
+                                                 +"time=" + found_time + ","
+                                                 + "place="+found_place;
+         if(user != null ){
+             // Founder send information about  lost item
+             // founder user from session             
+             if(found_item != null || found_date !=null || found_time != null || found_place != null){
+                boolean foundInsert = FoundRepo.insertFounder(user.getUserId(), Integer.parseInt(postId), foundDescription);
+                if(foundInsert){
+                    boolean pendingPost = Repo.updateToPostPending(1,Integer.parseInt(postId));
+                    if(pendingPost){
+                            //          ส่งแจ้งเตือน               
+                         response.sendRedirect(getServletContext().getContextPath()+"/pages/");
+                    }
+                    
+                }
+                
+             }
+      
+         }
         
-
-        getServletContext().getRequestDispatcher("/pages/homepage.jsp").forward(request, response);
+         
+         
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

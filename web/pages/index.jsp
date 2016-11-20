@@ -16,7 +16,7 @@
   <body>
     <!-- Navigator Bar -->
     <jsp:include page="../layouts/navbar_included.jsp"/>
-    
+
     <!-- Main Container -->
     <section class="section">
       <div class="container">
@@ -28,12 +28,15 @@
                 <c:if test="${posts != null}">
               <p class="subtitle is-5">
                   <% List<Post> posts = (List<Post>)request.getSession().getAttribute("posts");
-                         sizeOfPost = posts.size();
+                  for(Post p : posts){
+                      if(p.getStatus() == 0)
+                        sizeOfPost++;
+                  }
                       %>
                 </c:if>
                 <strong><%= sizeOfPost %></strong> posts
               </p>
-                
+
             </div>
             <div class="level-item">
              <form action="/WhereIsIt/pages/" method="GET">
@@ -49,11 +52,8 @@
 
           <!-- Right side -->
           <div class="level-right">
-            <p class="level-item"><strong>All</strong></p>
-            <p class="level-item"><a>Published</a></p>
-            <p class="level-item"><a>Drafts</a></p>
-            <p class="level-item"><a>Deleted</a></p>
-            <p class="level-item"><a class="button is-success">New</a></p>
+            <p class="level-item filter strong is-disabled"><a>All</a></p>
+            <p class="level-item filter"><a>My post</a></p>
           </div>
         </nav>
 
@@ -62,18 +62,33 @@
  <c:if test="${posts != null}">
     <c:forEach items="${posts}" var="p" varStatus="vs">
         <c:if test="${p.status == 0}">
-          <div class="column is-3">
+          <div class="column is-3 ${p.user.userId == sessionScope.loggedInUser.userId ? 'myPost' : ''}">
             <div class="card">
               <div class="card-image">
                 <figure class="image is-3by2">
-                  <img src="http://placehold.it/225x225" alt="">
+                    <c:choose>
+                        <c:when test="${p.image[0].imageId == 0}">
+                            <img src="..${p.image[0].src}" alt="">
+                        </c:when>
+                        <c:otherwise>
+                            <img src="..${p.image[0].src}" alt="">
+                         </c:otherwise>
+                  </c:choose>
                 </figure>
               </div>
               <div class="card-content">
                 <div class="media">
                   <div class="media-left">
                     <figure class="image is-32x32">
-                      <img src="http://placehold.it/64x64" alt="Image">
+                     <c:choose>
+                        <c:when test="${p.user.image.imageId == 0}">
+                             <img src="..${p.user.image.src}" alt="">
+                        </c:when>
+                        <c:otherwise>
+                            <img src="..${p.user.image.src}" alt="">
+                         </c:otherwise>
+                      </c:choose>
+
                     </figure>
                   </div>
                   <div class="media-content">
@@ -88,7 +103,11 @@
               </div>
               <footer class="card-footer">
                 <a class="card-footer-item" href="Post?post_id=${p.postId}">See more.</a>
-                <a class="card-footer-item modal-button" data-target="#found-item" onclick="chageFoundFormURL(${p.postId})">Found It!</a>
+                 <c:choose>
+                     <c:when test="${p.user.userId != sessionScope.loggedInUser.userId}">
+                        <a class="card-footer-item modal-button" data-target="#found-item" onclick="chageFoundFormURL(${p.postId})">Found It!</a>
+                     </c:when>
+                 </c:choose>
               </footer>
             </div>
           </div>
@@ -99,9 +118,9 @@
         </div>
       </div>
     </section>
-    
+
     <jsp:include page="../layouts/script_included.jsp"/>
-    
+
     <!-- Modal -->
     <div id="found-item" class="modal">
       <div class="modal-background"></div>
@@ -130,17 +149,13 @@
               <p class="control">
                 <input class="input" type="text" name="found_place" required>
               </p>
-              <label class="label">ที่อยู่</label>
-              <p class="control">
-                  <input class="input" type="text" name="found_address" required>
-              </p>
               <button class="button is-success is-medium is-fullwidth">ฉันเจอมันแล้ว</button>
             </div>
             </form>
         </section>
       </div>
     </div>
-            
+
             <script>
                 function chageFoundFormURL(id){
                     var foundForm = document.getElementById("found");

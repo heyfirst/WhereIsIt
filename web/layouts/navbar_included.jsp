@@ -47,6 +47,14 @@
                         <i class="fa fa-user"></i>
                       </span>
                       <span>${sessionScope.loggedInUser.fname} ${sessionScope.loggedInUser.lname}</span>
+                      <a class="nav-item" href="/WhereIsIt/Logout">
+                        <button class="button is-primary is-inverted modal-button">
+                          <span class="icon">
+                            <i class="fa fa-sign-out"></i>
+                          </span>
+                          <span>Logout</span>
+                        </button>
+                      </a>
                   </c:otherwise>
               </c:choose>
           </span>
@@ -59,7 +67,7 @@
   <div class="hero-body">
     <div class="container has-text-centered">
       <h1 class="title">
-          Where Is It 
+          Where Is It
       </h1>
       <h2 class="subtitle">
         Lost & Found Application
@@ -72,8 +80,16 @@
     <nav class="tabs is-boxed is-fullwidth">
       <div class="container">
         <ul>
-          <li class="is-active" id="tab1"><a  href="/WhereIsIt/pages/">รายการของหายในระบบ</a></li>
-          <li id="tab2"><a href="/WhereIsIt/pages/CreatePost">ประกาศหาของหาย</a></li>
+
+          <c:choose>
+              <c:when test="${sessionScope.loggedInUser != null && pageContext.request.requestURI != '/WhereIsIt/pages/user_post.jsp'}">
+                    <li class="is-active" id="tab1"><a  href="/WhereIsIt/pages/">รายการของหายในระบบ</a></li>
+                    <li id="tab2"><a href="/WhereIsIt/pages/CreatePost">ประกาศหาของหาย</a></li>
+               </c:when>
+              <c:otherwise>
+                    <li class="is-active" id="tab1"><a>โพสของฉัน</a></li>
+              </c:otherwise>
+            </c:choose>
         </ul>
       </div>
     </nav>
