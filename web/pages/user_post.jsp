@@ -62,11 +62,11 @@
               <div class="card-image">
                 <figure class="image is-3by2">
                   <c:choose>
-                        <c:when test="${p.image[0].imageId == 0}">
-                            <img src="..${p.image[0].src}" alt="">
+                        <c:when test="${up.image[0].imageId == 0}">
+                            <img src="..${up.image[0].src}" alt="">
                         </c:when>
                         <c:otherwise>
-                            <img src="..${p.image[0].src}" alt="">
+                            <img src="..${up.image[0].src}" alt="">
                          </c:otherwise>
                   </c:choose>
                 </figure>
