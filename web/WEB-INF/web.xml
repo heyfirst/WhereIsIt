@@ -23,10 +23,6 @@
         <dispatcher>FORWARD</dispatcher>
     </filter-mapping>
     <servlet>
-        <servlet-name>SampleServlet</servlet-name>
-        <servlet-class>servlet.SampleServlet</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>RegisterServlet</servlet-name>
         <servlet-class>servlet.RegisterServlet</servlet-class>
     </servlet>
@@ -59,7 +55,7 @@
         <servlet-class>servlet.UserPostServlet</servlet-class>
     </servlet>
     <servlet>
-      <servlet-name>ProfileServlet</servlet-name>
+        <servlet-name>ProfileServlet</servlet-name>
         <servlet-class>servlet.ProfileServlet</servlet-class>
     </servlet>
     <servlet>
@@ -70,10 +66,6 @@
         <servlet-name>OwnerConfirm</servlet-name>
         <servlet-class>servlet.OwnerConfirm</servlet-class>
     </servlet>
-    <servlet-mapping>
-        <servlet-name>SampleServlet</servlet-name>
-        <url-pattern>/SampleServlet</url-pattern>
-    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/Register</url-pattern>
@@ -95,10 +87,6 @@
         <url-pattern>/pages/PostPending</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>IndexServlet</servlet-name>
-        <url-pattern>/pages/</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>CreatePostServlet</servlet-name>
         <url-pattern>/pages/CreatePost</url-pattern>
     </servlet-mapping>
@@ -117,6 +105,10 @@
     <servlet-mapping>
         <servlet-name>ProfileServlet</servlet-name>
         <url-pattern>/pages/profile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>IndexServlet</servlet-name>
+        <url-pattern>/pages</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>
