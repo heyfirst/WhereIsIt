@@ -24,6 +24,13 @@
               <div class="content">
                 <h2>FOUNDER</h2>
               </div>
+           <form id="founder" action="ConfirmPostPending" method="post"
+                 <input type="hidden" value="${found_item}">
+               <input type="hidden" value="${found_place}">
+               <input type="hidden" value="${found_date}">
+               <input type="hidden" value="${found_time}">
+               <input type="hidden" value="${found_address}">
+           </form>
               <div class="media">
                 <div class="media-left">
                   <figure class="image is-32x32">
@@ -31,8 +38,8 @@
                   </figure>
                 </div>
                 <div class="media-content">
-                  <p class="title is-5">${founder}</p>
-                  <p class="subtitle is-6">@johnsmith</p>
+                  <p class="title is-5">${founder.user.fname} ${founder.user.lname}</p>
+                  <p class="subtitle is-6"></p>
                 </div>
               </div>
               <div class="columns">
@@ -53,14 +60,13 @@
                 </div>
               </div>
               <div class="content">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Phasellus nec iaculis mauris.
+                  ค้นพบ ${found_item} ซึ่งของที่สูญหาย ณ สถานที่ ${found_place}
               </div>
               <hr>
               <div class="content">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Phasellus nec iaculis mauris.
+                  พบเมื่อวันที่ ${found_date} เวลา ${found_time}
               </div>
+              <hr>
             </div>
             <footer class="card-footer">
               <a class="card-footer-item">Contact</a>
@@ -82,8 +88,8 @@
                   </figure>
                 </div>
                 <div class="media-content">
-                  <p class="title is-5">John Smith</p>
-                  <p class="subtitle is-6">@johnsmith</p>
+                    <p class="title is-5">${ownerPost.postName}</p>
+                    <p class="subtitle is-6">${ownerPost.user.fname} ${ownerPost.user.lname}</p>
                 </div>
               </div>
               <div class="columns">
@@ -104,13 +110,7 @@
                 </div>
               </div>
               <div class="content">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Phasellus nec iaculis mauris.
-              </div>
-              <hr>
-              <div class="content">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Phasellus nec iaculis mauris.
+                  ${ownerPost.postDescription}
               </div>
             </div>
             <footer class="card-footer">
@@ -125,7 +125,7 @@
           <button class="button is-danger is-fullwidth  is-medium">Discard</button>
         </div>
         <div class="column is-4">
-          <button class="button is-success is-fullwidth  is-medium">Comfirm Post</button>
+          <button class="button is-success is-fullwidth  is-medium" type="submit" form="founder" value="submit">Comfirm Post</button>
         </div>
       </div>
     </div>

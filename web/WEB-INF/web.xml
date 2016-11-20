@@ -66,6 +66,14 @@
         <servlet-name>UserPostServlet</servlet-name>
         <servlet-class>servlet.UserPostServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ConfirmPostPendingServlet</servlet-name>
+        <servlet-class>servlet.ConfirmPostPendingServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>OwnerConfirm</servlet-name>
+        <servlet-class>servlet.OwnerConfirm</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SampleServlet</servlet-name>
         <url-pattern>/SampleServlet</url-pattern>
@@ -109,6 +117,14 @@
     <servlet-mapping>
         <servlet-name>UserPostServlet</servlet-name>
         <url-pattern>/pages/User</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ConfirmPostPendingServlet</servlet-name>
+        <url-pattern>/pages/ConfirmPostPending</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OwnerConfirm</servlet-name>
+        <url-pattern>/OwnerConfirm</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>

@@ -5,25 +5,23 @@
  */
 package servlet;
 
-import Repo.*;
+import Repo.FoundRepo;
+import Repo.Repo;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import model.Found;
 import model.Post;
-import model.User;
 
 /**
  *
  * @author Huag
  */
-public class PostPendingServlet extends HttpServlet {
-    
+public class OwnerConfirm extends HttpServlet {
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -36,39 +34,43 @@ public class PostPendingServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        if(request.getCharacterEncoding() == null){
-            request.setCharacterEncoding("UTF-8");
-        }
-         String query = request.getQueryString();
-          int index = query.indexOf("=");
-         User user = (User)request.getSession().getAttribute("loggedInUser");
-         Post owner = null;
-         Found founder = new Found();
-         HttpSession session = request.getSession();
-         String postId = query.substring(index+1);
-         String found_item = request.getParameter("found_item");
-         String found_date = request.getParameter("found_date");
-         String found_time = request.getParameter("found_time");
-         String found_place= request.getParameter("found_place");
-         String found_address = request.getParameter("found_address");
-
-        if(user != null && session.getAttribute("posts") != null){
-
-             }
+                String found_item;
+                String found_date;
+                String found_time;
+                String found_place;
+                String found_address;
+                 /// Owner Confirm status pending
+                //    owner data form session
+                String postId = "9";
+                 Post owner = Repo.findPostById(Integer.parseInt(postId));
+                 Found founder = FoundRepo.findFounderByPostId(Integer.parseInt(postId));
+                 // User from Session
+                 String fdes = founder.getFoundDescription();
+                 int count = 1;
+                 int equal = fdes.indexOf("=");
+                 while(equal != -1){
+                     int indexComma = fdes.indexOf(",");
+                     switch(count){
+                         case 1 :   found_item = fdes.substring(equal+1,indexComma);
+                                        count++;
+                                        break;
+                        case 2 :   found_date = fdes.substring(equal+1,indexComma);
+                                        count++;
+                                        break;
+                        case 3 :   found_time = fdes.substring(equal+1,indexComma);
+                                        count++;
+                                        break;
+                        case 4 :   found_place = fdes.substring(equal+1,indexComma);
+                                        count++;
+                                        break;
+                       case 5 :   found_address = fdes.substring(equal+1,fdes.length());
+                                        count++;
+                                        break;
+                     }
+                 }
+                 
              
-                        request.setAttribute("ownerPost",owner);
-                        request.setAttribute("founderPost", founder);
-                        request.setAttribute("found_item", found_item);
-                        request.setAttribute("found_date", found_date);
-                        request.setAttribute("found_time", found_time);
-                        request.setAttribute("found_place", found_place);
-                        request.setAttribute("found_address", found_address);
-             
-             getServletContext().getRequestDispatcher("/pages/post_pending.jsp").forward(request, response);
-         }
-         
-          
-    
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
