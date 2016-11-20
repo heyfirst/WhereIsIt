@@ -101,10 +101,7 @@
               <p class="control">
                 <input class="input" type="text" name="found_place" required>
               </p>
-              <label class="label">ที่อยู่</label>
-              <p class="control">
-                <input class="input" type="text" name="found_address" required>
-              </p>
+
               <button class="button is-success is-medium is-fullwidth">ฉันเจอมันแล้ว</button>
             </div>
             </form>

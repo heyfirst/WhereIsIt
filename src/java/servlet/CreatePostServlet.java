@@ -52,9 +52,13 @@ public class CreatePostServlet extends HttpServlet {
                 int userId = user.getUserId();
                  int status = 0;
                  int tagId = Integer.parseInt(tagfromInput);
-                 Tag tag = Repo.queryTagByTagId(tagId);
+                 
                  ArrayList<Tag> listTag =  new ArrayList<Tag>();
-                 listTag.add(tag);
+                 for (int i = 0; i < listTag.size(); i++) {
+                    Tag tag = Repo.queryTagByTagId(tagId);
+                    listTag.add(tag);
+                }
+                 
                   ArrayList<Image> listImage =  new ArrayList<Image>();
                  
 

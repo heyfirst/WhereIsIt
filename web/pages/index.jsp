@@ -88,7 +88,11 @@
               </div>
               <footer class="card-footer">
                 <a class="card-footer-item" href="Post?post_id=${p.postId}">See more.</a>
-                <a class="card-footer-item modal-button" data-target="#found-item" onclick="chageFoundFormURL(${p.postId})">Found It!</a>
+                 <c:choose>
+                     <c:when test="${p.user.userId != sessionScope.loggedInUser.userId}">
+                        <a class="card-footer-item modal-button" data-target="#found-item" onclick="chageFoundFormURL(${p.postId})">Found It!</a>
+                     </c:when>
+                 </c:choose>
               </footer>
             </div>
           </div>
@@ -129,10 +133,6 @@
               <label class="label">สถานที่</label>
               <p class="control">
                 <input class="input" type="text" name="found_place" required>
-              </p>
-              <label class="label">ที่อยู่</label>
-              <p class="control">
-                  <input class="input" type="text" name="found_address" required>
               </p>
               <button class="button is-success is-medium is-fullwidth">ฉันเจอมันแล้ว</button>
             </div>
