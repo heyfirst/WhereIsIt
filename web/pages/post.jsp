@@ -4,6 +4,7 @@
     Author     : KS
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -60,7 +61,14 @@
               </div>
               <div class="panel-block">
                 <div class="content">
-                  <div id="map" data-lat="13.6525855" data-lng="100.4936103"></div>
+                    <c:choose>
+                        <c:when test="${post.lat != 0 && post.lon != 0}">
+                            <div id="map" data-lat="${post.lat}" data-lng="${post.lon}"></div>
+                        </c:when>
+                        <c:otherwise>
+                             <div id="map"></div>
+                        </c:otherwise>
+                  </c:choose>
                 </div>
               </div>
               <div class="panel-block">

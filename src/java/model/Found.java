@@ -5,6 +5,8 @@
  */
 package model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Huag
@@ -13,7 +15,7 @@ public class Found {
     private int foundId;
     private User user;
     private int postId;
-    private Image image;
+    private ArrayList<Image> image;
     private String foundDescription;
 
     public Found() {
@@ -22,33 +24,20 @@ public class Found {
     public Found(User user){
         this.user = user;
     }
-    
-    public Found(int foundId, User user, Image image, String foundDescription) {
+
+    public Found(User user, ArrayList<Image> image) {
+        this.user = user;
+        this.image = image;
+    }
+
+    public Found(int foundId, User user, int postId, ArrayList<Image> image, String foundDescription) {
         this.foundId = foundId;
         this.user = user;
+        this.postId = postId;
         this.image = image;
         this.foundDescription = foundDescription;
     }
 
-    public int getPostId() {
-        return postId;
-    }
-
-    public void setPostId(int postId) {
-        this.postId = postId;
-    }
-
-    public Image getImage() {
-        return image;
-    }
-
-    public void setImage(Image image) {
-        this.image = image;
-    }
-
-   
-
-    
     public int getFoundId() {
         return foundId;
     }
@@ -65,6 +54,22 @@ public class Found {
         this.user = user;
     }
 
+    public int getPostId() {
+        return postId;
+    }
+
+    public void setPostId(int postId) {
+        this.postId = postId;
+    }
+
+    public ArrayList<Image> getImage() {
+        return image;
+    }
+
+    public void setImage(ArrayList<Image> image) {
+        this.image = image;
+    }
+
     public String getFoundDescription() {
         return foundDescription;
     }
@@ -75,7 +80,7 @@ public class Found {
 
     @Override
     public String toString() {
-        return "Found{" + "foundId=" + foundId + ", user=" + user + ", description=" + foundDescription + '}';
+        return "Found{" + "foundId=" + foundId + ", user=" + user + ", postId=" + postId + ", image=" + image + ", foundDescription=" + foundDescription + '}';
     }
     
 }
