@@ -69,14 +69,29 @@
             <div class="card">
               <div class="card-image">
                 <figure class="image is-3by2">
-                  <img src="http://placehold.it/225x225" alt="">
+                    <c:choose>
+                        <c:when test="${p.image[0].imageId == 0}">
+                            <img src="..${p.image[0].src}" alt="">
+                        </c:when>
+                        <c:otherwise>
+                            <img src="..${p.image[0].src}" alt="">
+                         </c:otherwise>
+                  </c:choose>
                 </figure>
               </div>
               <div class="card-content">
                 <div class="media">
                   <div class="media-left">
                     <figure class="image is-32x32">
-                      <img src="http://placehold.it/64x64" alt="Image">
+                     <c:choose>
+                        <c:when test="${p.user.image.imageId == 0}">
+                             <img src="..${p.user.image.src}" alt="">
+                        </c:when>
+                        <c:otherwise>
+                            <img src="..${p.user.image.src}" alt="">
+                         </c:otherwise>
+                      </c:choose>
+                      
                     </figure>
                   </div>
                   <div class="media-content">
