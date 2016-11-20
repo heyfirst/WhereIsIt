@@ -23,8 +23,8 @@
             Gender: <br><input type="radio" name="gender" value="male"required/>Male<br>
                     <input type="radio" name="gender" value="female"required/>Female<br>
                     <input type="radio" name="gender" value="donotenter"required/>Do not Enter<br>
-            Citizen ID: <input type="number"  name="citizenid" maxlength="13"required/><br>
-            Phone number: <input type="number"  name="tel" maxlength="10"required/><br>
+            Citizen ID: <input type="number" name="citizenid" required/><br>
+            Phone number: <input type="number"  name="tel" maxlength="10" required/><br>
             Faculty: <input type="text"  name="faculty"required/><br>
             Address: <input type="text"  name="address"required/><br>
             <input type="submit" value="Submit"/>

@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
+
 /**
  *
  * @author pingpongsz
@@ -32,8 +33,7 @@ public class RegisterServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-        
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -95,7 +95,7 @@ public class RegisterServlet extends HttpServlet {
                 if(UserRepo.createUser(email, password, fname, lname, gender, citizenId, tel, faculty, address)){
                     message = "Successfully";
                     request.setAttribute("message", message);
-                    getServletContext().getRequestDispatcher("/pages/homepage.jsp").forward(request, response);
+                    getServletContext().getRequestDispatcher("/pages/index.jsp").forward(request, response);
                 }else{
                     message = "Your Email account have been registered.";
                 }
