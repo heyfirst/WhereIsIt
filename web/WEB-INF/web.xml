@@ -59,17 +59,16 @@
         <servlet-class>servlet.UserPostServlet</servlet-class>
     </servlet>
     <servlet>
-<<<<<<< HEAD
-        <servlet-name>ProfileServlet</servlet-name>
+      <servlet-name>ProfileServlet</servlet-name>
         <servlet-class>servlet.ProfileServlet</servlet-class>
-=======
+    </servlet>
+    <servlet>
         <servlet-name>ConfirmPostPendingServlet</servlet-name>
         <servlet-class>servlet.ConfirmPostPendingServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>OwnerConfirm</servlet-name>
         <servlet-class>servlet.OwnerConfirm</servlet-class>
->>>>>>> d3888b0f406602562c5fec9cd9dfaae7106975f3
     </servlet>
     <servlet-mapping>
         <servlet-name>SampleServlet</servlet-name>
@@ -108,17 +107,16 @@
         <url-pattern>/pages/User</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-<<<<<<< HEAD
-        <servlet-name>ProfileServlet</servlet-name>
-        <url-pattern>/pages/profile</url-pattern>
-=======
         <servlet-name>ConfirmPostPendingServlet</servlet-name>
         <url-pattern>/pages/ConfirmPostPending</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>OwnerConfirm</servlet-name>
         <url-pattern>/OwnerConfirm</url-pattern>
->>>>>>> d3888b0f406602562c5fec9cd9dfaae7106975f3
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProfileServlet</servlet-name>
+        <url-pattern>/pages/profile</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>

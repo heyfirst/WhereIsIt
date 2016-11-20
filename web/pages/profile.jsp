@@ -4,6 +4,9 @@
     Author     : KS
 --%>
 
+<%@page import="java.util.List"%>
+<%@page import="model.Post"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -18,17 +21,52 @@
       <div class="container">
         <div class="columns">
           <!-- Post -->
-          <div class="column is-3">
-            <img src="/" alt="" />
+          <div class="column is-2 is-offset-1">
+            <img src="../assets/img/user1.png" class="image rounded-image" alt="" />
           </div>
           <!-- ./End Post -->
           <!-- Content -->
-          <div class="column">
-
+          <div class="column is-8">
+            <label class="label">Name</label>
+            <p class="control">
+              <input class="input is-success disabled" type="text" value="Kanisorn Sutham" disabled="">
+            </p>
+            <div class="columns">
+              <div class="column is-6">
+                <label class="label">Email</label>
+                <p class="control">
+                  <input class="input is-success disabled" type="text" value="firstziiz.k@gmail.com" disabled="">
+                </p>
+              </div>
+              <div class="column is-4">
+                <label class="label">Tel</label>
+                <p class="control">
+                  <input class="input is-success disabled" type="text" value="088-252-9594" disabled="">
+                </p>
+              </div>
+            </div>
+            <div class="columns">
+              <div class="column is-4">
+                <label class="label">Citizen ID</label>
+                <p class="control">
+                  <input class="input is-success disabled" type="text" value="123434564567" disabled="">
+                </p>
+              </div>
+              <div class="column is-8">
+                <label class="label">Address</label>
+                <p class="control">
+                  <input class="input is-success disabled" type="text" value="ไม่บอกหรอก อิอิ" disabled="">
+                </p>
+              </div>
+            </div>
           </div>
           <!-- ./End Content -->
         </div>
       </div>
+    </section>
+
+    <div class="section">
+    <div class="container">
       <div class="columns is-multiline">
         <!-- Post -->
          <c:if test="${posts != null}">
@@ -69,7 +107,8 @@
             </c:forEach>
           </c:if>
       </div>
-    </section>
+    </div>
+    </div>
 
     <jsp:include page="../layouts/script_included.jsp"/>
 
