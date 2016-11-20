@@ -76,6 +76,7 @@
                <p class="control">
                  <input type="text" class="input" name="address"required/>
                </p>
+               <p>${message}</p>
                <p class="control">
                   <button type="submit" class="button is-primary is-fullwidth">Register</button>
                </p>
