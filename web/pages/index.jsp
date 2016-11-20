@@ -16,7 +16,7 @@
   <body>
     <!-- Navigator Bar -->
     <jsp:include page="../layouts/navbar_included.jsp"/>
-    
+
     <!-- Main Container -->
     <section class="section">
       <div class="container">
@@ -36,7 +36,7 @@
                 </c:if>
                 <strong><%= sizeOfPost %></strong> posts
               </p>
-                
+
             </div>
             <div class="level-item">
              <form action="/WhereIsIt/pages/" method="GET">
@@ -88,7 +88,7 @@
                             <img src="..${p.user.image.src}" alt="">
                          </c:otherwise>
                       </c:choose>
-                      
+
                     </figure>
                   </div>
                   <div class="media-content">
@@ -118,9 +118,9 @@
         </div>
       </div>
     </section>
-    
+
     <jsp:include page="../layouts/script_included.jsp"/>
-    
+
     <!-- Modal -->
     <div id="found-item" class="modal">
       <div class="modal-background"></div>
@@ -155,7 +155,7 @@
         </section>
       </div>
     </div>
-            
+
             <script>
                 function chageFoundFormURL(id){
                     var foundForm = document.getElementById("found");
