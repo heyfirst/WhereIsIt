@@ -77,13 +77,14 @@
     <nav class="tabs is-boxed is-fullwidth">
       <div class="container">
         <ul>
-          <li class="is-active" id="tab1"><a  href="/WhereIsIt/pages/">รายการของหายในระบบ</a></li>
+          
           <c:choose>
-              <c:when test="${sessionScope.loggedInUser != null}">
+              <c:when test="${sessionScope.loggedInUser != null && pageContext.request.requestURI != '/WhereIsIt/pages/user_post.jsp'}">
+                    <li class="is-active" id="tab1"><a  href="/WhereIsIt/pages/">รายการของหายในระบบ</a></li>
                     <li id="tab2"><a href="/WhereIsIt/pages/CreatePost">ประกาศหาของหาย</a></li>
                </c:when>
               <c:otherwise>
-                  <li id="tab2"><a>ประกาศหาของหาย</a></li>
+                    <li class="is-active" id="tab1"><a>โพสของฉัน</a></li>
               </c:otherwise>
             </c:choose>
         </ul>

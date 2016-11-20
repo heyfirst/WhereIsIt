@@ -47,11 +47,9 @@
 
           <!-- Right side -->
           <div class="level-right">
-            <p class="level-item"><strong>All</strong></p>
-            <p class="level-item"><a>Published</a></p>
-            <p class="level-item"><a>Drafts</a></p>
-            <p class="level-item"><a>Deleted</a></p>
-            <p class="level-item"><a class="button is-success">New</a></p>
+            <p class="level-item filter strong is-disabled"><a>All</a></p>
+            <p class="level-item filter"><a>Pending</a></p>
+            <p class="level-item filter"><a>Closed</a></p>
           </div>
         </nav>
 
@@ -59,8 +57,7 @@
           <!-- Post -->
  <c:if test="${userPost != null}">
     <c:forEach items="${userPost}" var="up" varStatus="vs">
-        <c:if test="${up.status == 0}">
-          <div class="column is-3">
+          <div class="column is-3 ${p.status == 0 ? '' : p.status == 1 ? 'pending' : p.status == 2 ? 'closed' : ''}">
             <div class="card">
               <div class="card-image">
                 <figure class="image is-3by2">
@@ -109,7 +106,6 @@
             </div>
           </div>
           <!-- ./End Post -->
-          </c:if>
        </c:forEach>
 </c:if>
         </div>

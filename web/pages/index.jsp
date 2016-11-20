@@ -52,10 +52,8 @@
 
           <!-- Right side -->
           <div class="level-right">
-            <p class="level-item"><strong>All</strong></p>
-            <p class="level-item"><a>My post</a></p>
-            <p class="level-item"><a>Closed</a></p>
-            <p class="level-item"><a>Pending</a></p>
+            <p class="level-item filter strong is-disabled"><a>All</a></p>
+            <p class="level-item filter"><a>My post</a></p>
           </div>
         </nav>
 
@@ -64,7 +62,7 @@
  <c:if test="${posts != null}">
     <c:forEach items="${posts}" var="p" varStatus="vs">
         <c:if test="${p.status == 0}">
-          <div class="column is-3">
+          <div class="column is-3 ${p.user.userId == sessionScope.loggedInUser.userId ? 'myPost' : ''}">
             <div class="card">
               <div class="card-image">
                 <figure class="image is-3by2">

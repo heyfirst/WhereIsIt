@@ -23,5 +23,10 @@ $(document).ready(function(){
     $('html').removeClass('is-clipped');
     $('.modal').removeClass('is-active');
   });
+  
+  $('.filter').click(function() {
+    $('.filter').removeClass('strong is-disabled');
+    $(this).addClass('strong is-disabled');
+  });
 
 });

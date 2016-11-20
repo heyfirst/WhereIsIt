@@ -5,5 +5,6 @@
 --%>
 <meta charset="UTF-8">
 <title>Where Is It | Lost and Found Website.</title>
+<link rel="stylesheet" href="../assets/css/style.css">
 <link rel="stylesheet" href="../assets/css/bulma.css">
 <link rel="stylesheet" href="../assets/css/font-awesome.min.css">
