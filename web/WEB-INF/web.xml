@@ -1,24 +1,116 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <filter>
+        <filter-name>Authencation</filter-name>
+        <filter-class>filter.Authencation</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>Authencation</filter-name>
+        <servlet-name>CreatePostServlet</servlet-name>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>Authencation</filter-name>
+        <servlet-name>PostPendingServlet</servlet-name>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>Authencation</filter-name>
+        <servlet-name>UserPostServlet</servlet-name>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+    </filter-mapping>
     <servlet>
         <servlet-name>SampleServlet</servlet-name>
         <servlet-class>servlet.SampleServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>DashBoardServlet</servlet-name>
-        <servlet-class>servlet.DashBoardServlet</servlet-class>
+        <servlet-name>AddPostServlet</servlet-name>
+        <servlet-class>servlet.AddPostServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RegisterServlet</servlet-name>
+        <servlet-class>servlet.RegisterServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>servlet.LoginServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LogoutServlet</servlet-name>
+        <servlet-class>servlet.LogoutServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>HomepageServlet</servlet-name>
+        <servlet-class>servlet.HomepageServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PostServlet</servlet-name>
+        <servlet-class>servlet.PostServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PostPendingServlet</servlet-name>
+        <servlet-class>servlet.PostPendingServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>IndexServlet</servlet-name>
+        <servlet-class>servlet.IndexServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CreatePostServlet</servlet-name>
+        <servlet-class>servlet.CreatePostServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UserPostServlet</servlet-name>
+        <servlet-class>servlet.UserPostServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>SampleServlet</servlet-name>
         <url-pattern>/SampleServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>DashBoardServlet</servlet-name>
-        <url-pattern>/DashBoardServlet</url-pattern>
+        <servlet-name>AddPostServlet</servlet-name>
+        <url-pattern>/AddPostServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RegisterServlet</servlet-name>
+        <url-pattern>/Register</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/pages/Login</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LogoutServlet</servlet-name>
+        <url-pattern>/Logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HomepageServlet</servlet-name>
+        <url-pattern>/Homepage</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PostServlet</servlet-name>
+        <url-pattern>/pages/Post</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PostPendingServlet</servlet-name>
+        <url-pattern>/pages/PostPending</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>IndexServlet</servlet-name>
+        <url-pattern>/pages/</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreatePostServlet</servlet-name>
+        <url-pattern>/pages/CreatePost</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserPostServlet</servlet-name>
+        <url-pattern>/pages/User</url-pattern>
     </servlet-mapping>
     <session-config>
-        <session-timeout>
-            30
-        </session-timeout>
+        <session-timeout>30</session-timeout>
     </session-config>
 </web-app>

@@ -23,6 +23,11 @@ public class User {
     private String address;
 
     public User() {
+        
+    }
+
+    public User(Image image) {
+        this.image = image;
     }
 
     public User(int userId, Image image, String email, String password, String fname, String lname, int gender, String citizenId, String tel, String faculty, String address) {
@@ -115,7 +120,7 @@ public class User {
         return image;
     }
 
-    public void setImage(Image image) {
+    public void setImage(Image imageId) {
         this.image = image;
     }
 

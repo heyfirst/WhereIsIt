@@ -18,11 +18,31 @@ public class Image {
     public Image() {
     }
 
+    public Image(String src) {
+        this.src = src;
+    }
+
+    
     public Image(int imageId, String src) {
         this.imageId = imageId;
         this.src = src;
     }
+
+    
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj != null && obj instanceof Image){
+               Image img = (Image)obj;
+               if(imageId == img.getImageId()){
+                   return true;
+               }
+        }
+        return false;
+    }
  
+    
+    
     public int getImageId() {
         return imageId;
     }
@@ -39,6 +59,7 @@ public class Image {
         this.src = src;
     }
 
+    
     @Override
     public String toString() {
         return "Image{" + "imageId=" + imageId + ", src=" + src + '}';

@@ -5,30 +5,20 @@
  */
 package servlet;
 
-import Repo.Repo;
+import Repo.UserRepo;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import model.Post;
 import model.User;
-import util.ConnectionBuilder;
 
 /**
  *
- * @author Huag
+ * @author pingpongsz
  */
-public class DashBoardServlet extends HttpServlet {
+public class LoginServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,32 +32,7 @@ public class DashBoardServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        if(request.getCharacterEncoding() == null) {
-            request.setCharacterEncoding("UTF-8");
-        }
-       HttpSession session = request.getSession(true); 
-       List<Post> listPost = null;
-        String searchParam = request.getParameter("searchParam");
-        
-        if(searchParam == null) {
-            searchParam = "";
-            listPost = Repo.allPost();
-        }else{
-            listPost = Repo.findPostByName(searchParam);
-        }
        
-       
-        request.setAttribute("listPost",listPost);
-            
-                
-      
-        
-        
-
-            getServletContext().getRequestDispatcher("/pages/dashboard.jsp").forward(request,response);
-
-
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -83,6 +48,17 @@ public class DashBoardServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        
+        HttpSession session = request.getSession();
+        User loggedInUser = (User) session.getAttribute("loggedInUser");
+        String message = "";
+        if(loggedInUser != null){
+            response.sendRedirect(getServletContext().getContextPath());
+        }else{
+            getServletContext().getRequestDispatcher("/pages/login.jsp").forward(request, response);
+        }
+        
+                
     }
 
     /**
@@ -97,6 +73,32 @@ public class DashBoardServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        
+        HttpSession session = request.getSession(false);
+        String message = "";
+        User loggedInUser = (User) session.getAttribute("loggedInUser");
+
+        if(loggedInUser != null){
+            response.sendRedirect(getServletContext().getContextPath());
+//                getServletContext().getRequestDispatcher("/pages/index.jsp").forward(request, response);
+        }else{
+            
+            String em = request.getParameter("email");
+            String pw = request.getParameter("password");
+            loggedInUser = UserRepo.getUser(em, pw);
+            
+            if(loggedInUser != null){
+                message = "Logged in! Welcome!";
+                
+            }else{
+                message = "Your Email or Password is not collect!";
+                request.setAttribute("message", message);
+                
+            }
+            session.setAttribute("loggedInUser", loggedInUser);
+        }
+        request.setAttribute("message", message);
+        response.sendRedirect(getServletContext().getContextPath()+"/pages/");
     }
 
     /**

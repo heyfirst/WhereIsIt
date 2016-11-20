@@ -6,8 +6,11 @@
 package Repo;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
+import model.Image;
 import model.Post;
+import model.Tag;
 
 /**
  *
@@ -19,9 +22,16 @@ public class NewMain {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
-        List<Post> lp = Repo.findPostByName("");
+        // TODO code application logic here^
+        List<Post> lp = Repo.findPostByStatusAndUserId(0,12);
+//        List<Post> lp = Repo.queryPost("select * from wil_post","");
+//        List<Tag> tag = Repo.queryTag("select * from wil_tag where tag_name IN(select tag_name like 'ของใช้ทั่วไป%')");
+//        System.out.println(tag);
+//        System.out.println(lp.get(0).getUser().getImage().getImageId());
+//        Post p = Repo.findPostByUserId(3);
+//         System.out.println(lp);
         System.out.println(lp);
+
     }
     
 }
