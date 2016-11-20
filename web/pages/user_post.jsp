@@ -57,16 +57,16 @@
           <!-- Post -->
  <c:if test="${userPost != null}">
     <c:forEach items="${userPost}" var="up" varStatus="vs">
-          <div class="column is-3 ${up.status == 0 ? '' : up.status == 1 ? 'pending' : up.status == 2 ? 'closed' : ''}">
+          <div class="column is-3 ${p.status == 0 ? '' : p.status == 1 ? 'pending' : p.status == 2 ? 'closed' : ''}">
             <div class="card">
               <div class="card-image">
                 <figure class="image is-3by2">
                   <c:choose>
-                        <c:when test="${up.image[0].imageId == 0}">
-                            <img src="..${up.image[0].src}" alt="">
+                        <c:when test="${p.image[0].imageId == 0}">
+                            <img src="..${p.image[0].src}" alt="">
                         </c:when>
                         <c:otherwise>
-                            <img src="..${up.image[0].src}" alt="">
+                            <img src="..${p.image[0].src}" alt="">
                          </c:otherwise>
                   </c:choose>
                 </figure>

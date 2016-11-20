@@ -42,19 +42,22 @@ public class CreatePostServlet extends HttpServlet {
         }
         // Post Only        
         String postName = request.getParameter("postName");
-        String tagfromInput    = request.getParameter("tag");
+        String[] tagfromInput    = request.getParameterValues("tag");
         String postDesciption = request.getParameter("postDescription");
         String yes = request.getParameter("question");
-       
+        String lat = request.getParameter("lat");
+        String lon = request.getParameter("lon");
+        
         User user = (User) request.getSession().getAttribute("loggedInUser");
         if(user != null){
             if(yes.equalsIgnoreCase("yes") && postName != null && postDesciption != null){
                 int userId = user.getUserId();
                  int status = 0;
-                 int tagId = Integer.parseInt(tagfromInput);
                  
+                  
                  ArrayList<Tag> listTag =  new ArrayList<Tag>();
-                 for (int i = 0; i < listTag.size(); i++) {
+                 for (int i = 0; i < tagfromInput.length; i++) {
+                     int tagId = Integer.parseInt(tagfromInput[i]);
                     Tag tag = Repo.queryTagByTagId(tagId);
                     listTag.add(tag);
                 }
@@ -71,7 +74,13 @@ public class CreatePostServlet extends HttpServlet {
                  post.setPostName(postName);
                  post.setPostDescription(postDesciption);
                  post.setStatus(0);
-                 
+                 try{
+                    post.setLon(Double.parseDouble(lon));
+                    post.setLat(Double.parseDouble(lat));
+                 }catch(Exception x){
+                    post.setLon(0);
+                    post.setLat(0);
+                 }
           
                  
                  boolean success = Repo.insertPost(post);
@@ -88,6 +97,7 @@ public class CreatePostServlet extends HttpServlet {
                  }
                      
             }
+            
         }
         
 

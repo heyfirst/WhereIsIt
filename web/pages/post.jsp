@@ -4,6 +4,7 @@
     Author     : KS
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -58,7 +59,18 @@
                   <p>${post.postDescription}</p>
                 </div>
               </div>
-              
+              <div class="panel-block">
+                <div class="content">
+                    <c:choose>
+                        <c:when test="${post.lat != 0 && post.lon != 0}">
+                            <div id="map" data-lat="${post.lat}" data-lng="${post.lon}"></div>
+                        </c:when>
+                        <c:otherwise>
+                             <div id="map"></div>
+                        </c:otherwise>
+                  </c:choose>
+                </div>
+              </div>
               <div class="panel-block">
                 <button class="button is-danger is-outlined is-fullwidth is-medium modal-button" data-target="#found-item">
                   I Found It !
@@ -72,6 +84,9 @@
     </section>
 
     <jsp:include page="../layouts/script_included.jsp"/>
+    <script type="text/javascript" src="../assets/js/map.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDiS9UZeqzWSIFgKVE_ooOllVLPT02dcEU&callback=initMap"
+    async defer></script>
 
     <!-- Modal -->
     <div id="found-item" class="modal">
