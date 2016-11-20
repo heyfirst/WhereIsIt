@@ -57,7 +57,7 @@
           <!-- Post -->
  <c:if test="${userPost != null}">
     <c:forEach items="${userPost}" var="up" varStatus="vs">
-          <div class="column is-3 ${p.status == 0 ? '' : p.status == 1 ? 'pending' : p.status == 2 ? 'closed' : ''}">
+          <div class="column is-3 ${up.status == 0 ? '' : up.status == 1 ? 'pending' : up.status == 2 ? 'closed' : ''}">
             <div class="card">
               <div class="card-image">
                 <figure class="image is-3by2">
