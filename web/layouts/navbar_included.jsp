@@ -47,6 +47,11 @@
                         <i class="fa fa-user"></i>
                       </span>
                       <span>${sessionScope.loggedInUser.fname} ${sessionScope.loggedInUser.lname}</span>
+                      <a class="nav-item" href="/WhereIsIt/Logout">
+                        <button class="button is-primary is-inverted modal-button">
+                        <span>Logout</span>
+                        </button>
+                      </a>
                   </c:otherwise>
               </c:choose>
           </span>

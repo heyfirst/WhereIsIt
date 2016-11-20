@@ -91,10 +91,6 @@
         <url-pattern>/pages/PostPending</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>IndexServlet</servlet-name>
-        <url-pattern>/pages/</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>CreatePostServlet</servlet-name>
         <url-pattern>/pages/CreatePost</url-pattern>
     </servlet-mapping>
@@ -109,6 +105,10 @@
     <servlet-mapping>
         <servlet-name>OwnerConfirm</servlet-name>
         <url-pattern>/OwnerConfirm</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>IndexServlet</servlet-name>
+        <url-pattern>/pages</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>
