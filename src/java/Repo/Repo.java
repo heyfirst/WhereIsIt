@@ -92,7 +92,7 @@ public class Repo {
                    if(listPost.get(i).getUser().getImage().getSrc() == null){
                        if(listPost.get(i).getUser().getGender() == 1)
                             listPost.get(i).getUser().getImage().setSrc("/assets/img/user1.png");
-                       else
+                       else if(listPost.get(i).getUser().getGender() == 0)
                            listPost.get(i).getUser().getImage().setSrc("/assets/img/user2.png");
                    }
                 }
