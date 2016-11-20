@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
+
 /**
  *
  * @author pingpongsz
@@ -32,8 +33,7 @@ public class RegisterServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-        
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -78,7 +78,7 @@ public class RegisterServlet extends HttpServlet {
             if(request.getParameter("gender").equalsIgnoreCase("male")){
                 gender = 1;
             }else if(request.getParameter("gender").equalsIgnoreCase("donotenter")){
-                gender = 3;
+                gender = 2;
             }else{
                 gender = 0;
             }
@@ -95,7 +95,7 @@ public class RegisterServlet extends HttpServlet {
                 if(UserRepo.createUser(email, password, fname, lname, gender, citizenId, tel, faculty, address)){
                     message = "Successfully";
                     request.setAttribute("message", message);
-                    getServletContext().getRequestDispatcher("/pages/homepage.jsp").forward(request, response);
+                    response.sendRedirect(getServletContext().getContextPath()+"/pages/");
                 }else{
                     message = "Your Email account have been registered.";
                 }
@@ -106,7 +106,7 @@ public class RegisterServlet extends HttpServlet {
             message = "Your Password and Confirm password are not the same!";
         }
         request.setAttribute("message", message);
-        getServletContext().getRequestDispatcher("/pages/register.jsp").forward(request, response);
+        getServletContext().getRequestDispatcher("/pages/register_new.jsp").forward(request, response);
     }
 
     /**
