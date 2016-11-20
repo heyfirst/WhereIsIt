@@ -53,7 +53,19 @@
           <!-- Right side -->
           <div class="level-right">
             <p class="level-item filter strong is-disabled"><a>All</a></p>
-            <p class="level-item filter"><a>My post</a></p>
+            <c:choose>
+              <c:when test="${sessionScope.loggedInUser != null}">
+                 <p class="level-item filter" >
+                      <a href="/WhereIsIt/pages/User">My post</a>
+                  </p>
+               </c:when>
+              <c:otherwise>
+                  <p class="level-item filter" >
+                      <a>My post</a>
+                  </p>
+              </c:otherwise>
+            </c:choose>
+            
           </div>
         </nav>
 

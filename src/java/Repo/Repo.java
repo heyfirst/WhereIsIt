@@ -89,7 +89,7 @@ public class Repo {
                               
                              listPost.get(i).getImage().get(0).setSrc("/assets/img/post1.png");
                    }
-                   if(listPost.get(i).getUser().getImage().getSrc() == null){
+                   if(listPost.get(i).getUser().getImage().getImageId() == 0){
                        if(listPost.get(i).getUser().getGender() == 1)
                             listPost.get(i).getUser().getImage().setSrc("/assets/img/user1.png");
                        else if(listPost.get(i).getUser().getGender() == 0)
@@ -235,9 +235,13 @@ public class Repo {
                     listUser = new ArrayList<User>(); 
                 Image img = new Image();     
                 ormImage(rs,img);
-                 User user = new User(img);
+                User user = new User(img);
                 ormUser(rs,user);
-          
+                img = ImageRepo.findImageById(img.getImageId());
+                System.out.println("Imageeeeee  "+img);
+                if(img != null)
+                    user.getImage().setSrc(img.getSrc());
+                System.out.println(user);
                 listUser.add(user);
             }
             if(listUser != null){
@@ -246,6 +250,8 @@ public class Repo {
    
           return listUser;
     }
+    
+   
     
     private static void setImageByUser(Connection con,List<User> listUser) {
 
@@ -283,6 +289,9 @@ public class Repo {
            
    
     }
+    
+    
+    
     
     public static Post ormPost(ResultSet rs,Post post) throws SQLException{
         post.setPostId(rs.getInt("post_id"));
