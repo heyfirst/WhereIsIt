@@ -12,17 +12,38 @@ package model;
 public class Found {
     private int foundId;
     private User user;
+    private int postId;
     private Image image;
     private String foundDescription;
 
     public Found() {
     }
-
+    
+    public Found(User user){
+        this.user = user;
+    }
+    
     public Found(int foundId, User user, Image image, String foundDescription) {
         this.foundId = foundId;
         this.user = user;
         this.image = image;
         this.foundDescription = foundDescription;
+    }
+
+    public int getPostId() {
+        return postId;
+    }
+
+    public void setPostId(int postId) {
+        this.postId = postId;
+    }
+
+    public Image getImage() {
+        return image;
+    }
+
+    public void setImage(Image image) {
+        this.image = image;
     }
 
    

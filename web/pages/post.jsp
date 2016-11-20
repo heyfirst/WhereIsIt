@@ -86,24 +86,24 @@
             <div class="content">
               <label class="label">ข้อมูลของที่พบ</label>
               <p class="control">
-                <textarea class="input" name="found_data"></textarea>
+                <textarea class="input" name="found_item" required></textarea>
               </p>
               <label class="label">วันที่เจอ</label>
               <p class="control">
-                <input class="input" type="date" name="found_date">
+                <input class="input" type="date" name="found_date" required>
               </p>
               <label class="label">เวลาที่เจอ</label>
               <p class="control">
-                <input class="input" type="time" name="found_time">
+                <input class="input" type="time" name="found_time" required>
               </p>
               <hr>
               <label class="label">สถานที่</label>
               <p class="control">
-                <input class="input" type="text" name="found_place">
+                <input class="input" type="text" name="found_place" required>
               </p>
               <label class="label">ที่อยู่</label>
               <p class="control">
-                <input class="input" type="text" name="found_address">
+                <input class="input" type="text" name="found_address" required>
               </p>
               <button class="button is-success is-medium is-fullwidth">ฉันเจอมันแล้ว</button>
             </div>

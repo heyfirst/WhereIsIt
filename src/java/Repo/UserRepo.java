@@ -132,4 +132,52 @@ public class UserRepo {
         }
         return isExist;
     }
+    
+        public synchronized static User getUserByUserId(int id){
+             User userInfor = null;
+            try {
+
+                String getUserInfor = "SELECT * FROM wil_user WHERE user_id=?";
+                Connection con = ConnectionBuilder.getMySqlCond();
+                PreparedStatement pstmt = con.prepareStatement(getUserInfor);
+                pstmt.setInt(1, id);
+                ResultSet rs = pstmt.executeQuery();
+                while(rs.next()){
+                    int userId = rs.getInt("user_id");
+                    int imageId;
+                    try{
+                         imageId = rs.getInt("image_id");
+                    }
+                    catch(Exception x){
+                        imageId = 0;
+                    }
+                    String email = rs.getString("email");
+                    String password = rs.getString("password");
+                    String fname = rs.getString("fname");
+                    String lname = rs.getString("lname");
+                    int gender = rs.getInt("gender");
+                    String citizenId = rs.getString("citizen_id");
+                    String tel = rs.getString("tel");
+                    String faculty = rs.getString("faculty");
+                    String address;
+                      try{
+                         address = rs.getString("address");
+                    }
+                    catch(Exception x){
+                        address = null;
+                    }
+
+
+
+                    Image image = new Image(); // need ImageRepo to query by Id
+                    userInfor = new User(userId, image, email, password, fname, lname, gender, citizenId, tel, faculty, address);
+                    }
+            }
+            catch(Exception x){
+                x.printStackTrace();
+            }
+            return userInfor;
+        }
+    
+    
 }

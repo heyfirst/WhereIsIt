@@ -88,7 +88,7 @@
               </div>
               <footer class="card-footer">
                 <a class="card-footer-item" href="Post?post_id=${p.postId}">See more.</a>
-                <a class="card-footer-item modal-button" data-target="#found-item">Found It!</a>
+                <a class="card-footer-item modal-button" data-target="#found-item" onclick="chageFoundFormURL(${p.postId})">Found It!</a>
               </footer>
             </div>
           </div>
@@ -111,28 +111,28 @@
           <button class="delete"></button>
         </header>
         <section class="modal-card-body">
-          <form action="PostPending?post_id=${post.postId}" method="post">
+          <form id="found" action="PostPending?post_id=${post.postId}" method="post">
             <div class="content">
               <label class="label">ข้อมูลของที่พบ</label>
               <p class="control">
-                <textarea class="input" name="found_data"></textarea>
+                <textarea class="input" name="found_item" required></textarea>
               </p>
               <label class="label">วันที่เจอ</label>
               <p class="control">
-                <input class="input" type="date" name="found_date">
+                <input class="input" type="date" name="found_date" required>
               </p>
               <label class="label">เวลาที่เจอ</label>
               <p class="control">
-                <input class="input" type="time" name="found_time">
+                <input class="input" type="time" name="found_time" required>
               </p>
               <hr>
               <label class="label">สถานที่</label>
               <p class="control">
-                <input class="input" type="text" name="found_place">
+                <input class="input" type="text" name="found_place" required>
               </p>
               <label class="label">ที่อยู่</label>
               <p class="control">
-                <input class="input" type="text" name="found_address">
+                  <input class="input" type="text" name="found_address" required>
               </p>
               <button class="button is-success is-medium is-fullwidth">ฉันเจอมันแล้ว</button>
             </div>
@@ -140,5 +140,12 @@
         </section>
       </div>
     </div>
+            
+            <script>
+                function chageFoundFormURL(id){
+                    var foundForm = document.getElementById("found");
+                    foundForm.setAttribute("action","PostPending?post_id="+id);
+                }
+            </script>
   </body>
 </html>

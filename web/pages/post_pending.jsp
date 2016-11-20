@@ -31,7 +31,7 @@
                   </figure>
                 </div>
                 <div class="media-content">
-                  <p class="title is-5">John Smith</p>
+                  <p class="title is-5">${founder}</p>
                   <p class="subtitle is-6">@johnsmith</p>
                 </div>
               </div>

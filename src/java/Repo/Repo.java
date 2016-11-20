@@ -310,7 +310,7 @@ public class Repo {
         return img;
     }
     
-    public static User ormUser(ResultSet rs,User user) throws SQLException  {
+    public synchronized static User ormUser(ResultSet rs,User user) throws SQLException  {
         try{
             user.setUserId(rs.getInt("user_id"));  
             user.setCitizenId(rs.getString("citizen_id"));
@@ -354,13 +354,13 @@ public class Repo {
         return  listPost;
     }
     
-     public static Post findPostById(int id){
+     public static Post findPostById(int postId){
          List<Post> listPost = null;
         Post   post = null;
         Connection con = null;
         String sql = "select * from wil_post where post_id=?";
         try{
-            listPost = queryPost(sql,String.valueOf(id));
+            listPost = queryPost(sql,String.valueOf(postId));
             if(listPost.size() == 1){
                 post = new Post(listPost.get(0).getImage(), listPost.get(0).getTag(), listPost.get(0).getUser());
                 post.setLat((listPost.get(0).getLat()));
@@ -596,6 +596,43 @@ public class Repo {
         return  listPost;
     }
     
+     public static List<Post>findPostByStatusAndUserId(int status,int id){
+        List<Post> listPost = null;
+        Connection con = null;
+        String sql = "select * from wil_post where user_id = ? and status ="+status;
+        System.out.println(sql);
+        try{
+            listPost = queryPost(sql,String.valueOf(id));
+        }catch(Exception ex){
+            System.out.println("Find Post By Name : "+ex);
+        }
+        
+        return  listPost;
+    }
+     
+     public synchronized static boolean updateToPostPending(int status, int postId){
+         boolean success = false;
+         String sql = "update wil_post set status=? where post_id=?";
+         try{
+             Connection con = ConnectionBuilder.getMySqlCond();
+             PreparedStatement pstmt  = con.prepareStatement(sql);
+             pstmt.setInt(1, status);
+             pstmt.setInt(2,postId);
+             int update =pstmt.executeUpdate();
+             if(update > 0){
+                 success = true;
+             }
+             con.close();
+         }catch(Exception x){
+             x.printStackTrace();
+         }
+         
+         
+         return success;
+     }
+     
+ 
+     
 }
   
 
