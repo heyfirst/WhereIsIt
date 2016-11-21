@@ -238,10 +238,10 @@ public class Repo {
                   User user = new User(img); 
                 ormUser(rs,user); 
                 img = ImageRepo.findImageById(img.getImageId()); 
-                System.out.println("Imageeeeee  "+img); 
+
                 if(img != null) 
                     user.getImage().setSrc(img.getSrc()); 
-                System.out.println(user); 
+
                 listUser.add(user);
             }
             if(listUser != null){
@@ -482,14 +482,8 @@ public class Repo {
             pstmt.setString(2,post.getPostName());
             pstmt.setString(3,post.getPostDescription());
             try{
-                 if(post.getLat() == -100 && post.getLon() == -100){
-                     pstmt.setString(4,null);
-                     pstmt.setString(5,null);
-                }
-                 else{
                       pstmt.setBigDecimal(4,BigDecimal.valueOf(post.getLat()));
                      pstmt.setBigDecimal(5,BigDecimal.valueOf(post.getLon()));
-                 }
             }catch(Exception ex){
                 pstmt.setString(4, null);
                 pstmt.setString(5, null);
@@ -604,7 +598,7 @@ public class Repo {
         Connection con = null;
         param = "%"+param.toLowerCase()+"%";
         String sql = "select * from wil_post where lower(name) like ? and user_id="+id;
-        System.out.println(sql);
+    
         try{
             listPost = queryPost(sql,param);
         }catch(Exception ex){

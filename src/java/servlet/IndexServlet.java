@@ -40,7 +40,7 @@ public class IndexServlet extends HttpServlet {
          HttpSession session = request.getSession(true);
          List<Post> listPost = null;
         String searchParam = request.getParameter("searchParam");
-         
+         session.setMaxInactiveInterval(60*10);
         if(searchParam == null) {
             searchParam = "";
             listPost = Repo.queryPost("Select * from wil_post","");
