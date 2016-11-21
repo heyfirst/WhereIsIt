@@ -82,20 +82,12 @@
         <ul>
 
           <c:choose>
-              <c:when test="${sessionScope.loggedInUser == null }">
+              <c:when test="${sessionScope.loggedInUser != null && pageContext.request.requestURI != '/WhereIsIt/pages/user_post.jsp'}">
                     <li class="is-active" id="tab1"><a  href="/WhereIsIt/pages/">รายการของหายในระบบ</a></li>
-                    <li id="tab2"><a class="modal-button" ${sessionScope.loggedInUser == null ? 'data-target="#login"' : 'href="/WhereIsIt/pages/CreatePost"'}>ประกาศหาของหาย</a></li>
+                    <li id="tab2"><a href="/WhereIsIt/pages/CreatePost">ประกาศหาของหาย</a></li>
                </c:when>
               <c:otherwise>
-                  <c:choose>
-                      <c:when test="${pageContext.request.requestURI == '/WhereIsIt/pages/user_post.jsp'}">
-                        <li class="is-active" ><a>โพสของฉัน</a></li>
-                      </c:when>
-                      <c:otherwise>
-                        <li class="is-active" id="tab1"><a  href="/WhereIsIt/pages/">รายการของหายในระบบ</a></li>
-                        <li id="tab2"><a class="modal-button" ${sessionScope.loggedInUser == null ? 'data-target="#login"' : 'href="/WhereIsIt/pages/CreatePost"'}>ประกาศหาของหาย</a></li>
-                      </c:otherwise>
-                  </c:choose>
+                    <li class="is-active" id="tab1"><a>โพสของฉัน</a></li>
               </c:otherwise>
             </c:choose>
         </ul>

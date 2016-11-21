@@ -45,11 +45,6 @@
                           </c:forEach>
                     </select>
                   </span>
-                    <label class="label">Latitude</label>
-                        <input name="lat" type="text" value="0" >
-                    <label class="label">Longtitude</label>
-                        <input name="lon" type="text" value="0" >
-                 
                 </p>
                 <label class="label">Message</label>
                 <p class="control">

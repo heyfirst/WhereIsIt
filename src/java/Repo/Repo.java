@@ -89,7 +89,7 @@ public class Repo {
                               
                              listPost.get(i).getImage().get(0).setSrc("/assets/img/post1.png");
                    }
-                   if(listPost.get(i).getUser().getImage().getSrc() == null){
+                   if(listPost.get(i).getUser().getImage().getImageId() == 0){
                        if(listPost.get(i).getUser().getGender() == 1)
                             listPost.get(i).getUser().getImage().setSrc("/assets/img/user1.png");
                        else if(listPost.get(i).getUser().getGender() == 0)
@@ -235,9 +235,13 @@ public class Repo {
                     listUser = new ArrayList<User>(); 
                 Image img = new Image();     
                 ormImage(rs,img);
-                 User user = new User(img);
-                ormUser(rs,user);
-          
+                  User user = new User(img); 
+                ormUser(rs,user); 
+                img = ImageRepo.findImageById(img.getImageId()); 
+
+                if(img != null) 
+                    user.getImage().setSrc(img.getSrc()); 
+
                 listUser.add(user);
             }
             if(listUser != null){
@@ -478,14 +482,8 @@ public class Repo {
             pstmt.setString(2,post.getPostName());
             pstmt.setString(3,post.getPostDescription());
             try{
-                 if(post.getLat() == -100 && post.getLon() == -100){
-                     pstmt.setString(4,null);
-                     pstmt.setString(5,null);
-                }
-                 else{
                       pstmt.setBigDecimal(4,BigDecimal.valueOf(post.getLat()));
                      pstmt.setBigDecimal(5,BigDecimal.valueOf(post.getLon()));
-                 }
             }catch(Exception ex){
                 pstmt.setString(4, null);
                 pstmt.setString(5, null);
@@ -600,7 +598,7 @@ public class Repo {
         Connection con = null;
         param = "%"+param.toLowerCase()+"%";
         String sql = "select * from wil_post where lower(name) like ? and user_id="+id;
-        System.out.println(sql);
+    
         try{
             listPost = queryPost(sql,param);
         }catch(Exception ex){
