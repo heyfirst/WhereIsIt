@@ -57,8 +57,14 @@ public class ConfirmPostPendingServlet extends HttpServlet {
              // Founder send information about  lost item
              // founder user from session  
              if(ownerAnswer.equalsIgnoreCase("owner")){
-                 String discard = request.getParameter("discard");
-                 if()
+                 String discard = (String)request.getParameter("discard");
+                 String confirm = (String)request.getParameter("confirm");
+                 if(discard != null && discard.equalsIgnoreCase("discard")){
+                     boolean updateToClosed = Repo.updateToPostPending(0, Integer.parseInt(postId));
+                 }
+                 else if(confirm != null && confirm.equalsIgnoreCase("confirm")){
+                     boolean updateToClosed = Repo.updateToPostPending(2, Integer.parseInt(postId));
+                 }
              }
              else if(ownerAnswer.equalsIgnoreCase("founder")){
                  if(found_item != null || found_date !=null || found_time != null || found_place != null){

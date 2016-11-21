@@ -98,12 +98,15 @@
               <footer class="card-footer">
                   <% String type = (String)request.getAttribute("type"); %>
                 <c:choose>
-                    <c:when test="<%= type.equalsIgnoreCase("all") || type.equalsIgnoreCase("closed") %>"> 
-                        <a class="card-footer-item" href="Post?post_id=${up.postId}">See more.</a>
-                    </c:when>     
+                    <c:when test="<%= type.equalsIgnoreCase("all") %>"> 
+                        <a class="card-footer-item" href="Post?post_id=${up.postId}">See more</a>
+                    </c:when>
+                      <c:when test="<%= type.equalsIgnoreCase("closed") %>"> 
+                        <a class="card-footer-item" href="Post?post_id=${up.postId}">Closed</a>
+                    </c:when>
                     <c:otherwise> 
                         <!-- type pending -->
-                        <a class="card-footer-item" href="PostPending?post_id=${up.postId}">See more.</a>
+                        <a class="card-footer-item" href="PostPending?post_id=${up.postId}">Pending</a>
                     </c:otherwise>
                 </c:choose>
                 <c:choose>

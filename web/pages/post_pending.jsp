@@ -143,7 +143,14 @@
             </c:choose>
         </div>
         <div class="column is-4">
-          <button class="button is-success is-fullwidth  is-medium" type="submit" form="founder" value="submit">Comfirm Post</button>
+            <c:choose>
+                <c:when test="<%= ownerAnswer.equalsIgnoreCase("founder")  %>">
+                     <button class="button is-success is-fullwidth  is-medium" type="submit" form="founder" value="submit">Comfirm Post</button>
+                </c:when>
+                <c:otherwise>
+                     <button class="button is-success is-fullwidth  is-medium" type="submit" form="founder" name="confirm" value="Confirm">Comfirm Post</button>
+                </c:otherwise>
+            </c:choose>
         </div>
       </div>
     </div>
