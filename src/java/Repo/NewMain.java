@@ -27,8 +27,7 @@ public class NewMain {
     public static void main(String[] args) {
         // TODO code application logic here^
 //        List<Post> lp = Repo.queryPost(0,12);
-         List<Post> lp = Repo.queryPost("select * from wil_post", "");
-//        List<Post> lp = Repo.queryPost("select * from wil_post","");
+///        List<Post> lp = Repo.queryPost("select * from wil_post","");
 //        List<Tag> tag = Repo.queryTag("select * from wil_tag where tag_name IN(select tag_name like 'ของใช้ทั่วไป%')");
 //        System.out.println(tag);
 //        System.out.println(lp.get(0).getUser().getImage().getImageId());
@@ -36,7 +35,7 @@ public class NewMain {
 //         System.out.println(lp);
 //        System.out.println(lp);
 //            Found founder = FoundRepo.findFounderByPostId(38);
-        System.out.println(lp);
+//        System.out.println(p);
         }
         
 
