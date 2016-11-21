@@ -145,8 +145,10 @@ public class UserRepo {
                 while(rs.next()){
                     int userId = rs.getInt("user_id");
                     int imageId;
+                      Image image = new Image(); // need ImageRepo to query by Id
                     try{
                          imageId = rs.getInt("image_id");
+                         image = ImageRepo.findImageById(imageId);
                     }
                     catch(Exception x){
                         imageId = 0;
@@ -169,8 +171,9 @@ public class UserRepo {
 
 
 
-                    Image image = new Image(); // need ImageRepo to query by Id
+                  
                     userInfor = new User(userId, image, email, password, fname, lname, gender, citizenId, tel, faculty, address);
+                    
                     }
             }
             catch(Exception x){

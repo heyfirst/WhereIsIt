@@ -17,7 +17,7 @@
           <span></span>
         </span>
         <div class="nav-right nav-menu">
-          <a class="nav-item ${pageContext.request.requestURI == '/WhereIsIt/pages/index.jsp' ? 'is-active' : ''}  " href="/WhereIsIt/pages/">
+          <a class="nav-item ${pageContext.request.requestURI == '/WhereIsIt/pages/homepage.jsp' ? 'is-active' : ''}  " href="/WhereIsIt/pages/">
             หน้าแรก
           </a>
             <c:choose> 

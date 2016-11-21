@@ -22,6 +22,7 @@ public class Post {
     private ArrayList<Tag> tag;
     private String postName;
     private String postDescription;
+    private String place;
     private String lost_time;
     private double lat;
     private double lon;
@@ -50,6 +51,14 @@ public class Post {
         this.image = image;
         this.user = user;
         this.tag = tag;
+    }
+
+    public String getPlace() {
+        return place;
+    }
+
+    public void setPlace(String place) {
+        this.place = place;
     }
 
 

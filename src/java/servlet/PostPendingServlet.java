@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -43,25 +44,28 @@ public class PostPendingServlet extends HttpServlet {
          String query = request.getQueryString();
           int index = query.indexOf("=");
          User user = (User)request.getSession().getAttribute("loggedInUser");
+         
          Post owner = null;
          Found founder = new Found();
          HttpSession session = request.getSession();
+         List<Post> listPost = (List<Post>)session.getAttribute("posts");
          String postId = query.substring(index+1);
          String found_item = request.getParameter("found_item");
          String found_date = request.getParameter("found_date");
          String found_time = request.getParameter("found_time");
          String found_place= request.getParameter("found_place");
          String ownerAnswer ;
-        if(user != null && session.getAttribute("posts") != null){
+        if(user != null && listPost != null){
             if(found_item != null && found_date != null && found_time != null && found_place != null){
                         founder.setUser(user);
-                        owner = Repo.findPostById(Integer.valueOf(postId));
+                        owner = Repo.findPostById(Integer.parseInt(postId));
                         ownerAnswer = "founder";
             }
             else{
-                founder = FoundRepo.findFounderByPostId(Integer.parseInt(postId));
-                owner = Repo.findPostById(Integer.parseInt(postId));
-                owner.setUser(user);
+                int pid = Integer.parseInt(postId);
+                founder = FoundRepo.findFounderByPostId(pid);
+                owner = Repo.findPostById(pid);
+                
                 ownerAnswer = "owner";
                 String des = founder.getFoundDescription();
                 ArrayList<String> descrip = new ArrayList<String>(); 
@@ -89,6 +93,7 @@ public class PostPendingServlet extends HttpServlet {
                 System.out.println(found_date);
                 System.out.println(found_time);
                 System.out.println(found_place);
+                System.out.println(founder);
             }
                         request.setAttribute("postId",postId);
                         request.setAttribute("ownerPost",owner);

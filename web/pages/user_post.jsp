@@ -92,7 +92,7 @@
                 </div>
 
                 <div class="content">
-                  ${up.postDescription}
+                    <p class="detail">${up.postDescription}</p>
                 </div>
               </div>
               <footer class="card-footer">

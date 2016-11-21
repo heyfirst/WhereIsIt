@@ -294,6 +294,7 @@ public class Repo {
         post.setPostName(rs.getString("name"));
         post.setPostDescription(rs.getString("description"));
         post.setStatus(rs.getInt("status"));
+        post.setPlace(rs.getString("place"));
         post.setLost_time(rs.getString("lost_time"));
         try{
             post.setLat(rs.getBigDecimal("lost_lat").doubleValue());
@@ -384,6 +385,8 @@ public class Repo {
                 post.setLat((listPost.get(0).getLat()));
                 post.setLon((listPost.get(0).getLon()));
                 post.setPostDescription((listPost.get(0).getPostDescription()));
+                post.setLost_time(listPost.get(0).getLost_time());
+                post.setPlace((listPost.get(0).getPlace()));
                 post.setPostId((listPost.get(0).getPostId()));
                 post.setStatus((listPost.get(0).getStatus()));
                 post.setPostName(listPost.get(0).getPostName());
@@ -582,6 +585,8 @@ public class Repo {
                 post.setLat((listPost.get(last).getLat()));
                 post.setLon((listPost.get(last).getLon()));
                 post.setPostDescription((listPost.get(last).getPostDescription()));
+                post.setLost_time(listPost.get(last).getLost_time());
+                post.setPlace((listPost.get(last).getPlace()));
                 post.setPostId((listPost.get(last).getPostId()));
                 post.setStatus((listPost.get(last).getStatus()));
                 post.setPostName(listPost.get(last).getPostName());

@@ -7,6 +7,7 @@
             <file>file:/C:/Users/Huag/Documents/SourceTree/WhereIsIt/web/assets/js/script.js</file>
             <file>file:/C:/Users/Huag/Documents/SourceTree/WhereIsIt/src/java/Repo/Repo.java</file>
             <file>file:/C:/Users/Huag/Documents/SourceTree/WhereIsIt/src/java/servlet/PostPendingServlet.java</file>
+            <file>file:/C:/Users/Huag/Documents/SourceTree/WhereIsIt/web/pages/user_post.jsp</file>
             <file>file:/C:/Users/Huag/Documents/SourceTree/WhereIsIt/web/assets/img/user2.png</file>
             <file>file:/C:/Users/Huag/Documents/SourceTree/WhereIsIt/web/assets/img/post1.png</file>
             <file>file:/C:/Users/Huag/Documents/SourceTree/WhereIsIt/web/pages/post.jsp</file>
@@ -20,6 +21,7 @@
             <file>file:/C:/Users/Huag/Documents/SourceTree/WhereIsIt/src/java/servlet/PostServlet.java</file>
             <file>file:/C:/Users/Huag/Documents/SourceTree/WhereIsIt/web/pages/create_post.jsp</file>
             <file>file:/C:/Users/Huag/Documents/SourceTree/WhereIsIt/src/java/servlet/ProfileServlet.java</file>
+            <file>file:/C:/Users/Huag/Documents/SourceTree/WhereIsIt/web/pages/register_completed.jsp</file>
             <file>file:/C:/Users/Huag/Documents/SourceTree/WhereIsIt/src/java/util/ConnectionBuilder.java</file>
             <file>file:/C:/Users/Huag/Documents/SourceTree/WhereIsIt/src/java/servlet/SampleServlet.java</file>
             <file>file:/C:/Users/Huag/Documents/SourceTree/WhereIsIt/src/java/model/Found.java</file>
@@ -36,6 +38,8 @@
             <file>file:/C:/Users/Huag/Documents/SourceTree/WhereIsIt/src/java/model/User.java</file>
             <file>file:/C:/Users/Huag/Documents/SourceTree/WhereIsIt/web/pages/edit_post.jsp</file>
             <file>file:/C:/Users/Huag/Documents/SourceTree/WhereIsIt/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/Huag/Documents/SourceTree/WhereIsIt/web/assets/css/style.css</file>
+            <file>file:/C:/Users/Huag/Documents/SourceTree/WhereIsIt/web/pages/register_new.jsp</file>
         </group>
     </open-files>
 </project-private>

@@ -109,7 +109,7 @@
                 </div>
 
                 <div class="content">
-                  ${p.postDescription}
+                    <p class="detail">${p.postDescription}</p>
                 </div>
               </div>
               <footer class="card-footer">

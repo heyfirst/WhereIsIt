@@ -39,7 +39,15 @@
               <div class="media">
                 <div class="media-left">
                   <figure class="image is-32x32">
-                    <img src="http://placehold.it/64x64" alt="Image">
+                      <c:choose>
+                          <c:when test="${founderPost.user.image == null || founderPost.user.image.imageId == 0}">
+                                <img src="../assets/img/${founderPost.user.gender == 0 ? 'user2' : 'user1'}.png" alt="Image">
+                          </c:when>
+                          <c:otherwise>
+                              <img src="..${founderPost.user.image.src}" alt="Image">
+                          </c:otherwise>
+                      </c:choose>
+                    
                   </figure>
                 </div>
                 <div class="media-content">
@@ -50,17 +58,25 @@
               <div class="columns">
                 <div class="column">
                   <figure class="image is-square">
-                    <img src="http://placehold.it/340x225" alt="">
+                      <c:choose>
+                          <c:when test="${founderPost.user.image == null || founderPost.user.image.imageId == 0}">
+                                <img src="../assets/img/post1.png" alt="Image">
+                          </c:when>
+                          <c:otherwise>
+                              <img src="..${founderPost.image[0].src}" alt="">
+                          </c:otherwise>
+                      </c:choose>
+                    
                   </figure>
                 </div>
                 <div class="column">
                   <figure class="image is-square">
-                    <img src="http://placehold.it/340x225" alt="">
+                    
                   </figure>
                 </div>
                 <div class="column">
                   <figure class="image is-square">
-                    <img src="http://placehold.it/340x225" alt="">
+                    
                   </figure>
                 </div>
               </div>
@@ -73,9 +89,6 @@
               </div>
               <hr>
             </div>
-            <footer class="card-footer">
-              <a class="card-footer-item">Contact</a>
-            </footer>
           </div>
         </div>
         <!-- ./End Post -->
@@ -89,7 +102,7 @@
               <div class="media">
                 <div class="media-left">
                   <figure class="image is-32x32">
-                    <img src="http://placehold.it/64x64" alt="Image">
+                    <img src="..${ownerPost.user.image.src}" alt="Image">
                   </figure>
                 </div>
                 <div class="media-content">
@@ -100,17 +113,17 @@
               <div class="columns">
                 <div class="column">
                   <figure class="image is-square">
-                    <img src="http://placehold.it/340x225" alt="">
+                    <img src="..${ownerPost.image[0].src}" alt="">
                   </figure>
                 </div>
                 <div class="column">
                   <figure class="image is-square">
-                    <img src="http://placehold.it/340x225" alt="">
+                    
                   </figure>
                 </div>
                 <div class="column">
                   <figure class="image is-square">
-                    <img src="http://placehold.it/340x225" alt="">
+                    
                   </figure>
                 </div>
               </div>
@@ -123,9 +136,6 @@
               </div>
               <hr>
             </div>
-            <footer class="card-footer">
-              <a class="card-footer-item">Contact</a>
-            </footer>
           </div>
         </div>
         <!-- ./End Post -->
