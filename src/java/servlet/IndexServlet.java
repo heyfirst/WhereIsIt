@@ -40,18 +40,17 @@ public class IndexServlet extends HttpServlet {
          HttpSession session = request.getSession(true);
          List<Post> listPost = null;
         String searchParam = request.getParameter("searchParam");
-         session.setMaxInactiveInterval(60*10);
+        session.setMaxInactiveInterval(60*60*24);
         if(searchParam == null) {
             searchParam = "";
             listPost = Repo.queryPost("Select * from wil_post","");
         }else{
             listPost = Repo.findPostByName(searchParam);
         }
-         
       
         session.setAttribute("posts",listPost);
 
-        getServletContext().getRequestDispatcher("/pages/index.jsp").forward(request, response);
+        getServletContext().getRequestDispatcher("/pages/homepage.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

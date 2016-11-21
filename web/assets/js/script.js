@@ -31,6 +31,18 @@ $(document).ready(function(){
 
   $("#tags").select2({
     tags: true
-  })
+  });
+
+  var citizenId = new Cleave('#citizen-id', {
+    blocks: [1,4,5,2,1],
+    uppercase: true
+  });
+  
+  var tel = new Cleave('#tel', {
+    prefix: '+66',
+    delimiter: '-',
+    blocks: [3,2,3,4],
+    uppercase: true
+  });
 
 });

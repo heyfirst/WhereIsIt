@@ -58,7 +58,7 @@ public class ConfirmPostPendingServlet extends HttpServlet {
              // founder user from session  
              if(ownerAnswer.equalsIgnoreCase("owner")){
                  String discard = request.getParameter("discard");
-                 if()
+//                 if()
              }
              else if(ownerAnswer.equalsIgnoreCase("founder")){
                  if(found_item != null || found_date !=null || found_time != null || found_place != null){
