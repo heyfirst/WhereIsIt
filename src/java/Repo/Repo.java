@@ -294,7 +294,7 @@ public class Repo {
         post.setPostName(rs.getString("name"));
         post.setPostDescription(rs.getString("description"));
         post.setStatus(rs.getInt("status"));
-        
+        post.setLost_time(rs.getString("lost_time"));
         try{
             post.setLat(rs.getBigDecimal("lost_lat").doubleValue());
             post.setLon(rs.getBigDecimal("lost_lon").doubleValue());        

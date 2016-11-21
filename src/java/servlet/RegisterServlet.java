@@ -77,8 +77,6 @@ public class RegisterServlet extends HttpServlet {
         if(request.getParameter("gender") != null){
             if(request.getParameter("gender").equalsIgnoreCase("male")){
                 gender = 1;
-            }else if(request.getParameter("gender").equalsIgnoreCase("donotenter")){
-                gender = 2;
             }else{
                 gender = 0;
             }

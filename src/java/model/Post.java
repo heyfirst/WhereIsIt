@@ -8,6 +8,7 @@ package model;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -21,8 +22,10 @@ public class Post {
     private ArrayList<Tag> tag;
     private String postName;
     private String postDescription;
+    private String lost_time;
     private double lat;
     private double lon;
+    
     private int status;
    
     public Post() {
@@ -126,10 +129,22 @@ public class Post {
         this.postName = postName;
     }
 
+    public String getLost_time() {
+        return lost_time;
+    }
+
+    public void setLost_time(String lost_time) {
+        this.lost_time = lost_time;
+    }
+
+   
+
     @Override
     public String toString() {
-        return "Post{" + "postId=" + postId + ",\n image=" + image + ",\n tag=" + tag + ",\n postName=" + postName + ", postDescription=" + postDescription + ", lat=" + lat + ", lon=" + lon + ", status=" + status + "'\n'" +" user= "+user+"\n";
+        return "Post{" + "postId=" + postId + ", image=" + image + ", user=" + user + ", tag=" + tag + ", postName=" + postName + ", postDescription=" + postDescription + ", lost_time=" + lost_time + ", lat=" + lat + ", lon=" + lon + ", status=" + status + '}';
     }
+
+    
 
    
     

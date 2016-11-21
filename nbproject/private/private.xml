@@ -3,14 +3,39 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/KS/NetBeansProjects/WhereIsIt/web/pages/register_new.jsp</file>
-            <file>file:/Users/KS/NetBeansProjects/WhereIsIt/web/pages/register_completed.jsp</file>
-            <file>file:/Users/KS/NetBeansProjects/WhereIsIt/web/pages/index.jsp</file>
-            <file>file:/Users/KS/NetBeansProjects/WhereIsIt/web/pages/post.jsp</file>
-            <file>file:/Users/KS/NetBeansProjects/WhereIsIt/web/pages/create_post.jsp</file>
-            <file>file:/Users/KS/NetBeansProjects/WhereIsIt/web/pages/edit_post.jsp</file>
-            <file>file:/Users/KS/NetBeansProjects/WhereIsIt/src/java/servlet/RegisterServlet.java</file>
-            <file>file:/Users/KS/NetBeansProjects/WhereIsIt/web/pages/profile_edit.jsp</file>
+            <file>file:/C:/Users/Huag/Documents/SourceTree/WhereIsIt/web/layouts/head_included.jsp</file>
+            <file>file:/C:/Users/Huag/Documents/SourceTree/WhereIsIt/web/assets/js/script.js</file>
+            <file>file:/C:/Users/Huag/Documents/SourceTree/WhereIsIt/src/java/Repo/Repo.java</file>
+            <file>file:/C:/Users/Huag/Documents/SourceTree/WhereIsIt/src/java/servlet/PostPendingServlet.java</file>
+            <file>file:/C:/Users/Huag/Documents/SourceTree/WhereIsIt/web/assets/img/user2.png</file>
+            <file>file:/C:/Users/Huag/Documents/SourceTree/WhereIsIt/web/assets/img/post1.png</file>
+            <file>file:/C:/Users/Huag/Documents/SourceTree/WhereIsIt/web/pages/post.jsp</file>
+            <file>file:/C:/Users/Huag/Documents/SourceTree/WhereIsIt/web/pages/homepage.jsp</file>
+            <file>file:/C:/Users/Huag/Documents/SourceTree/WhereIsIt/src/java/model/Image.java</file>
+            <file>file:/C:/Users/Huag/Documents/SourceTree/WhereIsIt/src/java/model/Post.java</file>
+            <file>file:/C:/Users/Huag/Documents/SourceTree/WhereIsIt/src/java/Repo/ImageRepo.java</file>
+            <file>file:/C:/Users/Huag/Documents/SourceTree/WhereIsIt/src/java/Repo/UserRepo.java</file>
+            <file>file:/C:/Users/Huag/Documents/SourceTree/WhereIsIt/src/java/servlet/ConfirmPostPendingServlet.java</file>
+            <file>file:/C:/Users/Huag/Documents/SourceTree/WhereIsIt/web/layouts/script_included.jsp</file>
+            <file>file:/C:/Users/Huag/Documents/SourceTree/WhereIsIt/src/java/servlet/PostServlet.java</file>
+            <file>file:/C:/Users/Huag/Documents/SourceTree/WhereIsIt/web/pages/create_post.jsp</file>
+            <file>file:/C:/Users/Huag/Documents/SourceTree/WhereIsIt/src/java/servlet/ProfileServlet.java</file>
+            <file>file:/C:/Users/Huag/Documents/SourceTree/WhereIsIt/src/java/util/ConnectionBuilder.java</file>
+            <file>file:/C:/Users/Huag/Documents/SourceTree/WhereIsIt/src/java/servlet/SampleServlet.java</file>
+            <file>file:/C:/Users/Huag/Documents/SourceTree/WhereIsIt/src/java/model/Found.java</file>
+            <file>file:/C:/Users/Huag/Documents/SourceTree/WhereIsIt/src/java/servlet/UserPostServlet.java</file>
+            <file>file:/C:/Users/Huag/Documents/SourceTree/WhereIsIt/src/java/filter/Authencation.java</file>
+            <file>file:/C:/Users/Huag/Documents/SourceTree/WhereIsIt/src/java/Repo/NewMain.java</file>
+            <file>file:/C:/Users/Huag/Documents/SourceTree/WhereIsIt/web/pages/profile.jsp</file>
+            <file>file:/C:/Users/Huag/Documents/SourceTree/WhereIsIt/src/java/Repo/FoundRepo.java</file>
+            <file>file:/C:/Users/Huag/Documents/SourceTree/WhereIsIt/src/java/util/Email.java</file>
+            <file>file:/C:/Users/Huag/Documents/SourceTree/WhereIsIt/web/layouts/navbar_included.jsp</file>
+            <file>file:/C:/Users/Huag/Documents/SourceTree/WhereIsIt/src/java/servlet/LoginServlet.java</file>
+            <file>file:/C:/Users/Huag/Documents/SourceTree/WhereIsIt/web/pages/post_pending.jsp</file>
+            <file>file:/C:/Users/Huag/Documents/SourceTree/WhereIsIt/src/java/servlet/CreatePostServlet.java</file>
+            <file>file:/C:/Users/Huag/Documents/SourceTree/WhereIsIt/src/java/model/User.java</file>
+            <file>file:/C:/Users/Huag/Documents/SourceTree/WhereIsIt/web/pages/edit_post.jsp</file>
+            <file>file:/C:/Users/Huag/Documents/SourceTree/WhereIsIt/web/WEB-INF/web.xml</file>
         </group>
     </open-files>
 </project-private>

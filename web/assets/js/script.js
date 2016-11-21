@@ -44,5 +44,8 @@ $(document).ready(function(){
     blocks: [3,2,3,4],
     uppercase: true
   });
+  
+  var myDiv = $('#detail');
+myDiv.text(myDiv.text().substring(0,10));
 
 });

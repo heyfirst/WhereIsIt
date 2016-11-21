@@ -23,7 +23,7 @@
             <div class="card">
               <div class="card-image">
                 <figure class="image is-3by2">
-                  <img src="http://placehold.it/225x225" alt="">
+                  <img src="..${post.image[0].src}" alt="">
                 </figure>
               </div>
               <div class="card-content">
@@ -31,17 +31,17 @@
                   <h2>${post.postName}</h2>
                 </div>
                 <div class="content">
-                  ${post.postDescription}
+                    <p id="detail">${post.postDescription}</p>
                 </div>
                 <div class="media">
                   <div class="media-left">
                     <figure class="image is-32x32">
-                      <img src="http://placehold.it/64x64" alt="Image">
+                      <img src="..${post.user.image.src}" alt="Image">
                     </figure>
                   </div>
                   <div class="media-content">
-                    <p class="title is-5">${post.postName}</p>
-                    <p class="subtitle is-6">${post.user.fname} ${post.user.lname}</p>
+                    <p class="title is-5">${post.user.fname} ${post.user.lname}</p>
+                    <p class="subtitle is-6">${post.user.email}</p>
                   </div>
                 </div>
               </div>
@@ -56,25 +56,41 @@
               </p>
               <div class="panel-block">
                 <div class="content">
-                  <p>${post.postDescription}</p>
+                   <p>ชื่อของหาย : ${post.postName}</p>
+                   <p>เวลาที่หาย : ${post.lost_time}</p>
+                   <p>ละติจูด : ${post.lat}</p>
+                   <p>ลองติจูด : ${post.lon}</p>
+                   <p>คำอธิบายเพิ่มเติม : ${post.postDescription}</p>
+                    <hr>
+                  <p>ชื่อ : ${post.user.fname} ${post.user.lname}</p>
+                  <p>เพศ : ${post.user.gender == 0 ? 'Female' : 'Male'} </p>
+                  <p>เบอร์โทรศัพท์ : ${post.user.tel} </p>
+                  <p>คณะ : ${post.user.faculty} </p>
+                  <p>ที่อยู่ : ${post.user.address == null ? 'ไม่ได้ระบุที่อยู่ไว้' : post.user.address} </p>
                 </div>
               </div>
+                 <c:if test="${post.lat != 0.00 && post.lon != 0.00}">
+                           <div class="panel-block">
+                            <div class="content">
+                                 <div id="map" data-lat="${post.lat}" data-lng="${post.lon}"></div>
+                            </div>
+                          </div>
+                 </c:if>
+              
               <div class="panel-block">
-                <div class="content">
-                    <c:choose>
-                        <c:when test="${post.lat != 0 && post.lon != 0}">
-                            <div id="map" data-lat="${post.lat}" data-lng="${post.lon}"></div>
-                        </c:when>
-                        <c:otherwise>
-                             <div id="map"></div>
-                        </c:otherwise>
+                  <c:choose>
+                      <c:when test="${sessionScope.loggedInUser == null}">
+                          <button class="button is-danger is-outlined is-fullwidth is-medium modal-button" data-target="#login">
+                              I found it!
+                        </button>
+                      </c:when>
+                      <c:otherwise>
+                          <button class="button is-danger is-outlined is-fullwidth is-medium modal-button" data-target="#found-item" ${post.user.userId == sessionScope.loggedInUser.userId ? 'disabled' : ''}>
+                                ${(post.user.userId == sessionScope.loggedInUser.userId && post.status == 2) ? 'Closed' : 'Waiting'} 
+                           </button>
+                      </c:otherwise>
                   </c:choose>
-                </div>
-              </div>
-              <div class="panel-block">
-                <button class="button is-danger is-outlined is-fullwidth is-medium modal-button" data-target="#found-item" ${post.user.userId == sessionScope.loggedInUser.userId ? 'disabled' : ''}>
-                  ${(post.user.userId == sessionScope.loggedInUser.userId && post.status == 2) ? 'Closed' : 'Waiting !'} 
-                </button>
+                
               </div>
             </div>
           </div>

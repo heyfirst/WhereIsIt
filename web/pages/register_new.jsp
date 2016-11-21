@@ -55,10 +55,7 @@
                     <input type="radio" name="gender" value="female"required/>
                     Female
                   </label>
-                  <label class="radio">
-                    <input type="radio" name="gender" value="donotenter"required/>
-                    Do not Enter
-                  </label>
+                  
                </p>
                <label class="label">Citizen ID:</label>
                <p class="control">
