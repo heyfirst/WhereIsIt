@@ -43,13 +43,12 @@ public class CreatePostServlet extends HttpServlet {
         String postName = request.getParameter("postName");
         String[] tagfromInput    = request.getParameterValues("tag");
         String postDesciption = request.getParameter("postDescription");
-        String yes = request.getParameter("question");
         String lat = request.getParameter("map_lat");
         String lon = request.getParameter("map_lng");
         
         User user = (User) request.getSession().getAttribute("loggedInUser");
         if(user != null){
-            if(yes.equalsIgnoreCase("yes") && postName != null && postDesciption != null){
+            if( postName != null && postDesciption != null){
                 int userId = user.getUserId();
                  int status = 0;
                  

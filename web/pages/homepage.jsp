@@ -114,11 +114,17 @@
               </div>
               <footer class="card-footer">
                 <a class="card-footer-item" href="Post?post_id=${p.postId}">See more.</a>
-                 <c:choose>
-                     <c:when test="${p.user.userId != sessionScope.loggedInUser.userId}">
-                        <a class="card-footer-item modal-button" data-target="#found-item" onclick="chageFoundFormURL(${p.postId})">Found It!</a>
-                     </c:when>
-                 </c:choose>
+                 <c:choose> 
+                      <c:when test="${p.user.userId != sessionScope.loggedInUser.userId && sessionScope.loggedInUser != null }"> 
+                            <a class="card-footer-item modal-button" data-target="#found-item" onclick="chageFoundFormURL(${p.postId})">Found It!</a> 
+                      </c:when> 
+                        <c:when test="${p.user.userId == sessionScope.loggedInUser.userId && sessionScope.loggedInUser != null }">
+                            
+                         </c:when>
+                      <c:otherwise> 
+                            <a class="card-footer-item modal-button" ${sessionScope.loggedInUser == null ? 'data-target="#login"' : ' '}>Found It!</a>
+                      </c:otherwise> 
+                  </c:choose>
               </footer>
             </div>
           </div>
