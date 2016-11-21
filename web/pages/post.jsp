@@ -73,7 +73,7 @@
               </div>
               <div class="panel-block">
                 <button class="button is-danger is-outlined is-fullwidth is-medium modal-button" data-target="#found-item" ${post.user.userId == sessionScope.loggedInUser.userId ? 'disabled' : ''}>
-                  ${post.user.userId == sessionScope.loggedInUser.userId ? 'Closed' : 'I Found It !'} 
+                  ${(post.user.userId == sessionScope.loggedInUser.userId && post.status == 2) ? 'Closed' : 'Waiting !'} 
                 </button>
               </div>
             </div>

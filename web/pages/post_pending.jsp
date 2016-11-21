@@ -138,7 +138,7 @@
                     <a href="Post?post_id=${postId}"><button class="button is-danger is-fullwidth  is-medium" >Discard</button></a>
                 </c:when>
                 <c:otherwise>
-                    <button class="button is-danger is-fullwidth  is-medium"  type="submit" form="founder" name="discard" value="submit" >Discard</button>              
+                    <button class="button is-danger is-fullwidth  is-medium"  type="submit" form="founder" name="discard" value="discard" >Discard</button>              
                 </c:otherwise>
             </c:choose>
         </div>

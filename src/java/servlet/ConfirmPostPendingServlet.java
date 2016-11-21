@@ -60,7 +60,7 @@ public class ConfirmPostPendingServlet extends HttpServlet {
                  String discard = (String)request.getParameter("discard");
                  String confirm = (String)request.getParameter("confirm");
                  if(discard != null && discard.equalsIgnoreCase("discard")){
-                     boolean updateToClosed = Repo.updateToPostPending(0, Integer.parseInt(postId));
+                        boolean updateToClosed = Repo.updateToPostPending(0, Integer.parseInt(postId));
                  }
                  else if(confirm != null && confirm.equalsIgnoreCase("confirm")){
                      boolean updateToClosed = Repo.updateToPostPending(2, Integer.parseInt(postId));
