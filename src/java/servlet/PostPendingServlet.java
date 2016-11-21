@@ -8,6 +8,7 @@ package servlet;
 import Repo.*;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -50,10 +51,45 @@ public class PostPendingServlet extends HttpServlet {
          String found_date = request.getParameter("found_date");
          String found_time = request.getParameter("found_time");
          String found_place= request.getParameter("found_place");
-
+         String ownerAnswer ;
         if(user != null && session.getAttribute("posts") != null){
+            if(found_item != null && found_date != null && found_time != null && found_place != null){
                         founder.setUser(user);
                         owner = Repo.findPostById(Integer.valueOf(postId));
+                        ownerAnswer = "founder";
+            }
+            else{
+                founder = FoundRepo.findFounderByPostId(Integer.parseInt(postId));
+                owner = Repo.findPostById(Integer.parseInt(postId));
+                owner.setUser(user);
+                ownerAnswer = "owner";
+                String des = founder.getFoundDescription();
+                ArrayList<String> descrip = new ArrayList<String>(); 
+                int next = 0;
+                int equal = 0;
+                int comma =0;
+                for (int i = 0; i < 4; i++) {
+                    equal = des.indexOf("=",next);
+                   comma = des.indexOf(",",equal);
+                    System.out.println(equal);
+                    System.out.println(comma);
+                   String item;
+                   if(comma == -1)
+                       item = des.substring(equal+1);
+                   else
+                        item= des.substring(equal+1, comma);
+                   next = equal+1;
+                   descrip.add(item);
+                }
+                found_item = descrip.get(0);
+                found_date = descrip.get(1);
+                found_time = descrip.get(2);
+                found_place = descrip.get(3);
+                System.out.println(found_item);
+                System.out.println(found_date);
+                System.out.println(found_time);
+                System.out.println(found_place);
+            }
                         request.setAttribute("postId",postId);
                         request.setAttribute("ownerPost",owner);
                         request.setAttribute("founderPost", founder);
@@ -61,10 +97,11 @@ public class PostPendingServlet extends HttpServlet {
                         request.setAttribute("found_date", found_date);
                         request.setAttribute("found_time", found_time);
                         request.setAttribute("found_place", found_place);
-
-             getServletContext().getRequestDispatcher("/pages/post_pending.jsp").forward(request, response);
-             
+                        request.setAttribute("ownerAnswer",  ownerAnswer);
+              getServletContext().getRequestDispatcher("/pages/post_pending.jsp").forward(request, response);
         }
+        
+        
      }
          
           

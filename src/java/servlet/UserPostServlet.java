@@ -37,19 +37,39 @@ public class UserPostServlet extends HttpServlet {
         if(request.getCharacterEncoding() == null) {
             request.setCharacterEncoding("UTF-8");
         }
+        
+        String query = request.getQueryString();
+        int index;
+        String type = "";
+        
+        if(query != null){
+          index = query.indexOf("=");
+          type = query.substring(index+1);
+        }
+        System.out.println(type);
         HttpSession session = request.getSession(false);
         User user = (User)session.getAttribute("loggedInUser");
         String search = request.getParameter("searchParam");
         List<Post> listPost = null;
         if(session != null && user != null){
             int userId = user.getUserId();
+            
             if(search == null){
-                listPost = Repo.findPostByUserId(userId);
-                
+                if(type.equalsIgnoreCase("Pending") && search == null){
+                    listPost = Repo.findPostByStatusAndUserId(1, userId);
+                }
+                else if(type.equalsIgnoreCase("closed") && search == null){
+                    listPost = Repo.findPostByStatusAndUserId(2, userId);
+                }
+                else{
+                    listPost = Repo.findPostByUserId(userId);
+                    type = "all";
+                }
             }
             else{
                listPost = Repo.findPostByNameAndUserId(search,userId);
             }
+            request.setAttribute("type", type);
             request.setAttribute("userPost", listPost);
                 getServletContext().getRequestDispatcher("/pages/user_post.jsp").forward(request, response);
 

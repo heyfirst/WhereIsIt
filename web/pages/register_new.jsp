@@ -62,11 +62,11 @@
                </p>
                <label class="label">Citizen ID:</label>
                <p class="control">
-                 <input type="number" class="input" name="citizenid" maxlength="13"required/>
+                 <input id="citizen-id" type="text" class="input" name="citizenid" onkeypress="return event.charCode >= 48 && event.charCode <= 57" required/>
                </p>
                <label class="label">Phone number:</label>
                <p class="control">
-                 <input type="number" class="input" name="tel" maxlength="10"required/>
+                 <input id="tel" type="text" class="input" name="tel" onkeypress="return event.charCode >= 48 && event.charCode <= 57" required/>
                </p>
                <label class="label">Faculty:</label>
                <p class="control">
@@ -76,7 +76,7 @@
                <p class="control">
                  <input type="text" class="input" name="address"required/>
                </p>
-               <label class="label">Image:</label>
+               <p>${message}</p>
                <p class="control">
                   <button type="submit" class="button is-primary is-fullwidth">Register</button>
                </p>

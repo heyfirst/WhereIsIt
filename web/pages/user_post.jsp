@@ -47,9 +47,9 @@
 
           <!-- Right side -->
           <div class="level-right">
-            <p class="level-item filter strong is-disabled"><a>All</a></p>
-            <p class="level-item filter"><a>Pending</a></p>
-            <p class="level-item filter"><a>Closed</a></p>
+              <p class="level-item filter ${type == "all" ? "strong is-disabled" : ' ' }"><a href="User?type=all">All</a></p>
+              <p class="level-item filter ${type == "pending" ? "strong is-disabled" : ' ' }"><a href="User?type=pending">Pending</a></p>
+              <p class="level-item filter ${type == "closed" ? "strong is-disabled" : ' ' }"><a href="User?type=closed">Closed</a></p>
           </div>
         </nav>
 
@@ -57,16 +57,16 @@
           <!-- Post -->
  <c:if test="${userPost != null}">
     <c:forEach items="${userPost}" var="up" varStatus="vs">
-          <div class="column is-3 ${p.status == 0 ? '' : p.status == 1 ? 'pending' : p.status == 2 ? 'closed' : ''}">
+          <div class="column is-3 ${up.status == 0 ? '' : up.status == 1 ? 'pending' : up.status == 2 ? 'closed' : ''}">
             <div class="card">
               <div class="card-image">
                 <figure class="image is-3by2">
                   <c:choose>
-                        <c:when test="${p.image[0].imageId == 0}">
-                            <img src="..${p.image[0].src}" alt="">
+                        <c:when test="${up.image[0].imageId == 0}">
+                            <img src="..${up.image[0].src}" alt="">
                         </c:when>
                         <c:otherwise>
-                            <img src="..${p.image[0].src}" alt="">
+                            <img src="..${up.image[0].src}" alt="">
                          </c:otherwise>
                   </c:choose>
                 </figure>
@@ -96,7 +96,16 @@
                 </div>
               </div>
               <footer class="card-footer">
-                <a class="card-footer-item" href="Post?post_id=${up.postId}">See more.</a>
+                  <% String type = (String)request.getAttribute("type"); %>
+                <c:choose>
+                    <c:when test="<%= type.equalsIgnoreCase("all") || type.equalsIgnoreCase("closed") %>"> 
+                        <a class="card-footer-item" href="Post?post_id=${up.postId}">See more.</a>
+                    </c:when>     
+                    <c:otherwise> 
+                        <!-- type pending -->
+                        <a class="card-footer-item" href="PostPending?post_id=${up.postId}">See more.</a>
+                    </c:otherwise>
+                </c:choose>
                 <c:choose>
                      <c:when test="${up.user.userId != sessionScope.loggedInUser.userId}">
                         <a class="card-footer-item modal-button" data-target="#found-item" onclick="chageFoundFormURL(${p.postId})">Found It!</a>

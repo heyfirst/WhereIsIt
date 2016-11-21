@@ -48,26 +48,34 @@ public class ConfirmPostPendingServlet extends HttpServlet {
          String found_date = request.getParameter("found_date");
          String found_time = request.getParameter("found_time");
          String found_place= request.getParameter("found_place");
+         String ownerAnswer = request.getParameter("ownerAnswer");
          String foundDescription = "item=" +found_item + ","
                                                  +"date="+found_date + ","
                                                  +"time=" + found_time + ","
                                                  + "place="+found_place;
          if(user != null ){
              // Founder send information about  lost item
-             // founder user from session             
-             if(found_item != null || found_date !=null || found_time != null || found_place != null){
-                boolean foundInsert = FoundRepo.insertFounder(user.getUserId(), Integer.parseInt(postId), foundDescription);
-                if(foundInsert){
-                    boolean pendingPost = Repo.updateToPostPending(1,Integer.parseInt(postId));
-                    if(pendingPost){
-                            //          ส่งแจ้งเตือน               
-                         response.sendRedirect(getServletContext().getContextPath()+"/pages/");
-                    }
+             // founder user from session  
+             if(ownerAnswer.equalsIgnoreCase("owner")){
+                 String discard = request.getParameter("discard");
+//                 if()
+             }
+             else if(ownerAnswer.equalsIgnoreCase("founder")){
+                 if(found_item != null || found_date !=null || found_time != null || found_place != null){
+                    boolean foundInsert = FoundRepo.insertFounder(user.getUserId(), Integer.parseInt(postId), foundDescription);
+                    if(foundInsert){
+                        boolean pendingPost = Repo.updateToPostPending(1,Integer.parseInt(postId));
+                        if(pendingPost){
+                                //          ส่งแจ้งเตือน               
+                            
+                        }
                     
                 }
+             }
+             
                 
              }
-      
+              response.sendRedirect(getServletContext().getContextPath()+"/pages/");
          }
         
          

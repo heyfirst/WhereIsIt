@@ -4,6 +4,7 @@
     Author     : KS
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -31,7 +32,10 @@
                <input type="hidden" name="found_date" value="${found_date}">
                <input type="hidden" name="found_time" value="${found_time}">
                <input type="hidden" name="found_address" value="${found_address}">
+               <input type="hidden" name="ownerAnswer" value="${ownerAnswer}">
+               
            </form>
+          
               <div class="media">
                 <div class="media-left">
                   <figure class="image is-32x32">
@@ -128,7 +132,15 @@
       </div>
       <div class="columns">
         <div class="column is-4 is-offset-2">
-            <a href="Post?post_id=${postId}"><button class="button is-danger is-fullwidth  is-medium" >Discard</button></a>
+            <% String ownerAnswer = (String) request.getAttribute("ownerAnswer"); %>
+            <c:choose>
+                <c:when test="<%= ownerAnswer.equalsIgnoreCase("founder")  %>">
+                    <a href="Post?post_id=${postId}"><button class="button is-danger is-fullwidth  is-medium" >Discard</button></a>
+                </c:when>
+                <c:otherwise>
+                    <button class="button is-danger is-fullwidth  is-medium"  type="submit" form="founder" name="discard" value="submit" >Discard</button>              
+                </c:otherwise>
+            </c:choose>
         </div>
         <div class="column is-4">
           <button class="button is-success is-fullwidth  is-medium" type="submit" form="founder" value="submit">Comfirm Post</button>
