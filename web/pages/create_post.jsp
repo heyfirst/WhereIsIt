@@ -28,7 +28,7 @@
                  <p style="color: red; font-size: 16px;">${message}</p>
                 <label class="label">Name</label>
                 <p class="control">
-                  <input class="input" type="text" placeholder="Text input" name="postName" required>
+                  <input class="input" type="text" placeholder="ชื่อสิ่งของที่หาย" name="postName" required>
                 </p>
                 <label class="label">Username</label>
                 <p class="control has-icon has-icon-right">
@@ -49,22 +49,6 @@
                 <label class="label">Message</label>
                 <p class="control">
                   <textarea class="textarea" placeholder="Textarea" name="postDescription" required></textarea>
-                </p>
-                <p class="control">
-                  <label class="checkbox">
-                    <input type="checkbox">
-                    Remember me
-                  </label>
-                </p>
-                <p class="control">
-                  <label class="radio">
-                    <input type="radio" name="question" value="yes">
-                    Yes
-                  </label>
-                  <label class="radio">
-                    <input type="radio" name="question" value="no">
-                    No
-                  </label>
                 </p>
                 <label class="label">Map</label>
                 <div class="content">
